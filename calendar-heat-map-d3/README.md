@@ -5,10 +5,7 @@ A cool visualization idea from github, but could be applied to a number of diffe
 - DB transaction log
 - Behavior Log
 - Stock Price Movements
-- Recurring Binary Events e.g.
-    Earnings Releases
-    Weather
-    Sports Wins/Loss 
+- Recurring Binary Events e.g. Earnings Releases, Weather, Sports Wins/Loss 
 
 Version 0.01 - Goals
 - Use D3 SVG
