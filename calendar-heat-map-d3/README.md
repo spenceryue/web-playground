@@ -10,3 +10,6 @@ A cool visualization idea from github, but could be applied to a number of diffe
 Version 0.01 - Goals
 - Use D3 SVG
 - Create a close to exact replica of the github visualization
+
+Verson 0.001 Results:
+![alt text](https://raw.githubusercontent.com/ginsengtang/web-playground/master/calendar-heat-map-d3/img/v0.001.png

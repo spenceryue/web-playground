@@ -20,14 +20,14 @@ var svg = d3.select("body")
             .attr("width","100%");
 
 svg.selectAll("rect")
-      .data(dataArray)
-      .enter()
-                .append("rect")
-                .attr("height", square_side_length) 
-                .attr("width", square_side_length)
-                .attr('fill', (d, i) => { return interpolate(((i % 2) + 0.5) / 2); })
-                .attr("x", (d,i) => { return (square_side_length + square_spacing) * Math.floor(i / days_in_week) + position.x; })
-                .attr("y", (d,i) => { return (square_side_length + square_spacing) * (i % days_in_week) + position.y });
+    .data(dataArray)
+    .enter()
+    .append("rect")
+    .attr("height", square_side_length) 
+    .attr("width", square_side_length)
+    .attr('fill', (d, i) => { return interpolate(((i % 2) + 0.5) / 2); })
+    .attr("x", (d,i) => { return (square_side_length + square_spacing) * Math.floor(i / days_in_week) + position.x; })
+    .attr("y", (d,i) => { return (square_side_length + square_spacing) * (i % days_in_week) + position.y });
 
 svg.selectAll('text.month')
    .data([month])
@@ -44,6 +44,6 @@ svg.selectAll('text.day')
    .append('text')
    .attr('class', 'day')
    .attr('font-size', '10px')
-   .attr('x', position.x - 40)
-   .attr('y', (d, i) => { return position.y + 12 + 22 * i; })
+   .attr('x', position.x - 30)
+   .attr('y', (d, i) => { return position.y + 13 + 22 * i; })
    .text((d) => {return d;});
