@@ -2,16 +2,37 @@ const position = { x: 100, y: 100 }
 const square_side_length = 20
 const square_spacing = 2
 const days_in_week = 7
-const month = 'Feb'
-const days_of_week = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+const date = new Date();
+date.setDate(1);
+date.setMonth(0);
+
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+const month = months[date.getMonth()];
+const days_of_week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
 const interpolate = d3.scaleSequential((t) => { return d3.hsl(100, 1, t) } );
 
 const dataArray = [];
 
+console.log(date);
+
 for (let i = 0; i < 7 * 6; i++)
 {
-	dataArray.push(i);
+  if (months[date.getMonth()] !== month)
+  {
+    dataArray.push(1);
+    continue;
+  }
+
+  if (i % 7 == date.getDay())
+  {
+    dataArray.push(0);
+    date.setDate(date.getDate() + 1);
+  }
+  else
+  {
+    dataArray.push(1);
+  }
 }
 
 var svg = d3.select("body")
@@ -25,7 +46,7 @@ svg.selectAll("rect")
     .append("rect")
     .attr("height", square_side_length) 
     .attr("width", square_side_length)
-    .attr('fill', (d, i) => { return interpolate(((i % 2) + 0.5) / 2); })
+    .attr('fill', (d, i) => { return interpolate((d + 0.5) / 2); })
     .attr("x", (d,i) => { return (square_side_length + square_spacing) * Math.floor(i / days_in_week) + position.x; })
     .attr("y", (d,i) => { return (square_side_length + square_spacing) * (i % days_in_week) + position.y });
 
