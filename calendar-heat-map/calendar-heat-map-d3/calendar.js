@@ -57,7 +57,7 @@ svg.selectAll('text.month')
    .attr('class', 'month')
    .attr('x', position.x)
    .attr('y', position.y - 10)
-   .text((d) => {return d;});
+   .text((d) => { return d; });
 
 svg.selectAll('text.day')
    .data(days_of_week)
@@ -67,4 +67,4 @@ svg.selectAll('text.day')
    .attr('font-size', '10px')
    .attr('x', position.x - 30)
    .attr('y', (d, i) => { return position.y + 13 + 22 * i; })
-   .text((d) => {return d;});
+   .text((d) => { return d; });
