@@ -13,3 +13,7 @@ Version 0.01 - Goals
 
 Verson 0.001 Results:
 ![alt text](https://raw.githubusercontent.com/ginsengtang/web-playground/master/calendar-heat-map-d3/img/v0.001.png)
+
+Verson 0.002 Results:
+![alt text](https://raw.githubusercontent.com/ginsengtang/web-playground/master/calendar-heat-map-d3/img/v0.002.png)
+
