@@ -46,7 +46,7 @@ svg.selectAll("rect")
     .append("rect")
     .attr("height", square_side_length) 
     .attr("width", square_side_length)
-    .attr('fill', (d, i) => { return interpolate((d + 0.5) / 2); })
+    .attr('fill', (d, i) => { return interpolate(d + 0.9); })
     .attr("x", (d,i) => { return (square_side_length + square_spacing) * Math.floor(i / days_in_week) + position.x; })
     .attr("y", (d,i) => { return (square_side_length + square_spacing) * (i % days_in_week) + position.y });
 
