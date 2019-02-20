@@ -1,25 +1,3 @@
-//testing to see that react works
-const e = React.createElement;
-
-class LikeButton extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { liked: false };
-  }
-
-  render() {
-    if (this.state.liked) {
-      return 'You liked this.';
-    }
-
-    //For some reason this line needs to be one line?
-    return <button onClick={()=>this.setState({liked:true })}>Like</button>;
-  }
-}
-
-const domContainer = document.querySelector('#like_button_container');
-ReactDOM.render(e(LikeButton), domContainer);
-
 const position = { x: 100, y: 100 }
 const square_side_length = 20
 const square_spacing = 2
@@ -57,36 +35,54 @@ for (let i = 0; i < 7 * 6; i++)
   }
 }
 
-var svg = d3.select("body")
-            .append("svg")
-            .attr("height","100%")
-            .attr("width","100%");
+//testing to see that react works
+const e = React.createElement;
 
-svg.selectAll("rect")
-    .data(dataArray)
-    .enter()
-    .append("rect")
-    .attr("height", square_side_length) 
-    .attr("width", square_side_length)
-    .attr('fill', (d, i) => { return interpolate(d + 0.9); })
-    .attr("x", (d,i) => { return (square_side_length + square_spacing) * Math.floor(i / days_in_week) + position.x; })
-    .attr("y", (d,i) => { return (square_side_length + square_spacing) * (i % days_in_week) + position.y });
+class LikeButton extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { liked: false };
+  }
 
-svg.selectAll('text.month')
-   .data([month])
-   .enter()
-   .append('text')
-   .attr('class', 'month')
-   .attr('x', position.x)
-   .attr('y', position.y - 10)
-   .text((d) => { return d; });
+  render() {
+    var svg = d3.select("body")
+      .append("svg")
+      .attr("height","100%")
+      .attr("width","100%");
 
-svg.selectAll('text.day')
-   .data(days_of_week)
-   .enter()
-   .append('text')
-   .attr('class', 'day')
-   .attr('font-size', '10px')
-   .attr('x', position.x - 30)
-   .attr('y', (d, i) => { return position.y + 13 + 22 * i; })
-   .text((d) => { return d; });
+    svg.selectAll("rect")
+      .data(dataArray)
+      .enter()
+      .append("rect")
+      .attr("height", square_side_length) 
+      .attr("width", square_side_length)
+      .attr('fill', (d, i) => { return interpolate(d + 0.9); })
+      .attr("x", (d,i) => { return (square_side_length + square_spacing) * Math.floor(i / days_in_week) + position.x; })
+      .attr("y", (d,i) => { return (square_side_length + square_spacing) * (i % days_in_week) + position.y });
+
+    svg.selectAll('text.month')
+      .data([month])
+      .enter()
+      .append('text')
+      .attr('class', 'month')
+      .attr('x', position.x)
+      .attr('y', position.y - 10)
+      .text((d) => { return d; });
+
+    svg.selectAll('text.day')
+      .data(days_of_week)
+      .enter()
+      .append('text')
+      .attr('class', 'day')
+      .attr('font-size', '10px')
+      .attr('x', position.x - 30)
+      .attr('y', (d, i) => { return position.y + 13 + 22 * i; })
+      .text((d) => { return d; });
+
+    console.log(svg);
+  }
+}
+
+const domContainer = document.querySelector('#like_button_container');
+ReactDOM.render(e(LikeButton), domContainer);
+
