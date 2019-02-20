@@ -12,8 +12,8 @@ Version 0.01 - Goals
 - Create a close to exact replica of the github visualization
 
 Verson 0.001 Results:
-![alt text](https://raw.githubusercontent.com/ginsengtang/web-playground/master/calendar-heat-map-d3/img/v0.001.png)
+![alt text](https://raw.githubusercontent.com/ginsengtang/web-playground/master/calendar-heat-map/calendar-heat-map-d3/img/v0.001.png)
 
 Verson 0.002 Results:
-![alt text](https://raw.githubusercontent.com/ginsengtang/web-playground/master/calendar-heat-map-d3/img/v0.002.png)
+![alt text](https://raw.githubusercontent.com/ginsengtang/web-playground/master/calendar-heat-map/calendar-heat-map-d3/img/v0.002.png)
 
