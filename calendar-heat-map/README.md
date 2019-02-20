@@ -2,7 +2,7 @@ Playing Gets Messy
 
 The react framework renders d3 append and select useless.
 
-So I'm diving this block into two implementations:
+So I'm dividing this block into two implementations:
 
 one with react and d3
 
