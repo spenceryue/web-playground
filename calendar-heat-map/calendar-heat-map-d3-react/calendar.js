@@ -35,54 +35,109 @@ for (let i = 0; i < 7 * 6; i++)
   }
 }
 
-//testing to see that react works
-const e = React.createElement;
+/*
+var svg = d3.select("body")
+  .append("svg")
+  .attr("height","100%")
+  .attr("width","100%");
 
-class LikeButton extends React.Component {
+svg.selectAll("rect")
+  .data(dataArray)
+  .enter()
+  .append("rect")
+  .attr("height", square_side_length)
+  .attr("width", square_side_length)
+  .attr('fill', (d, i) => { return interpolate(d + 0.9); })
+  .attr("x", (d,i) => { return (square_side_length + square_spacing) * Math.floor(i / days_in_week) + position.x; })
+  .attr("y", (d,i) => { return (square_side_length + square_spacing) * (i % days_in_week) + position.y });
+
+svg.selectAll('text.month')
+  .data([month])
+  .enter()
+  .append('text')
+  .attr('class', 'month')
+  .attr('x', position.x)
+  .attr('y', position.y - 10)
+  .text((d) => { return d; });
+
+svg.selectAll('text.day')
+  .data(days_of_week)
+  .enter()
+  .append('text')
+  .attr('class', 'day')
+  .attr('font-size', '10px')
+  .attr('x', position.x - 30)
+  .attr('y', (d, i) => { return position.y + 13 + 22 * i; })
+  .text((d) => { return d; });
+
+console.log(svg);
+*/
+
+var data =
+[
+  { "day": "2017-04-18", "productPerceivedQuality": "2.8" },
+  { "day": "2017-04-19", "productPerceivedQuality": "2.9" },
+  { "day": "2017-04-20", "productPerceivedQuality": "2.7" },
+  { "day": "2017-04-21", "productPerceivedQuality": "4.3" },
+  { "day": "2017-04-22", "productPerceivedQuality": "4.6" },
+  { "day": "2017-04-23", "productPerceivedQuality": "5" },
+  { "day": "2017-04-24", "productPerceivedQuality": "5.2" },
+  { "day": "2017-04-25", "productPerceivedQuality": "5.1" },
+  { "day": "2017-04-26", "productPerceivedQuality": "4.8" },
+  { "day": "2017-04-27", "productPerceivedQuality": "4.9" },
+  { "day": "2017-04-28", "productPerceivedQuality": "5.1" },
+  { "day": "2017-04-29", "productPerceivedQuality": "5.3" },
+  { "day": "2017-04-30", "productPerceivedQuality": "5.6" },
+  { "day": "2017-05-01", "productPerceivedQuality": "6.2" }
+];
+
+var data_x_y =
+[
+  { "x": "1", "y": "2.8" },
+  { "x": "2", "y": "2.9" },
+  { "x": "3", "y": "2.7" },
+  { "x": "4", "y": "4.3" },
+  { "x": "5", "y": "4.6" },
+  { "x": "6", "y": "5" },
+  { "x": "7", "y": "5.2" },
+];
+
+class Month extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { liked: false };
+    this.state = {};
+    this.state.height = 300;
+    this.state.width  = 300;
+
+		this.selectScaledX = (data) => this.xScale(data.x);
+		this.selectScaledY = (data) => this.xScale(data.y);
+
+    this.xScale = d3.scaleLinear()
+      .domain(d3.extent(data_x_y, (data) => {return data.x}))
+      .range([0, this.state.width]);
+
+    this.yScale = d3.scaleLinear()
+      .domain(d3.extent(data_x_y, (data) => {return data.y}))
+      .range([this.state.height, 0]);
+
+		this.line = d3.line()
+									.x(this.selectScaledX)
+									.y(this.selectScaledY);
+
+		this.linePath = this.line(data_x_y);
   }
 
   render() {
-    var svg = d3.select("body")
-      .append("svg")
-      .attr("height","100%")
-      .attr("width","100%");
-
-    svg.selectAll("rect")
-      .data(dataArray)
-      .enter()
-      .append("rect")
-      .attr("height", square_side_length) 
-      .attr("width", square_side_length)
-      .attr('fill', (d, i) => { return interpolate(d + 0.9); })
-      .attr("x", (d,i) => { return (square_side_length + square_spacing) * Math.floor(i / days_in_week) + position.x; })
-      .attr("y", (d,i) => { return (square_side_length + square_spacing) * (i % days_in_week) + position.y });
-
-    svg.selectAll('text.month')
-      .data([month])
-      .enter()
-      .append('text')
-      .attr('class', 'month')
-      .attr('x', position.x)
-      .attr('y', position.y - 10)
-      .text((d) => { return d; });
-
-    svg.selectAll('text.day')
-      .data(days_of_week)
-      .enter()
-      .append('text')
-      .attr('class', 'day')
-      .attr('font-size', '10px')
-      .attr('x', position.x - 30)
-      .attr('y', (d, i) => { return position.y + 13 + 22 * i; })
-      .text((d) => { return d; });
-
-    console.log(svg);
+    return <svg
+      height={this.state.height}
+      width={this.state.width} >
+				<g className='line'>
+			    <path d={this.linePath}/>
+			  </g>
+      </svg>;
   }
 }
 
-const domContainer = document.querySelector('#like_button_container');
-ReactDOM.render(e(LikeButton), domContainer);
+const domContainer = document.querySelector('#calendar_container');
+ReactDOM.render(<Month></Month>, domContainer);
 
