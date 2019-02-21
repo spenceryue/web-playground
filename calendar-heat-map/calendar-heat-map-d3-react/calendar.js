@@ -109,31 +109,38 @@ class Month extends React.Component {
     this.state.height = 300;
     this.state.width  = 300;
 
-		this.selectScaledX = (data) => this.xScale(data.x);
-		this.selectScaledY = (data) => this.xScale(data.y);
+    this.state.offset_x = 100;
+    this.state.offset_y = 100;
 
-    this.xScale = d3.scaleLinear()
-      .domain(d3.extent(data_x_y, (data) => {return data.x}))
-      .range([0, this.state.width]);
+    this.state.square_side = 20;
+    this.state.spacing = 3;
 
-    this.yScale = d3.scaleLinear()
-      .domain(d3.extent(data_x_y, (data) => {return data.y}))
-      .range([this.state.height, 0]);
-
-		this.line = d3.line()
-									.x(this.selectScaledX)
-									.y(this.selectScaledY);
-
-		this.linePath = this.line(data_x_y);
+		//this.linePath = this.line(data_x_y);
   }
+
+  createMonth = () => 
+  {
+    let month = [];
+
+    for (let i = 0; i < 7 * 6; i++)
+    {
+      month.push(<rect
+          x={this.state.offset_x + (this.state.spacing + this.state.square_side) * Math.floor(i / days_in_week)}
+          y={this.state.offset_y + (this.state.spacing + this.state.square_side) * (i % days_in_week)}
+          width={this.state.square_side}
+          height={this.state.square_side}
+          />)
+
+    }
+    return month;
+  }
+
 
   render() {
     return <svg
       height={this.state.height}
       width={this.state.width} >
-				<g className='line'>
-			    <path d={this.linePath}/>
-			  </g>
+        {this.createMonth()}
       </svg>;
   }
 }
