@@ -35,44 +35,6 @@ for (let i = 0; i < 7 * 6; i++)
   }
 }
 
-/*
-var svg = d3.select("body")
-  .append("svg")
-  .attr("height","100%")
-  .attr("width","100%");
-
-svg.selectAll("rect")
-  .data(dataArray)
-  .enter()
-  .append("rect")
-  .attr("height", square_side_length)
-  .attr("width", square_side_length)
-  .attr('fill', (d, i) => { return interpolate(d + 0.9); })
-  .attr("x", (d,i) => { return (square_side_length + square_spacing) * Math.floor(i / days_in_week) + position.x; })
-  .attr("y", (d,i) => { return (square_side_length + square_spacing) * (i % days_in_week) + position.y });
-
-svg.selectAll('text.month')
-  .data([month])
-  .enter()
-  .append('text')
-  .attr('class', 'month')
-  .attr('x', position.x)
-  .attr('y', position.y - 10)
-  .text((d) => { return d; });
-
-svg.selectAll('text.day')
-  .data(days_of_week)
-  .enter()
-  .append('text')
-  .attr('class', 'day')
-  .attr('font-size', '10px')
-  .attr('x', position.x - 30)
-  .attr('y', (d, i) => { return position.y + 13 + 22 * i; })
-  .text((d) => { return d; });
-
-console.log(svg);
-*/
-
 class Month extends React.Component {
   constructor(props) {
     super(props);
@@ -101,11 +63,27 @@ class Month extends React.Component {
           y={this.state.offset_y + (this.state.spacing + this.state.square_side) * (i % days_in_week)}
           width={this.state.square_side}
           height={this.state.square_side}
-          fill={interpolate(i / 84 + 0.2)}
+          fill={interpolate(dataArray[i] + 0.9)}
           />)
 
     }
     return month;
+  }
+
+  createWeekdays = () =>
+  {
+    let weekdays = [];
+
+    for (let i = 0; i < 7; i++)
+    {
+      weekdays.push(<text
+          x={this.state.offset_x - 30}
+          y={this.state.offset_y + 13 + 23 * i}
+          font-size={'10px'} >
+          {days_of_week[i]}
+          </text>)
+    }
+    return weekdays;
   }
 
 
@@ -119,6 +97,7 @@ class Month extends React.Component {
           >{this.state.month_name}
           </text>
 
+        {this.createWeekdays()}
         {this.createMonth()}
       </svg>;
   }
