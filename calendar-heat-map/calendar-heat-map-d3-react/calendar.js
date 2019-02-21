@@ -73,35 +73,6 @@ svg.selectAll('text.day')
 console.log(svg);
 */
 
-var data =
-[
-  { "day": "2017-04-18", "productPerceivedQuality": "2.8" },
-  { "day": "2017-04-19", "productPerceivedQuality": "2.9" },
-  { "day": "2017-04-20", "productPerceivedQuality": "2.7" },
-  { "day": "2017-04-21", "productPerceivedQuality": "4.3" },
-  { "day": "2017-04-22", "productPerceivedQuality": "4.6" },
-  { "day": "2017-04-23", "productPerceivedQuality": "5" },
-  { "day": "2017-04-24", "productPerceivedQuality": "5.2" },
-  { "day": "2017-04-25", "productPerceivedQuality": "5.1" },
-  { "day": "2017-04-26", "productPerceivedQuality": "4.8" },
-  { "day": "2017-04-27", "productPerceivedQuality": "4.9" },
-  { "day": "2017-04-28", "productPerceivedQuality": "5.1" },
-  { "day": "2017-04-29", "productPerceivedQuality": "5.3" },
-  { "day": "2017-04-30", "productPerceivedQuality": "5.6" },
-  { "day": "2017-05-01", "productPerceivedQuality": "6.2" }
-];
-
-var data_x_y =
-[
-  { "x": "1", "y": "2.8" },
-  { "x": "2", "y": "2.9" },
-  { "x": "3", "y": "2.7" },
-  { "x": "4", "y": "4.3" },
-  { "x": "5", "y": "4.6" },
-  { "x": "6", "y": "5" },
-  { "x": "7", "y": "5.2" },
-];
-
 class Month extends React.Component {
   constructor(props) {
     super(props);
@@ -112,10 +83,11 @@ class Month extends React.Component {
     this.state.offset_x = 100;
     this.state.offset_y = 100;
 
+    this.state.month_name = 'Jan';
+
     this.state.square_side = 20;
     this.state.spacing = 3;
 
-		//this.linePath = this.line(data_x_y);
   }
 
   createMonth = () => 
@@ -129,6 +101,7 @@ class Month extends React.Component {
           y={this.state.offset_y + (this.state.spacing + this.state.square_side) * (i % days_in_week)}
           width={this.state.square_side}
           height={this.state.square_side}
+          fill={interpolate(i / 84 + 0.2)}
           />)
 
     }
@@ -140,11 +113,14 @@ class Month extends React.Component {
     return <svg
       height={this.state.height}
       width={this.state.width} >
+        <text 
+          x={this.state.offset_x}
+          y={this.state.offset_y - 10}
+          >{this.state.month_name}
+          </text>
+
         {this.createMonth()}
       </svg>;
   }
 }
-
-const domContainer = document.querySelector('#calendar_container');
-ReactDOM.render(<Month></Month>, domContainer);
 
