@@ -10,7 +10,6 @@ const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
 const month = months[date.getMonth()];
 const days_of_week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
-const interpolate = d3.scaleSequential((t) => { return d3.hsl(100, 1, t) } );
 
 const dataArray = [];
 
@@ -38,18 +37,20 @@ for (let i = 0; i < 7 * 6; i++)
 class Month extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
-    this.state.height = 300;
-    this.state.width  = 300;
 
-    this.state.offset_x = 100;
-    this.state.offset_y = 100;
+    this.state = {};
+    this.state.height = props.height;
+    this.state.width  = props.width;
+
+    this.state.offset_x = props.offset_x;
+    this.state.offset_y = props.offset_y;
 
     this.state.month_name = 'Jan';
 
     this.state.square_side = 20;
     this.state.spacing = 3;
 
+    this.interpolate = d3.scaleSequential((t) => { return d3.hsl(100, 1, t) } );
   }
 
   createMonth = () => 
@@ -63,7 +64,7 @@ class Month extends React.Component {
           y={this.state.offset_y + (this.state.spacing + this.state.square_side) * (i % days_in_week)}
           width={this.state.square_side}
           height={this.state.square_side}
-          fill={interpolate(dataArray[i] + 0.9)}
+          fill={this.interpolate(dataArray[i] + 0.9)}
           />)
 
     }
@@ -96,7 +97,6 @@ class Month extends React.Component {
           y={this.state.offset_y - 10}
           >{this.state.month_name}
           </text>
-
         {this.createWeekdays()}
         {this.createMonth()}
       </svg>;
