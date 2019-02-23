@@ -39,6 +39,8 @@ class Month extends React.Component {
     super(props);
 
     this.state = {};
+    this.state.height = props.height;
+    this.state.width  = props.width;
 
     this.state.offset_x = props.offset_x;
     this.state.offset_y = props.offset_y;
@@ -87,7 +89,9 @@ class Month extends React.Component {
 
 
   render() {
-    return <g>
+    return <svg
+      height={this.state.height}
+      width={this.state.width} >
         <text 
           x={this.state.offset_x}
           y={this.state.offset_y - 10}
@@ -95,7 +99,7 @@ class Month extends React.Component {
           </text>
         {this.createWeekdays()}
         {this.createMonth()}
-        </g>
+      </svg>;
   }
 }
 

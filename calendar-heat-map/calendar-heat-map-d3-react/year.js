@@ -9,22 +9,18 @@ class Year extends React.Component {
   }
 
   render() {
-    return <div>
-      <Month
-      height={300}
-      width={300}
-      offset_x={100}
-      offset_y={100}
+    return <svg
+        width={600}
+        height={300}
       >
-      </Month>
-      <Month
-      height={300}
-      width={300}
-      offset_x={0}
-      offset_y={100}
-      >
-      </Month>
-      </div>;
+        <Month offset_x={100}
+          offset_y={100}
+          ></Month>
+
+        <Month offset_x={300}
+          offset_y={100}
+          ></Month>
+      </svg>;
   }
 }
 
