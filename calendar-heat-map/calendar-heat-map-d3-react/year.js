@@ -10,7 +10,7 @@ class Year extends React.Component {
 
   render() {
     return <svg
-        width={600}
+        width={700}
         height={300}
       >
         <Month offset_x={100}
@@ -18,6 +18,9 @@ class Year extends React.Component {
           ></Month>
 
         <Month offset_x={300}
+          offset_y={100}
+          ></Month>
+        <Month offset_x={500}
           offset_y={100}
           ></Month>
       </svg>;
