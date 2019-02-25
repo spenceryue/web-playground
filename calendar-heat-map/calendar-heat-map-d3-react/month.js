@@ -5,8 +5,6 @@ const days_in_week = 7
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 const days_of_week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
-
-
 class Month extends React.Component {
   constructor(props) {
     super(props);
@@ -22,7 +20,20 @@ class Month extends React.Component {
     this.state.square_side = 20;
     this.state.spacing = 3;
 
-    this.interpolate = d3.scaleSequential((t) => { return d3.hsl(100, 1, t) } );
+    this.interpolate = d3.scaleSequential((t) => { 
+      if (t == -1)
+      {
+        return d3.hsl(0, 0, 1) 
+      }
+      else if (t == 0)
+      {
+        return d3.hsl(0, 0, 0.9) 
+      }
+      else
+      {
+        return d3.hsl(82, 1, .75 - t / 2) 
+      }
+    } );
 
     this.date = new Date();
 
@@ -35,7 +46,7 @@ class Month extends React.Component {
     {
       if (this.date.getMonth() !== props.month)
       {
-        this.dataArray.push(1);
+        this.dataArray.push(-1);
         continue;
       }
 
@@ -46,7 +57,7 @@ class Month extends React.Component {
       }
       else
       {
-        this.dataArray.push(1);
+        this.dataArray.push(-1);
       }
     }
 
@@ -63,7 +74,7 @@ class Month extends React.Component {
           y={this.state.offset_y + (this.state.spacing + this.state.square_side) * (i % days_in_week)}
           width={this.state.square_side}
           height={this.state.square_side}
-          fill={this.interpolate(this.dataArray[i] / 2 + 0.25)}
+          fill={this.interpolate(this.dataArray[i])}
           />)
 
     }

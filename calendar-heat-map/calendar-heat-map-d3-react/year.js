@@ -2,7 +2,9 @@ class Year extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.state.year = 2000;
+    this.state.year = props.year;
+    this.state.offset_x = 100;
+    this.state.offset_y = 100;
   }
 
   createMonth = () => 
@@ -12,8 +14,8 @@ class Year extends React.Component {
     for (let i = 0; i < 12; i++)
     {
       months.push(<Month
-          offset_x={100 + i * 139}
-          offset_y={100}
+          offset_x={this.state.offset_x + i * 139}
+          offset_y={this.state.offset_y}
           month={i}
           year={this.state.year} >
           </Month>)
@@ -28,8 +30,8 @@ class Year extends React.Component {
         height={300}
       >
         <text
-          x={100}
-          y={65}
+          x={this.state.offset_x}
+          y={this.state.offset_y - 35}
           >{this.state.year}
         </text>
       {this.createMonth()}

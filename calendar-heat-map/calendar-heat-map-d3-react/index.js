@@ -1,2 +1,8 @@
 const domContainer = document.querySelector('#calendar_container');
-ReactDOM.render(<Year></Year>, domContainer);
+ReactDOM.render(
+    <div>
+    <Year year='2000'></Year>
+    <Year year='2001'></Year>
+    <Litmus></Litmus>
+    </div>
+    , domContainer);

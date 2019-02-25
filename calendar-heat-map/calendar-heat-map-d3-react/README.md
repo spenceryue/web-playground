@@ -17,3 +17,6 @@ https://hackernoon.com/how-and-why-to-use-d3-with-react-d239eb1ea274
 Verson 0.001 Results:
 ![alt text](https://raw.githubusercontent.com/ginsengtang/web-playground/master/calendar-heat-map/calendar-heat-map-d3-react/img/v0.001.png)
 
+Verson 0.002 Results:
+![alt text](https://raw.githubusercontent.com/ginsengtang/web-playground/master/calendar-heat-map/calendar-heat-map-d3-react/img/v0.002.png)
+
