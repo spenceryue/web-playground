@@ -2,37 +2,10 @@ const position = { x: 100, y: 100 }
 const square_side_length = 20
 const square_spacing = 2
 const days_in_week = 7
-const date = new Date();
-date.setDate(1);
-date.setMonth(0);
-
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-const month = months[date.getMonth()];
 const days_of_week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
 
-const dataArray = [];
-
-console.log(date);
-
-for (let i = 0; i < 7 * 6; i++)
-{
-  if (months[date.getMonth()] !== month)
-  {
-    dataArray.push(1);
-    continue;
-  }
-
-  if (i % 7 == date.getDay())
-  {
-    dataArray.push(0);
-    date.setDate(date.getDate() + 1);
-  }
-  else
-  {
-    dataArray.push(1);
-  }
-}
 
 class Month extends React.Component {
   constructor(props) {
@@ -50,6 +23,32 @@ class Month extends React.Component {
     this.state.spacing = 3;
 
     this.interpolate = d3.scaleSequential((t) => { return d3.hsl(100, 1, t) } );
+
+    this.date = new Date();
+
+    this.date.setDate(1);
+    this.date.setMonth(props.month);
+    this.dataArray = [];
+
+    for (let i = 0; i < 7 * 6; i++)
+    {
+      if (this.date.getMonth() !== props.month)
+      {
+        this.dataArray.push(1);
+        continue;
+      }
+
+      if (i % 7 == this.date.getDay())
+      {
+        this.dataArray.push(0);
+        this.date.setDate(this.date.getDate() + 1);
+      }
+      else
+      {
+        this.dataArray.push(1);
+      }
+    }
+
   }
 
   createMonth = () => 
@@ -63,7 +62,7 @@ class Month extends React.Component {
           y={this.state.offset_y + (this.state.spacing + this.state.square_side) * (i % days_in_week)}
           width={this.state.square_side}
           height={this.state.square_side}
-          fill={this.interpolate(dataArray[i] / 2 + 0.25)}
+          fill={this.interpolate(this.dataArray[i] / 2 + 0.25)}
           />)
 
     }
@@ -92,14 +91,14 @@ class Month extends React.Component {
 
   render() {
     return <g>
-        <text 
-          x={this.state.offset_x}
-          y={this.state.offset_y - 10}
-          >{this.state.month_name}
-          </text>
-        {this.createWeekdays()}
-        {this.createMonth()}
-        </g>
+      <text
+        x={this.state.offset_x}
+        y={this.state.offset_y - 10}
+      >{this.state.month_name}
+      </text>
+       {this.createWeekdays()}
+       {this.createMonth()}
+      </g>
   }
 }
 
