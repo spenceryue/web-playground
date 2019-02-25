@@ -43,7 +43,8 @@ class Month extends React.Component {
     this.state.offset_x = props.offset_x;
     this.state.offset_y = props.offset_y;
 
-    this.state.month_name = 'Jan';
+    this.state.month_name = months[props.month];
+    this.state.month = props.month;
 
     this.state.square_side = 20;
     this.state.spacing = 3;
@@ -62,7 +63,7 @@ class Month extends React.Component {
           y={this.state.offset_y + (this.state.spacing + this.state.square_side) * (i % days_in_week)}
           width={this.state.square_side}
           height={this.state.square_side}
-          fill={this.interpolate(dataArray[i] + 0.9)}
+          fill={this.interpolate(dataArray[i] / 2 + 0.25)}
           />)
 
     }
@@ -71,18 +72,21 @@ class Month extends React.Component {
 
   createWeekdays = () =>
   {
-    let weekdays = [];
-
-    for (let i = 0; i < 7; i++)
+    if (this.state.month === 0)
     {
-      weekdays.push(<text
-          x={this.state.offset_x - 30}
-          y={this.state.offset_y + 13 + 23 * i}
-          font-size={'10px'} >
-          {days_of_week[i]}
-          </text>)
+      let weekdays = [];
+
+      for (let i = 0; i < 7; i++)
+      {
+        weekdays.push(<text
+            x={this.state.offset_x - 30}
+            y={this.state.offset_y + 13 + 23 * i}
+            font-size={'10px'} >
+            {days_of_week[i]}
+            </text>)
+      }
+      return weekdays;
     }
-    return weekdays;
   }
 
 

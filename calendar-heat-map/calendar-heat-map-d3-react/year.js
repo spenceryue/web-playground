@@ -6,28 +6,26 @@ class Year extends React.Component {
 
   createMonth = () => 
   {
+    let months = [];
+
+    for (let i = 0; i < 12; i++)
+    {
+      months.push(<Month
+          offset_x={100 + i * 139}
+          offset_y={100}
+          month={i}>
+          </Month>)
+    }
+
+    return months;
   }
 
   render() {
     return <svg
-        width={900}
+        width={2400}
         height={300}
       >
-        <Month offset_x={100}
-          offset_y={100}
-          ></Month>
-
-        <Month offset_x={300}
-          offset_y={100}
-          ></Month>
-
-        <Month offset_x={500}
-          offset_y={100}
-          ></Month>
-
-        <Month offset_x={700}
-          offset_y={100}
-          ></Month>
+      {this.createMonth()}
       </svg>;
   }
 }
