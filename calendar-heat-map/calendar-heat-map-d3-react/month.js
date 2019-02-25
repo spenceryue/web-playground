@@ -27,6 +27,7 @@ class Month extends React.Component {
     this.date = new Date();
 
     this.date.setDate(1);
+    this.date.setYear(props.year);
     this.date.setMonth(props.month);
     this.dataArray = [];
 
