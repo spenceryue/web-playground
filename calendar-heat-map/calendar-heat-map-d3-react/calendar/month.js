@@ -32,7 +32,7 @@ class Month extends React.Component {
     {
       if (this.date.getMonth() !== props.month)
       {
-        this.dataArray.push(-1);
+        this.dataArray.push({number: -1, title: ''});
         continue;
       }
 
@@ -40,19 +40,19 @@ class Month extends React.Component {
       {
         if (typeof(this.state.data[ptr]) !== 'undefined' && this.date.getDate() == this.state.data[ptr].getDate())
         {
-          this.dataArray.push(1);
+          this.dataArray.push({number: 1, title: this.date.toDateString()});
           ptr++;
         }
         else
         {
-          this.dataArray.push(0);
+          this.dataArray.push({number: 0, title: this.date.toDateString()});
         }
 
         this.date.setDate(this.date.getDate() + 1);
       }
       else
       {
-        this.dataArray.push(-1);
+        this.dataArray.push({number: -1, title: ''});
       }
     }
 
@@ -69,8 +69,10 @@ class Month extends React.Component {
           y={this.state.offset_y + (this.state.spacing + this.state.square_side) * (i % days_in_week)}
           width={this.state.square_side}
           height={this.state.square_side}
-          fill={green(this.dataArray[i])}
-          />)
+          fill={green(this.dataArray[i].number)}
+          >
+            <title>{this.dataArray[i].title}</title>
+          </rect>)
 
     }
     return month;
