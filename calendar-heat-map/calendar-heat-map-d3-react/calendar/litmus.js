@@ -12,14 +12,14 @@ class Litmus extends React.Component {
       }
       else
       {
-        return d3.hsl(82, 1, .75 - t / 2) 
+        return d3.hsl(props.color, 1, .75 - t / 2) 
       }
     } );
 
     this.spacing = 3; 
     this.square_side = 20; 
-    this.offset_x = 20; 
-    this.offset_y = 20; 
+    this.offset_x = 10; 
+    this.offset_y = -20; 
   }
 
   createSquares = () => 
@@ -49,7 +49,7 @@ class Litmus extends React.Component {
 
   render() {
     return <svg
-          height={200}
+          height={24}
           width={2000}
         >
           <g>

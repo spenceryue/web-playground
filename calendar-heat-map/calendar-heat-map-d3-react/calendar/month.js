@@ -21,22 +21,6 @@ class Month extends React.Component {
 
     this.state.square_side = 20;
     this.state.spacing = 3;
-
-    this.interpolate = d3.scaleSequential((t) => { 
-      if (t == -1)
-      {
-        return d3.hsl(0, 0, 1) 
-      }
-      else if (t == 0)
-      {
-        return d3.hsl(0, 0, 0.9) 
-      }
-      else
-      {
-        return d3.hsl(82, 1, .75 - t / 2) 
-      }
-    } );
-
     this.date = new Date();
 
     this.date.setDate(1);
@@ -86,7 +70,7 @@ class Month extends React.Component {
           y={this.state.offset_y + (this.state.spacing + this.state.square_side) * (i % days_in_week)}
           width={this.state.square_side}
           height={this.state.square_side}
-          fill={this.interpolate(this.dataArray[i])}
+          fill={green(this.dataArray[i])}
           />)
 
     }
