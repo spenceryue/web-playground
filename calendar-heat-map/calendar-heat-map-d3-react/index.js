@@ -3,6 +3,6 @@ ReactDOM.render(
     <div>
     <Year year='2000'></Year>
     <Year year='2001'></Year>
-    <Litmus></Litmus>
+    <Litmus color={10} ></Litmus>
     </div>
     , domContainer);

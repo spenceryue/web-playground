@@ -23,3 +23,5 @@ Verson 0.002 Results:
 Verson 0.003 Results:
 ![alt text](https://raw.githubusercontent.com/ginsengtang/web-playground/master/calendar-heat-map/calendar-heat-map-d3-react/img/v0.003.png)
 
+Verson 0.004 Results:
+![alt text](https://raw.githubusercontent.com/ginsengtang/web-playground/master/calendar-heat-map/calendar-heat-map-d3-react/img/v0.004.png)

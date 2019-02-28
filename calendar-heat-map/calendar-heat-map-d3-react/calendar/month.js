@@ -17,7 +17,6 @@ class Month extends React.Component {
     this.state.month_name = months[props.month];
     this.state.month = props.month;
     this.state.data = props.data;
-    console.log(this.state.data);
 
     this.state.square_side = 20;
     this.state.spacing = 3;

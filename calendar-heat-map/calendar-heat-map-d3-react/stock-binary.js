@@ -11,31 +11,44 @@ let all_litmus = () =>
   return ret;
 }
 
+let all_years = (years) =>
+{
+  let ret = [];
+  for (let i = 0; i < years.length; i++)
+  {
+    ret.push(<Year year={years[i][0].getFullYear()}
+                   data={years[i]}>
+                   </Year>);
+  }
+  return ret;
+}
+
 d3.csv('SPY.csv').get((error, data) => 
     {
-      let year1993 = [];
-      let year2003 = [];
+      let year_separated = [[]];
+      let cur_year_ptr = 0;
       data.forEach((dat) => {
         var date = new Date(dat.Date);
         date.setDate(date.getDate() + 1);
-        if (date.getFullYear() == 1993)
-        {
-          year1993.push(date);
-        }
 
-        if (date.getFullYear() == 2003)
+        if (year_separated[cur_year_ptr].length == 0)
         {
-          year2003.push(date);
+          year_separated[cur_year_ptr].push(date);
+        }
+        else if (year_separated[cur_year_ptr][0].getFullYear() == date.getFullYear())
+        {
+          year_separated[cur_year_ptr].push(date);
+        }
+        else
+        {
+          cur_year_ptr++;
+          year_separated.push([date]);
         }
       });
-      //console.log(year1993);
 
       ReactDOM.render(
           <div>
-          <Year year='1993' data={year1993}></Year>
-          <Year year='2003' data={year2003}></Year>
-          <Litmus color={82}></Litmus>
-          <Litmus color={200}></Litmus>
+          {all_years(year_separated)}
           {all_litmus()}
           </div>
           , domContainer);
