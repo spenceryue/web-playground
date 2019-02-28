@@ -7,6 +7,7 @@ class Year extends React.Component {
     this.state.offset_y = 100;
 
     this.state.data = props.data;
+    this.state.max = props.max;
     this.data = props.data;
   }
 
@@ -23,7 +24,7 @@ class Year extends React.Component {
         if (i < 11)
         {
           let ptr = -1;
-          while (this.data[++ptr].getMonth() == i);
+          while (this.data[++ptr].date.getMonth() == i);
           curr_month = this.data.splice(0, ptr);
         }
         else
@@ -37,6 +38,7 @@ class Year extends React.Component {
           offset_y={this.state.offset_y}
           month={i}
           data={curr_month}
+          max={this.state.max}
           year={this.state.year} >
           </Month>)
     }

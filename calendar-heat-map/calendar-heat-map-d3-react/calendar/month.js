@@ -17,6 +17,7 @@ class Month extends React.Component {
     this.state.month_name = months[props.month];
     this.state.month = props.month;
     this.state.data = props.data;
+    this.state.max = props.max;
 
     this.state.square_side = 20;
     this.state.spacing = 3;
@@ -38,9 +39,11 @@ class Month extends React.Component {
 
       if (i % 7 == this.date.getDay())
       {
-        if (typeof(this.state.data[ptr]) !== 'undefined' && this.date.getDate() == this.state.data[ptr].getDate())
+        if (typeof(this.state.data[ptr]) !== 'undefined' &&
+            this.state.data[ptr].date &&
+            this.date.getDate() == this.state.data[ptr].date.getDate())
         {
-          this.dataArray.push({number: 1, title: this.date.toDateString()});
+          this.dataArray.push({number: this.state.data[ptr].Volume / this.state.max.Volume, title: this.date.toDateString() + '\n' + this.state.data[ptr].Volume});
           ptr++;
         }
         else
