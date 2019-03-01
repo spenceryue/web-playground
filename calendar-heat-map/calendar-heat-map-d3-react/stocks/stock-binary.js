@@ -1,4 +1,8 @@
 const domContainer = document.querySelector('#calendar_container');
+const selectMetric = document.querySelector('#select_metric');
+selectMetric.addEventListener('change',() => {
+  console.log('selected item ' + selectMetric.value);
+});
 
 let all_litmus = () =>
 {
