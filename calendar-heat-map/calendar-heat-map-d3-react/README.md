@@ -25,3 +25,17 @@ Verson 0.003 Results:
 
 Verson 0.004 Results:
 ![alt text](https://raw.githubusercontent.com/ginsengtang/web-playground/master/calendar-heat-map/calendar-heat-map-d3-react/img/v0.004.png)
+
+A lot of this is going to be incoherent and chaotic. That is the nature of things it seems. As time progresses, it will become more clear what it is I'm trying to do.
+
+Mar 1, 2019
+
+What already exists:
+ * a yearly calendar
+ * a stock visualization
+
+
+Specifications for Version 0.005
+ * pull data from firebase
+ * make month more flexible, able to handle different ranges of numbers
+
