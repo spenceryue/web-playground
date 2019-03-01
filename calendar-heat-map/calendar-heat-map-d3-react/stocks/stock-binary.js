@@ -33,33 +33,44 @@ d3.csv('SPY.csv').get((error, data) =>
       let year_separated = [[]];
       let cur_year_ptr = 0;
 
-      let max_volume = data.reduce((dat1, dat2) => {
-        return {Volume: Math.max(dat1.Volume, dat2.Volume)};
+      let max = data.reduce((dat1, dat2) => {
+        return { Volume: Math.max(dat1.Volume, dat2.Volume),
+                 Close: Math.max(dat1.Close, dat2.Close),
+                 PercentChange: Math.max(dat1.PercentChange, dat2.PercentChange) };
       });
 
       data.forEach((dat) => {
         var date = new Date(dat.Date);
-        date.setDate(date.getDate() + 1);
+        date.setDate(date.getDate());
 
         if (year_separated[cur_year_ptr].length == 0)
         {
-          year_separated[cur_year_ptr].push({date: date, Volume: dat.Volume});
+          year_separated[cur_year_ptr].push({date: date,
+                                             Volume: dat.Volume,
+                                             Close: dat.Close,
+                                             PercentChanged: dat.PercentChange });
         }
         else if (year_separated[cur_year_ptr][0].date.getFullYear() == date.getFullYear())
         {
-          year_separated[cur_year_ptr].push({date: date, Volume: dat.Volume});
+          year_separated[cur_year_ptr].push({date: date,
+                                             Volume: dat.Volume,
+                                             Close: dat.Close,
+                                             PercentChange: dat.PercentChange });
         }
         else
         {
           cur_year_ptr++;
-          year_separated.push([{date: date, Volume: dat.Volume}]);
+          year_separated.push([{date: date,
+                                Volume: dat.Volume,
+                                Close: dat.Close,
+                                PercentChange: dat.PercentChange }]);
         }
       });
 
-      console.log(max_volume);
+      console.log(max);
       ReactDOM.render(
           <div>
-          {all_years(year_separated, max_volume)}
+          {all_years(year_separated, max)}
           {all_litmus()}
           </div>
           , domContainer);
