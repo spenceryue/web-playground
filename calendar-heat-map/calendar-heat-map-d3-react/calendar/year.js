@@ -7,6 +7,7 @@ class Year extends React.Component {
     this.state.offset_y = 100;
 
     this.state.data = props.data;
+    this.state.metric = props.metric;
     this.state.max = props.max;
     this.data = props.data;
   }
@@ -39,11 +40,22 @@ class Year extends React.Component {
           month={i}
           data={curr_month}
           max={this.state.max}
-          year={this.state.year} >
+          year={this.state.year}
+          metric={this.state.metric} >
           </Month>)
     }
 
     return months;
+  }
+
+  componentDidUpdate(prevProps)
+  {
+    if (prevProps.metric !== this.props.metric)
+    {
+      this.setState((prevState) => ({
+        metric: this.props.metric
+      }));
+    }
   }
 
   render() {

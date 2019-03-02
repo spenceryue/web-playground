@@ -21,6 +21,7 @@ class Month extends React.Component {
 
     this.state.square_side = 20;
     this.state.spacing = 3;
+    this.state.metric = props.metric;
     this.date = new Date();
 
     this.date.setDate(1);
@@ -28,10 +29,15 @@ class Month extends React.Component {
     this.date.setMonth(props.month);
     this.dataArray = [];
 
+    this.redo();
+  }
+
+  redo = () => {
+    this.dataArray = []; 
     let ptr = 0;
     for (let i = 0; i < 7 * 6; i++)
     {
-      if (this.date.getMonth() !== props.month)
+      if (this.date.getMonth() !== this.props.month)
       {
         this.dataArray.push({number: -1, title: ''});
         continue;
@@ -43,7 +49,7 @@ class Month extends React.Component {
             this.state.data[ptr].date &&
             this.date.getDate() == this.state.data[ptr].date.getDate())
         {
-          this.dataArray.push({number: this.state.data[ptr].Volume / this.state.max.Volume, title: this.date.toDateString() + '\n' + this.state.data[ptr].Volume});
+          this.dataArray.push({number: this.state.data[ptr][this.state.metric] / this.state.max[this.state.metric], title: this.date.toDateString() + '\n' + this.state.data[ptr][this.state.metric]});
           ptr++;
         }
         else
@@ -58,8 +64,8 @@ class Month extends React.Component {
         this.dataArray.push({number: -1, title: ''});
       }
     }
-
   }
+
 
   createMonth = () => 
   {
@@ -100,6 +106,16 @@ class Month extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps)
+  {
+    if (prevProps.metric !== this.props.metric)
+    {
+      this.setState((prevState) => ({
+        metric: this.props.metric
+      }));
+      this.redo();
+    }
+  }
 
   render() {
     return <g>

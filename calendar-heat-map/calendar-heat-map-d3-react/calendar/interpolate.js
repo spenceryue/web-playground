@@ -7,8 +7,14 @@ const green = d3.scaleSequential((t) => {
       {
         return d3.hsl(0, 0, 0.9) 
       }
-      else
+      else if (t > 0)
       {
+        //green
         return d3.hsl(82, 1, .75 - t / 2) 
+      }
+      else if (t < 0)
+      {
+        //red
+        return d3.hsl(0, 1, .75 + t / 2) 
       }
     });
