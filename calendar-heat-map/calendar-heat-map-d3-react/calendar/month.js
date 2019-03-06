@@ -16,54 +16,55 @@ class Month extends React.Component {
 
     this.state.month_name = months[props.month];
     this.state.month = props.month;
+    this.state.year = props.year;
     this.state.data = props.data;
     this.state.max = props.max;
 
     this.state.square_side = 20;
     this.state.spacing = 3;
     this.state.metric = props.metric;
-    this.date = new Date();
-
-    this.date.setDate(1);
-    this.date.setYear(props.year);
-    this.date.setMonth(props.month);
-    this.dataArray = [];
-
-    this.redo();
+    this.state.dataArray = this.getDataArray(this.state.metric);
   }
 
-  redo = () => {
-    this.dataArray = []; 
+  getDataArray = (metric) => {
+    let date = new Date();
+    date.setDate(1);
+    date.setYear(this.state.year);
+    date.setMonth(this.state.month);
+
+    let data_array = [];
     let ptr = 0;
     for (let i = 0; i < 7 * 6; i++)
     {
-      if (this.date.getMonth() !== this.props.month)
+      if (date.getMonth() !== this.props.month)
       {
-        this.dataArray.push({number: -1, title: ''});
+        data_array.push({number: -1, title: ''});
         continue;
       }
 
-      if (i % 7 == this.date.getDay())
+      if (i % 7 == date.getDay())
       {
         if (typeof(this.state.data[ptr]) !== 'undefined' &&
             this.state.data[ptr].date &&
-            this.date.getDate() == this.state.data[ptr].date.getDate())
+            date.getDate() == this.state.data[ptr].date.getDate())
         {
-          this.dataArray.push({number: this.state.data[ptr][this.state.metric] / this.state.max[this.state.metric], title: this.date.toDateString() + '\n' + this.state.data[ptr][this.state.metric]});
+          data_array.push({number: this.state.data[ptr][metric] / this.state.max[metric], title: date.toDateString() + '\n' + this.state.data[ptr][metric]});
           ptr++;
         }
         else
         {
-          this.dataArray.push({number: 0, title: this.date.toDateString()});
+          data_array.push({number: 0, title: date.toDateString()});
         }
 
-        this.date.setDate(this.date.getDate() + 1);
+        date.setDate(date.getDate() + 1);
       }
       else
       {
-        this.dataArray.push({number: -1, title: ''});
+        data_array.push({number: -1, title: ''});
       }
     }
+
+    return data_array;
   }
 
 
@@ -78,9 +79,9 @@ class Month extends React.Component {
           y={this.state.offset_y + (this.state.spacing + this.state.square_side) * (i % days_in_week)}
           width={this.state.square_side}
           height={this.state.square_side}
-          fill={green(this.dataArray[i].number)}
+          fill={green(this.state.dataArray[i].number)}
           >
-            <title>{this.dataArray[i].title}</title>
+            <title>{this.state.dataArray[i].title}</title>
           </rect>)
 
     }
@@ -110,10 +111,13 @@ class Month extends React.Component {
   {
     if (prevProps.metric !== this.props.metric)
     {
-      this.setState((prevState) => ({
+      this.setState({
         metric: this.props.metric
-      }));
-      this.redo();
+      });
+
+      this.setState({
+        dataArray: this.getDataArray(this.props.metric)
+      });
     }
   }
 

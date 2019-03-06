@@ -52,9 +52,9 @@ class Year extends React.Component {
   {
     if (prevProps.metric !== this.props.metric)
     {
-      this.setState((prevState) => ({
+      this.setState({
         metric: this.props.metric
-      }));
+      });
     }
   }
 

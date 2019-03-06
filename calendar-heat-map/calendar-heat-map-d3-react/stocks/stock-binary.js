@@ -8,10 +8,9 @@ let react_comp;
 
 selectMetric.addEventListener('change',() => {
   metric = selectMetric.value;
-  react_comp.setState((state) => 
-      ({
+  react_comp.setState({
         metric: metric
-      }));
+      });
 });
 
 let all_litmus = () =>
