@@ -1,16 +1,24 @@
-const domContainer = document.querySelector('#calendar_container');
+const domContainer = [];
+for (let i = 1; i < 11; i++)
+{
+  domContainer.push(document.querySelector('#calendar_container' + i));
+}
+const react_comp = [];
+
 const selectMetric = document.querySelector('#select_metric');
 
 let metric = 'Volume';
 let year_separated =[[]];
 let max = {};
-let react_comp;
 
 selectMetric.addEventListener('change',() => {
   metric = selectMetric.value;
-  react_comp.setState({
-        metric: metric
-      });
+  for (let i = 0; i < 10; i++)
+  {
+    react_comp[i].setState({
+      metric: metric
+    });
+  }
 });
 
 let all_litmus = () =>
@@ -76,7 +84,6 @@ d3.csv('SPY.csv').get((error, data) =>
         }
       });
 
-      console.log(max);
       /*react_comp = ReactDOM.render(
           <div>
           {all_years(year_separated, max)}
@@ -84,10 +91,15 @@ d3.csv('SPY.csv').get((error, data) =>
           </div>
           , domContainer);*/
 
-      react_comp = ReactDOM.render(<Year year={year_separated[0][0].date.getFullYear()}
-                   data={year_separated[0]}
-                   max={max}
-                   metric={metric} >
-                   </Year>, domContainer);
+      for (let i = 0; i < 10; i++)
+      {
+        react_comp.push(
+            ReactDOM.render(<Year year={year_separated[i][0].date.getFullYear()}
+              data={year_separated[i]}
+              max={max}
+              metric={metric} >
+              </Year>, domContainer[i])
+            );
+      }
     });
 
