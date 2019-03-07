@@ -42,7 +42,7 @@ let all_years = (years, max) =>
   return ret;
 }
 
-d3.csv('SPY.csv').get((error, data) =>
+d3.csv('questions.csv').get((error, data) =>
     {
       let cur_year_ptr = 0;
 

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>stock data heatmap</title>
+    <title>introspect heatmap</title>
     <link rel="stylesheet" type="text/css" href="../style.css" >
     <script type='text/javascript' src='../d3.v4.js'></script>
     <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
@@ -12,16 +12,14 @@
 
   <body>
     <select id='select_metric'>
-      <option value='Volume'>Volume</option>
-      <option value='Close'>Close</option>
-      <option value='PercentChange'>Percent Change</option>
+      <option value='How Much Did I Spend Today?'>How Much Did I Spend Today?</option>
     </select>
 
     <script type='text/babel' src='../calendar/month.js'></script>
     <script type='text/babel' src='../calendar/year.js'></script>
     <script type='text/babel' src='../calendar/litmus.js'></script>
     <script type='text/babel' src='../calendar/interpolate.js'></script>
-    <script type='text/babel' src='stock-binary.js'></script>
+    <script type='text/babel' src='introspect.js'></script>
   </body>
 
 </html>
