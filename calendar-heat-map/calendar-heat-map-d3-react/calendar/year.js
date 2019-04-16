@@ -3,8 +3,13 @@ class Year extends React.Component {
     super(props);
     this.state = {};
     this.state.year = props.year;
-    this.state.offset_x = 100;
-    this.state.offset_y = 100;
+
+    this.state.offset_x = props.offset_x || 100;
+    this.state.offset_y = props.offset_y || 100;
+
+    this.state.square_length = props.square_length || 15;
+    this.state.square_padding = props.square_padding || 2;
+    this.state.month_padding = props.month_padding || 1;
 
     this.state.data = props.data;
     this.state.metric = props.metric;
@@ -35,8 +40,10 @@ class Year extends React.Component {
       }
 
       months.push(<Month
-          offset_x={this.state.offset_x + i * 139}
+          offset_x={this.state.offset_x + i * (this.state.square_length + this.state.square_padding) * 6 + this.state.month_padding}
           offset_y={this.state.offset_y}
+          square_length={this.state.square_length}
+          square_padding={this.state.square_padding}
           month={i}
           data={curr_month}
           max={this.state.max}
