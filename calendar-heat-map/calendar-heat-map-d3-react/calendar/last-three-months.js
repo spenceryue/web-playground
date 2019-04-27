@@ -43,11 +43,19 @@ class Last3Months extends React.Component {
         }
       }
 
+      let createWeekdays = false;
+
+      if (i === 0)
+      {
+        createWeekdays = true;
+      }
+
       months.push(<Month
           offset_x={this.state.offset_x + i * (this.state.square_length + this.state.square_padding) * 6 + this.state.month_padding}
           offset_y={this.state.offset_y}
           square_length={this.state.square_length}
           square_padding={this.state.square_padding}
+          createWeekdays={createWeekdays}
           month={months3[i]}
           data={curr_month}
           max={this.state.max}

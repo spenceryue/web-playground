@@ -24,6 +24,7 @@ class Month extends React.Component {
     this.state.square_padding = props.square_padding;
     this.state.metric = props.metric;
     this.state.dataArray = this.getDataArray(this.state.metric);
+    this.state.createWeekdays = props.createWeekdays;
   }
 
   getDataArray = (metric) => {
@@ -90,7 +91,7 @@ class Month extends React.Component {
 
   createWeekdays = () =>
   {
-    if (this.state.month === 0)
+    if (this.state.createWeekdays)
     {
       let weekdays = [];
 
