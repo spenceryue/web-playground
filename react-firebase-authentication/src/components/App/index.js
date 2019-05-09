@@ -17,11 +17,14 @@ import AccountPage from '../Account';
 import AdminPage from '../Admin';
 
 import * as ROUTES from '../../constants/routes';
+import { withFirebase } from '../Firebase';
 
-const App = () =>
-  (
-    <Router>
-      <div>
+import { AuthUserContext } from '../Session';
+import { withAuthentication } from '../Session';
+
+const App = () => (
+  <Router>
+    <div>
       <Navigation/>
       <hr/>
 
@@ -33,8 +36,8 @@ const App = () =>
       <Route exact path={ROUTES.ACCOUNT} component={AccountPage} />
       <Route exact path={ROUTES.ADMIN} component={AdminPage} />
 
-      </div>
-    </Router>
-  );
+    </div>
+  </Router>
+);
 
-export default App;
+export default withAuthentication(App);
