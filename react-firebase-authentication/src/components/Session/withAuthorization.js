@@ -1,4 +1,6 @@
 import React from 'react';
+
+import AuthUserContext from './context';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 
@@ -22,7 +24,11 @@ const withAuthorization = condition => Component => {
 
     render() {
       return (
-        <Component {...this.props} />
+        <AuthUserContext.Consumer>
+          {authUser =>
+              condition(authUser) ? <Component {...this.props} /> : null
+          }
+        </AuthUserContext.Consumer>
       );
     }
   }
