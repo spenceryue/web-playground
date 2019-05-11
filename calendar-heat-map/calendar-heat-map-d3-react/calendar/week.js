@@ -1,8 +1,6 @@
-const position = { x: 100, y: 100 }
 const square_side_length = 20
-const days_in_week = 7
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
+const days_in_week = 7
 const days_of_week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
 class Week extends React.Component {
@@ -14,9 +12,6 @@ class Week extends React.Component {
     this.state.offset_x = props.offset_x;
     this.state.offset_y = props.offset_y;
 
-    this.state.month_name = months[props.month];
-    this.state.month = props.month;
-    this.state.year = props.year;
     this.state.data = props.data;
     this.state.max = props.max;
 
@@ -24,7 +19,6 @@ class Week extends React.Component {
     this.state.square_padding = props.square_padding;
     this.state.metric = props.metric;
     this.state.dataArray = this.getDataArray(this.state.metric);
-    this.state.createWeekdays = props.createWeekdays;
   }
 
   getDataArray = (metric) => {
@@ -68,27 +62,6 @@ class Week extends React.Component {
     return data_array;
   }
 
-
-  createMonth = () => 
-  {
-    let month = [];
-
-    for (let i = 0; i < 7 * 6; i++)
-    {
-      month.push(<rect
-          x={this.state.offset_x + (this.state.square_padding + this.state.square_length) * Math.floor(i / days_in_week)}
-          y={this.state.offset_y + (this.state.square_padding + this.state.square_length) * (i % days_in_week)}
-          width={this.state.square_length}
-          height={this.state.square_length}
-          fill={green(this.state.dataArray[i].number)}
-          >
-            <title>{this.state.dataArray[i].title}</title>
-          </rect>)
-
-    }
-    return month;
-  }
-
   createWeekdays = () =>
   {
     if (this.state.createWeekdays)
@@ -130,7 +103,6 @@ class Week extends React.Component {
       >{this.state.month_name}
       </text>
        {this.createWeekdays()}
-       {this.createMonth()}
       </g>
   }
 }
