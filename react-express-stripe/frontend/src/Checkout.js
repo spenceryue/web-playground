@@ -37,7 +37,7 @@ const Checkout = ({ name, description, amount }) =>
       amount={fromUsdtoCent(amount)}
       token={onToken(amount, description)}
       currency={CURRENCY}
-      stripKey={STRIPE_PUBLISHABLE}
+      stripeKey={STRIPE_PUBLISHABLE}
     />
   )
 }
