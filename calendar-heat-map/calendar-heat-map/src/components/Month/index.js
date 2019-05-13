@@ -71,9 +71,10 @@ class Month extends Component {
         }
         else
         {
+          let num = Math.random();
           data_array.push({
-            number: Math.random(),
-            title: date.toDateString()});
+            number: num,
+            title: date.toDateString() + ' ' + num});
         }
 
         date.setDate(date.getDate() + 1);
@@ -98,7 +99,7 @@ class Month extends Component {
           y={this.state.offset_y + (this.state.square_padding + this.state.square_length) * (i % days_in_week)}
           width={this.state.square_length}
           height={this.state.square_length}
-          fill={Gradient.red(this.state.dataArray[i].number)}
+          fill={Gradient.green(this.state.dataArray[i].number)}
           >
             <title>{this.state.dataArray[i].title}</title>
           </rect>)
