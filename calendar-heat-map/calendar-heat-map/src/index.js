@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import Year from './components/Year';
+import Quarter from './components/Quarter';
 
 ReactDOM.render(
   <div>
@@ -14,6 +15,10 @@ ReactDOM.render(
 
   <Year
     year={2002}
+  />
+
+  <Quarter
+    date={new Date()}
   />
 
   </div>

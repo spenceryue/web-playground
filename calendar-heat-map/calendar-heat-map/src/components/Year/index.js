@@ -106,7 +106,7 @@ class Year extends Component {
       <text
         x={this.state.offset_x}
         y={this.state.offset_y - 35}
-      >{this.state.year}
+      >{this.state.dates[0].getYear() + 1900}
       </text>
       {this.createMonth()}
     </svg>;

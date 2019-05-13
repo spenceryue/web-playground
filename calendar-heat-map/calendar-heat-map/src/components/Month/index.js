@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import * as d3 from 'd3';
 import Gradient from '../Gradients';
 
 const days_in_week = 7
@@ -32,7 +31,6 @@ class Month extends Component {
     }
 
     this.state.dataArray = this.getDataArray(this.state.metric);
-    console.log(this.state.dataArray);
 
     this.state.createWeekdays = props.createWeekdays;
   }
@@ -59,8 +57,6 @@ class Month extends Component {
             this.state.data[ptr].date &&
             date.getDate() === this.state.data[ptr].date.getDate())
         {
-
-          console.log(this.state.random);
           //data_array.push({number: this.state.data[ptr][metric] / this.state.max[metric], title: date.toDateString() + '\n' + this.state.data[ptr][metric]});
           data_array.push({
             number: this.state.random[ptr], 
