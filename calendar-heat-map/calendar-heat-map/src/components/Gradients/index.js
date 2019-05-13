@@ -25,7 +25,10 @@ const colorFunction = (hue) => {
 
 const color = 
 {
-  green: colorFunction(82)
+  green: colorFunction(82),
+  red: colorFunction(0),
+  blue: colorFunction(203),
+  orange: colorFunction(33),
 };
 
 export default color;

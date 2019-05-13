@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import * as d3 from 'd3';
 import Gradient from '../Gradients';
 
-const position = { x: 100, y: 100 }
-const square_side_length = 20
 const days_in_week = 7
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-
 const days_of_week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
 class Month extends Component {
@@ -27,7 +24,16 @@ class Month extends Component {
     this.state.square_length = props.square_length;
     this.state.square_padding = props.square_padding;
     this.state.metric = props.metric;
+
+    this.state.random = [];
+    for (let i = 0; i < 32; i++)
+    {
+      this.state.random.push(Math.random());
+    }
+
     this.state.dataArray = this.getDataArray(this.state.metric);
+    console.log(this.state.dataArray);
+
     this.state.createWeekdays = props.createWeekdays;
   }
 
@@ -53,12 +59,21 @@ class Month extends Component {
             this.state.data[ptr].date &&
             date.getDate() === this.state.data[ptr].date.getDate())
         {
-          data_array.push({number: this.state.data[ptr][metric] / this.state.max[metric], title: date.toDateString() + '\n' + this.state.data[ptr][metric]});
+
+          console.log(this.state.random);
+          //data_array.push({number: this.state.data[ptr][metric] / this.state.max[metric], title: date.toDateString() + '\n' + this.state.data[ptr][metric]});
+          data_array.push({
+            number: this.state.random[ptr], 
+            title: date.toDateString() + '\n' + this.state.random[ptr]
+          });
+
           ptr++;
         }
         else
         {
-          data_array.push({number: 0, title: date.toDateString()});
+          data_array.push({
+            number: Math.random(),
+            title: date.toDateString()});
         }
 
         date.setDate(date.getDate() + 1);
@@ -83,7 +98,7 @@ class Month extends Component {
           y={this.state.offset_y + (this.state.square_padding + this.state.square_length) * (i % days_in_week)}
           width={this.state.square_length}
           height={this.state.square_length}
-          fill={Gradient.green(this.state.dataArray[i].number)}
+          fill={Gradient.red(this.state.dataArray[i].number)}
           >
             <title>{this.state.dataArray[i].title}</title>
           </rect>)
