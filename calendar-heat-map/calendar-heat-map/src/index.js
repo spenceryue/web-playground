@@ -5,9 +5,19 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import Year from './components/Year';
 
-ReactDOM.render(<Year 
-  year={2001}
-  />,
+ReactDOM.render(
+  <div>
+
+  <Year 
+    year={2001}
+  />
+
+  <Year
+    year={2002}
+  />
+
+  </div>
+,
 
   document.getElementById('root'));
 // Learn more about service workers: https://bit.ly/CRA-PWA

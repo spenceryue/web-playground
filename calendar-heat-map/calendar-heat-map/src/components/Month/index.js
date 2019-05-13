@@ -1,27 +1,6 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
-
-const green = d3.scaleSequential((t) => { 
-      if (t === -1)
-      {
-        return d3.hsl(0, 0, 1) 
-      }
-      else if (t === 0)
-      {
-        return d3.hsl(0, 0, 0.9) 
-      }
-      else if (t > 0)
-      {
-        //green
-        return d3.hsl(82, 1, .75 - t / 2) 
-      }
-      else if (t < 0)
-      {
-        //red
-        return d3.hsl(0, 1, .75 + t / 2) 
-      }
-    });
-
+import Gradient from '../Gradients';
 
 const position = { x: 100, y: 100 }
 const square_side_length = 20
@@ -104,7 +83,7 @@ class Month extends Component {
           y={this.state.offset_y + (this.state.square_padding + this.state.square_length) * (i % days_in_week)}
           width={this.state.square_length}
           height={this.state.square_length}
-          fill={green(this.state.dataArray[i].number)}
+          fill={Gradient.green(this.state.dataArray[i].number)}
           >
             <title>{this.state.dataArray[i].title}</title>
           </rect>)

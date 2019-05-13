@@ -1,11 +1,35 @@
 import React, { Component } from 'react'
 import Month from '../Month'
 
+const states =
+  ['trailing',
+   'standard'];
+
 class Year extends Component {
   constructor(props) {
     super(props);
+
     this.state = {};
-    this.state.year = props.year;
+
+    this.state.format = props.format || 'standard';
+
+    this.state.dates = [];
+    let date = new Date();
+
+    if (this.state.format === 'trailing') {
+      date.setMonth(date.getMonth() - 11);
+    } else if (this.state.format === 'standard')
+    {
+      date.setYear(props.year);
+      date.setMonth(0);
+    }
+
+    for (let i = 0; i < 12; i++) {
+      this.state.dates.push(
+        new Date(date)
+      );
+      date.setMonth(date.getMonth() + 1);
+    }
 
     this.state.offset_x = props.offset_x || 100;
     this.state.offset_y = props.offset_y || 100;
@@ -20,14 +44,12 @@ class Year extends Component {
     this.data = props.data;
   }
 
-  createMonth = () => 
-  {
+  createMonth = () => {
     let months = [];
 
-    for (let i = 0; i < 12; i++)
-    {
+    for (let i = 0; i < 12; i++) {
       let curr_month = [];
-      
+
       if (typeof(this.data) !== 'undefined')
       {
         if (i < 11)
@@ -43,30 +65,31 @@ class Year extends Component {
       }
 
       let createWeekdays = false;
+
       if (i === 0)
       {
         createWeekdays = true;
       }
+
       months.push(<Month
-          key={i}
-          offset_x={this.state.offset_x + i * (this.state.square_length + this.state.square_padding) * 6 + this.state.month_padding}
-          offset_y={this.state.offset_y}
-          square_length={this.state.square_length}
-          square_padding={this.state.square_padding}
-          createWeekdays={createWeekdays}
-          month={i}
-          data={curr_month}
-          max={this.state.max}
-          year={this.state.year}
-          metric={this.state.metric} >
-          </Month>)
+        key={i}
+        offset_x={this.state.offset_x + i * (this.state.square_length + this.state.square_padding) * 6 + this.state.month_padding}
+        offset_y={this.state.offset_y}
+        square_length={this.state.square_length}
+        square_padding={this.state.square_padding}
+        createWeekdays={createWeekdays}
+        month={this.state.dates[i].getMonth()}
+        data={curr_month}
+        max={this.state.max}
+        year={this.state.dates[i].getYear() + 1900}
+        metric={this.state.metric} >
+      </Month>)
     }
 
     return months;
   }
 
-  componentDidUpdate(prevProps)
-  {
+  componentDidUpdate(prevProps) {
     if (prevProps.metric !== this.props.metric)
     {
       this.setState({
@@ -77,16 +100,16 @@ class Year extends Component {
 
   render() {
     return <svg
-        width={2400}
-        height={300}
-      >
-        <text
-          x={this.state.offset_x}
-          y={this.state.offset_y - 35}
-          >{this.state.year}
-        </text>
+      width={2400}
+      height={300}
+    >
+      <text
+        x={this.state.offset_x}
+        y={this.state.offset_y - 35}
+      >{this.state.year}
+      </text>
       {this.createMonth()}
-      </svg>;
+    </svg>;
   }
 }
 
