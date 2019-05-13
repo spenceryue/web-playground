@@ -99,6 +99,7 @@ class Month extends Component {
 
     for (let i = 0; i < 7 * 6; i++) {
       month.push(<rect
+          key={this.state.month_name + ' ' + i}
           x={this.state.offset_x + (this.state.square_padding + this.state.square_length) * Math.floor(i / days_in_week)}
           y={this.state.offset_y + (this.state.square_padding + this.state.square_length) * (i % days_in_week)}
           width={this.state.square_length}
@@ -120,6 +121,7 @@ class Month extends Component {
       for (let i = 0; i < 7; i++)
       {
         weekdays.push(<text
+            key={days_of_week[i]}
             x={this.state.offset_x - 30}
             y={this.state.offset_y + 13 + (this.state.square_length + this.state.square_padding) * i}
             fontSize={'10px'} >

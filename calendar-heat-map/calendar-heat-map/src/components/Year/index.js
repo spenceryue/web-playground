@@ -48,6 +48,7 @@ class Year extends Component {
         createWeekdays = true;
       }
       months.push(<Month
+          key={i}
           offset_x={this.state.offset_x + i * (this.state.square_length + this.state.square_padding) * 6 + this.state.month_padding}
           offset_y={this.state.offset_y}
           square_length={this.state.square_length}
