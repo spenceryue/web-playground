@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import Year from './calendar/Year';
+import Year from './components/Year';
 
 ReactDOM.render(<Year 
   year={2001}
