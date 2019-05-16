@@ -5,8 +5,8 @@ import { withFirebase } from '../Firebase';
 const SignOutButton = ({ firebase }) => (
   <button 
     type='button'
-    onClick={() => {
-      firebase.doGetQuestions('gtang.gt');
+    onClick={async () => {
+      console.log(await firebase.doGetQuestions('gtang.gt'));
       firebase.doSignOut();
     }
     }>

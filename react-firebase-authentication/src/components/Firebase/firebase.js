@@ -39,16 +39,22 @@ class Firebase {
   doPasswordUpdate = (password) =>
     this.auth.currentUser.updatePassword(password);
 
-  doGetQuestions = (userId) => {
+  doGetQuestions = async (userId) => {
     const questionsRef = this.store.collection('user-questions');
 
     const query = questionsRef.where('userId', '==', userId);
 
-    query.get().then((snap) => {
+
+    let questions;
+
+    await query.get().then((snap) => {
       snap.forEach((doc) => {
         console.log(doc.data());
+        questions = doc.data().questions;
       });
     });
+
+    return questions;
   }
 
   user = uid => this.db.ref(`users/${uid}`);
