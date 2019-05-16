@@ -4,8 +4,9 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { InputTextField } from './components/FormComponents';
+import BasicExample from './components/FormikApiExample';
 
-ReactDOM.render(<InputTextField 
+ReactDOM.render(<BasicExample
     placeholder={'george says hi'}
   />,
   document.getElementById('root'));

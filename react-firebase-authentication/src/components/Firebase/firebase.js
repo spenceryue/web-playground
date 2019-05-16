@@ -1,6 +1,7 @@
 import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
+import 'firebase/firestore';
 
 const config =
   {
@@ -20,6 +21,7 @@ class Firebase {
 
     this.auth = app.auth();
     this.db   = app.database();
+    this.store = app.firestore();
   }
 
   doCreateUserWithEmailAndPassword = (email, password) =>
@@ -36,6 +38,15 @@ class Firebase {
 
   doPasswordUpdate = (password) =>
     this.auth.currentUser.updatePassword(password);
+
+  doGetQuestions = () => {
+    this.store.collection('user-questions').get().then((query) => {
+        query.forEach((doc) => {
+          console.log(doc.data());
+          console.log(`${doc.id} => ${doc.data()}`);
+        });
+      });
+  }
 
   user = uid => this.db.ref(`users/${uid}`);
 
