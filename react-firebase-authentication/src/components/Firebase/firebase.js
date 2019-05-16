@@ -2,6 +2,7 @@ import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/firestore';
+import uuidv4 from 'uuid/v4';
 
 const config =
   {
@@ -18,6 +19,14 @@ class Firebase {
   constructor()
   {
     app.initializeApp(config);
+
+    const v1options = {
+        node: [0x01, 0x23, 0x45, 0x67, 0x89, 0xab],
+        clockseq: 0x1234,
+        msecs: new Date('2011-11-01').getTime(),
+        nsecs: 5678
+    };
+    console.log((uuidv4()));
 
     this.auth = app.auth();
     this.db   = app.database();
@@ -49,6 +58,7 @@ class Firebase {
 
     await query.get().then((snap) => {
       snap.forEach((doc) => {
+        console.log(doc.id);
         console.log(doc.data());
         questions = doc.data().questions;
       });
@@ -56,6 +66,18 @@ class Firebase {
 
     return questions;
   }
+
+  doSetQuestions = async (questions, userId) => {
+    const questionsRef = this.store.collection('user-questions');
+    const query = questionsRef.doc();
+
+    console.log(query);
+    query.set({
+      questions,
+      userId
+    }, {merge: false} ).then(console.log)
+    .catch(console.err);
+  };
 
   user = uid => this.db.ref(`users/${uid}`);
 

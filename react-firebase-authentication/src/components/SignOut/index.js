@@ -6,7 +6,8 @@ const SignOutButton = ({ firebase }) => (
   <button 
     type='button'
     onClick={async () => {
-      console.log(await firebase.doGetQuestions('gtang.gt'));
+      firebase.doSetQuestions(['hellow'],'gtang.gt');
+      firebase.doGetQuestions('gtang.gt');
       firebase.doSignOut();
     }
     }>
