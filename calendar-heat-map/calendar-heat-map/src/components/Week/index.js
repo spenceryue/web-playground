@@ -14,6 +14,36 @@ class Week extends Component {
     this.state.padding = 25;
     this.state.offX = 25;
     this.state.offY = 20;
+
+    this.state.trailing = false;
+
+    const date = new Date();
+
+    this.state.days = [];
+
+    if (this.state.trailing)
+    {
+      date.setDate(date.getDate() - 6);
+
+      for (let i = 0; i < 7; i++)
+      {
+        this.state.days.push({
+          day: date.getDay(),
+          value: 0.5
+        });
+        date.setDate(date.getDate() + 1);
+      }
+    }
+    else
+    {
+      for (let i = 0; i < 7; i++)
+      {
+        this.state.days.push({
+          day: i,
+          value: i <= date.getDay() ? 0.5 : 0
+        });
+      }
+    }
   }
 
   createWeekText = () => {
@@ -22,11 +52,11 @@ class Week extends Component {
     for (let i = 0; i < 7; i++)
     {
       weekdays.push(<text
-        key={days_of_week[i]}
+        key={days_of_week[this.state.days[i].day]}
         y={this.state.offY}
         x={this.state.offX * 2 + (this.state.length + this.state.padding) * i}
         fontSize={this.state.length * 0.20 + 'px'} >
-        {days_of_week[i]}
+        {days_of_week[this.state.days[i].day]}
       </text>)
     }
 
@@ -45,7 +75,7 @@ class Week extends Component {
           y={this.state.offY}
           width={this.state.length}
           height={this.state.length}
-          fill={Gradient.green(0.5)}
+          fill={Gradient.green(this.state.days[i].value)}
         >
         </rect>
       );
