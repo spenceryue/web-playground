@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import Year from './components/Year';
+import Week from './components/Week';
 import Quarter from './components/Quarter';
 
 ReactDOM.render(
@@ -19,6 +20,9 @@ ReactDOM.render(
 
   <Quarter
     date={new Date()}
+  />
+
+  <Week
   />
 
   </div>
