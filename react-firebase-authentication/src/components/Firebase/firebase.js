@@ -82,6 +82,23 @@ class Firebase {
     });
   }
 
+  doGetAnswersV2 = (userId) => {
+    const answersRef = this.store.collection('answers');
+
+    const date = new Date();
+    date.setDate(0);
+
+    const query = answersRef.where('userId', '==', userId)
+      .where('timeCreated', '>', date)
+      .get().then((snap) => {
+      snap.forEach((doc) => {
+        console.log(doc.data());
+        console.log(doc.data().timeCreated.toDate());
+      });
+    });
+
+  };
+
   doSetQuestions = async (questions, userId) => {
     const questionsRef = this.store.collection('user-questions');
     const query = questionsRef.doc();

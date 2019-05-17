@@ -18,6 +18,8 @@ class AdminPage extends Component
   componentDidMount() {
     this.setState({ loading: true });
 
+    this.props.firebase.doGetAnswersV2('gtang.gt');
+
     this.props.firebase.users().on('value', snapshot => {
       const userObj = snapshot.val();
 
