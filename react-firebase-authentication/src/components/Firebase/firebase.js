@@ -67,6 +67,21 @@ class Firebase {
     return questions;
   }
 
+  doGetQuestionsV2 = (userId) => {
+    const questionMetaRef = this.store.collection('questionsMeta');
+    const query = questionMetaRef.where('userId', '==', userId);
+
+    query.get().then((snap) => {
+      snap.forEach((doc) => {
+        doc.data().qRefs.forEach((qRef) => {
+          qRef.get().then((doc) => {
+            console.log(doc.data());
+          });
+        });
+      });
+    });
+  }
+
   doSetQuestions = async (questions, userId) => {
     const questionsRef = this.store.collection('user-questions');
     const query = questionsRef.doc();
