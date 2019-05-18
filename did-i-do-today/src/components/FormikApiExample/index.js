@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Formik } from 'formik';
+import { withFirebase } from '../Firebase';
 
-const BasicExample = () => (
+class BasicExample extends Component {
+  render() {
+    const date = new Date();
+    date.setDate(date.getDate() - 17);
+    console.log(date);
+    this.props.firebase.doGetAnswers('gtang.gt', date);
+
+    return (
   <div>
     <h1>My Form</h1>
     <Formik
@@ -28,6 +36,8 @@ const BasicExample = () => (
       )}
     />
   </div>
-);
+    );
+  }
+}
 
-export default BasicExample;
+export default withFirebase(BasicExample);

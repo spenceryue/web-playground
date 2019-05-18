@@ -6,9 +6,15 @@ import * as serviceWorker from './serviceWorker';
 import { InputTextField } from './components/FormComponents';
 import BasicExample from './components/FormikApiExample';
 
-ReactDOM.render(<BasicExample
-    placeholder={'george says hi'}
-  />,
+import Firebase, { FirebaseContext } from './components/Firebase';
+
+ReactDOM.render(
+  <FirebaseContext.Provider value={new Firebase()}>
+    <BasicExample
+      placeholder={'george says hi'}
+    />
+  </FirebaseContext.Provider>
+  ,
   document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
