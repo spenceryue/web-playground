@@ -5,5 +5,7 @@ export const TAGS = [
   'do more of what matters, do less of what doesn\'t',
   'today, fix yourself. tomorrow, the world.',
   'define the problem. today, you\'re the solution.',
-  'look within for the answer'
+  'look within for the answer',
+  'attention divided is attention conquered',
+  'see, hear, listen, be aware',
 ];
