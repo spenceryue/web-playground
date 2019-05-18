@@ -73,19 +73,19 @@ class Week extends Component {
       ret.push(
         <rect
           className='Day'
-          key={'1'}
+          key={i}
           x={(this.state.length + this.state.padding) * i + this.state.offX}
           y={this.state.offY}
           width={this.state.length}
           height={this.state.length}
           fill={Gradient.green(this.state.days[i].value)}
-          stroke-width={3}
           stroke={'black'}
         />
       );
 
       ret.push(
         <text className='innerText'
+          key={'text' + i}
           x={this.state.offX * 2 + (this.state.length + this.state.padding) * i}
           y={this.state.offY + (this.state.length / 2)}
           fontSize={this.state.length * 0.2 + 'px'} >

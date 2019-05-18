@@ -1,0 +1,13 @@
+p {
+  text-align: center;
+  font-family: 'Courier New', monospace;
+  display: block;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+  font-size: 70px;
+}
+
+.tag {
+  margin-top: 1em;
+  font-size: 25px;
+}

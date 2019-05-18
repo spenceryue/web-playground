@@ -1,8 +1,9 @@
 import React from 'react';
+import Logo from './logo';
 
 const LoginPage = () => (
   <div>
-    Login Page
+    <Logo/>
   </div>
 );
 
