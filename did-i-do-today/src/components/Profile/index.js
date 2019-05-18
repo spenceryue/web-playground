@@ -11,6 +11,10 @@ class Profile extends Component {
   render() {
     return (
       <div>
+        <div>
+          Did I Make Progress On Did I Do Today?
+        </div>
+        <p/>
         <Week trailing={false} />
       </div>
     );

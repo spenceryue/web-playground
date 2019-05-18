@@ -22,7 +22,7 @@ class Week extends Component {
       this.state.trailing = this.props.trailing;
     }
     this.state.date = this.props.date || new Date();
-    this.state.data = this.props.data || [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5];
+    this.state.data = this.props.data || ['Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'];
 
     this.state.days = [];
 
@@ -33,7 +33,7 @@ class Week extends Component {
       {
         this.state.days.push({
           day: this.state.date.getDay(),
-          value: this.state.data[i]
+          value: (this.state.data[i] === 'Yes') ? 0.5 : 0
         });
         this.state.date.setDate(this.state.date.getDate() + 1);
       }
@@ -42,7 +42,7 @@ class Week extends Component {
       {
         this.state.days.push({
           day: i,
-          value: this.state.data[i]
+          value: (this.state.data[i] === 'Yes') ? 0.5 : 0
         });
       }
     }
@@ -55,8 +55,8 @@ class Week extends Component {
     {
       weekdays.push(<text
         key={days_of_week[this.state.days[i].day]}
-        y={this.state.offY}
         x={this.state.offX * 2 + (this.state.length + this.state.padding) * i}
+        y={this.state.offY}
         fontSize={this.state.length * 0.20 + 'px'} >
         {days_of_week[this.state.days[i].day]}
       </text>)
@@ -81,8 +81,16 @@ class Week extends Component {
           fill={Gradient.green(this.state.days[i].value)}
           stroke-width={3}
           stroke={'black'}
-        >
-        </rect>
+        />
+      );
+
+      ret.push(
+        <text className='innerText'
+          x={this.state.offX * 2 + (this.state.length + this.state.padding) * i}
+          y={this.state.offY + (this.state.length / 2)}
+          fontSize={this.state.length * 0.2 + 'px'} >
+          {this.state.data[i]}
+        </text>
       );
     }
     return ret;

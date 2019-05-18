@@ -6,3 +6,16 @@
   stroke-width: 3;
   stroke: 'black';
 }
+
+.Day:hover + .innerText {
+  opacity: 1;
+}
+
+.innerText:hover {
+  opacity: 1;
+}
+
+.innerText {
+  opacity: 0;
+  pointer-events: none;
+}
