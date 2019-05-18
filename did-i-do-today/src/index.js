@@ -1,17 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './components/App';
 import * as serviceWorker from './serviceWorker';
-import { InputTextField } from './components/FormComponents';
-import BasicExample from './components/FormikApiExample';
-import Profile from './components/Profile';
 
 import Firebase, { FirebaseContext } from './components/Firebase';
 
 ReactDOM.render(
   <FirebaseContext.Provider value={new Firebase()}>
-    <Profile
+    <App
     />
   </FirebaseContext.Provider>
   ,
