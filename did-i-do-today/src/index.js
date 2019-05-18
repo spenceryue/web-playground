@@ -5,13 +5,13 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { InputTextField } from './components/FormComponents';
 import BasicExample from './components/FormikApiExample';
+import Profile from './components/Profile';
 
 import Firebase, { FirebaseContext } from './components/Firebase';
 
 ReactDOM.render(
   <FirebaseContext.Provider value={new Firebase()}>
-    <BasicExample
-      placeholder={'george says hi'}
+    <Profile
     />
   </FirebaseContext.Provider>
   ,

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "d3": "^5.9.2",
     "firebase": "^6.0.2",
     "formik": "^1.5.4",
     "react": "^16.8.6",
