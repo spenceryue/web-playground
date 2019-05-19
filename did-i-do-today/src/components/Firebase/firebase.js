@@ -19,15 +19,20 @@ class Firebase {
     this.store = app.firestore();
   }
 
-  doGetAnswers = (userId, date) => {
+  doGetAnswers = (userId, date, func) => {
     const answersRef = this.store.collection('answers');
 
     const query = answersRef.where('userId', '==', userId)
                             .where('timeCreated', '>', date)
                             .get().then((snap) => {
+
+                              let ret = [];
+
                               snap.forEach((doc) => {
-                                console.log(doc.data());
+                                ret.push(doc.data());
                               });
+
+                              func(ret);
                             });
   };
 

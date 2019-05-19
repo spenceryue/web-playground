@@ -6,6 +6,11 @@ import { withFirebase } from  '../Firebase'
 class Profile extends Component {
   constructor (props) {
     super(props);
+    const date = new Date();
+
+    date.setDate(date.getDate() - 17);
+
+    this.props.firebase.doGetAnswers('gtang.gt', date, console.log);
   }
 
   render() {
