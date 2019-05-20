@@ -36,6 +36,15 @@ class Firebase {
                             });
   };
 
+  doGetQuestions = (userId, func) => {
+    const questionsRef = this.store.collection('questionsMeta');
+
+    const query = questionsRef.where('userId', '==', userId)
+                              .get()
+                              .then((snap) => {
+
+                              });
+  }
 }
 
 export default Firebase;

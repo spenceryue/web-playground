@@ -2,6 +2,7 @@ import React from 'react';
 
 import LandingPage from '../Landing';
 import LoginPage from '../Login';
+import TestPage from '../Test';
 
 import
 {
@@ -17,6 +18,7 @@ const App = () => (
     <div>
       <Route exact path={ROUTES.LANDING} component={LandingPage} />
       <Route exact path={ROUTES.LOGIN} component={LoginPage} />
+      <Route exact path={ROUTES.TEST} component={TestPage} />
     </div>
   </Router>
 );
