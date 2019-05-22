@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Week from  '../Calendar/Week'
 
 import { withFirebase } from  '../Firebase'
 
@@ -18,17 +19,27 @@ class Questions extends Component {
     });
   }
 
+  renderTitle() {
+    if (typeof(this.state.questions.userId) === 'undefined') {
+      return <h1>questions</h1>;
+    }
+    return <h1>{this.state.questions.userId + '\'s '}questions</h1>;
+  }
+
   renderQuestions() {
     let ret = [];
 
-    this.state.questions.questions.forEach((question) => {
+    this.state.questions.questions.forEach((question, i) => {
       ret.push(
-        <div>
+        <div key={question.value + (3 * i + 0)}>
           {question.value}
         </div>
       );
       ret.push(
-        <br/>
+        <br key={question.value + (3 * i + 1)} />
+      );
+      ret.push(
+        <Week key={question.value + (3 * i + 2)} trailing={true} />
       );
     });
 
@@ -39,7 +50,7 @@ class Questions extends Component {
     console.log(this.state.questions);
     return (
       <div>
-        Questions
+        {this.renderTitle()}
         <br/>
         {this.renderQuestions()}
       </div>
