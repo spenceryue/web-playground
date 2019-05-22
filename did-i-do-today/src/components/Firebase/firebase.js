@@ -40,10 +40,20 @@ class Firebase {
     const questionsRef = this.store.collection('questionsMeta');
 
     const query = questionsRef.where('userId', '==', userId)
-                              .get()
-                              .then((snap) => {
-
-                              });
+      .get()
+      .then((snap) => {
+        snap.forEach((doc) =>
+          {
+            let qRefs = doc.data().qRefs;
+            if (qRefs.length > 0)
+            {
+              qRefs[qRefs.length - 1].get()
+                .then((qSnap) => {
+                  func(qSnap.data());
+                });
+            }
+          });
+      });
   }
 }
 
