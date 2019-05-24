@@ -50,6 +50,7 @@ class Questions extends Component {
         {this.renderTitle()}
         <br/>
         {this.renderQuestions()}
+        <button>Submit</button>
       </div>
     );
   }
