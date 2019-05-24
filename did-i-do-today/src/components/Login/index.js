@@ -29,16 +29,6 @@ const LoginValidation = yup.object().shape({
 });
 
 class LoginFormBase extends Component {
-  constructor(props)
-  {
-    super(props);
-    this.state = { 
-      email: '',
-      password: ''
-    };
-
-  }
-
   render() {
     return ( 
       <Formik
@@ -50,7 +40,14 @@ class LoginFormBase extends Component {
         }
 
         onSubmit={(values, actions) => {
-            this.props.history.push(ROUTES.LANDING);
+            this.props.firebase
+              .doSignInWithEmailAndPassword(values.email, values.password)
+              .then(() => {
+                this.props.history.push(ROUTES.LANDING);
+              })
+              .catch(error => {
+                this.setState({ error });
+              });
           }
         }
       >

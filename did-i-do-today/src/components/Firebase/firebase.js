@@ -1,5 +1,6 @@
 import app from 'firebase/app';
 import 'firebase/firestore';
+import 'firebase/auth';
 
 const config =
   {
@@ -17,7 +18,11 @@ class Firebase {
   {
     app.initializeApp(config);
     this.store = app.firestore();
+    this.auth  = app.auth();
   }
+
+  doSignInWithEmailAndPassword = (email, password) =>
+    this.auth.signInWithEmailAndPassword(email, password);
 
   doGetAnswers = (userId, date, func) => {
     const answersRef = this.store.collection('answers');
