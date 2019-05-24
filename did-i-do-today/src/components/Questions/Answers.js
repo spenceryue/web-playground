@@ -32,11 +32,20 @@ class Questions extends Component {
     let ret = [];
 
     this.state.questions.questions.forEach((question, i) => {
+      ret.push(
+        <div key={question.value + (3 * i + 0)}>
+          {question.value}
+        </div>
+      );
+      ret.push(
+        <br key={question.value + (3 * i + 1)} />
+      );
+      ret.push(
+        <Week key={question.value + (3 * i + 2)} trailing={true} />
+      );
 
       ret.push(
-        <BinaryQuestion
-          key={question.value + i}
-          text={question.value}/>
+        <BinaryQuestion text={question.value}/>
       )
     });
 

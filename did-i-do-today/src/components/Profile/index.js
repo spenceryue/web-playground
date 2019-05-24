@@ -11,6 +11,7 @@ class Profile extends Component {
     date.setDate(date.getDate() - 17);
 
     this.props.firebase.doGetAnswers('gtang.gt', date, console.log);
+
   }
 
   render() {
