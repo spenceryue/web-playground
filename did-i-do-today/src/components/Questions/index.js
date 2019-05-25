@@ -3,9 +3,11 @@ import Week from  '../Calendar/Week'
 import BinaryQuestion from  '../BinaryQuestion'
 import IntegerQuestion from  '../IntegerQuestion'
 
-import { Formik, withFormik, Form, Field, ErrorMessage }  from 'formik';
-
+import { compose } from 'recompose';
+import { Formik, Form, Field, ErrorMessage }  from 'formik';
+import { withRouter } from 'react-router-dom';
 import { withFirebase } from  '../Firebase'
+import * as ROUTES from '../../constants/routes';
 
 class Questions extends Component {
   constructor (props) {
@@ -61,9 +63,10 @@ class Questions extends Component {
     return (
       <div>
         <Formik onSubmit={(values, actions) => {
-          console.log(values);
-          console.log(actions);
-        }
+            console.log(values);
+            console.log(actions);
+            this.props.history.push(ROUTES.ANSWERS);
+          }
         }
       >
         <Form>
@@ -84,4 +87,9 @@ class Questions extends Component {
   }
 }
 
-export default withFirebase(Questions);
+const QuestionForm = compose(
+  withRouter,
+  withFirebase
+)(Questions);
+
+export default QuestionForm;

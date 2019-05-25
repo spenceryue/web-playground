@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import Week from  '../Calendar/Week'
-import BinaryQuestion from  '../BinaryQuestion'
 
 import { withFirebase } from  '../Firebase'
 
-class Questions extends Component {
+class Answers extends Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -43,10 +42,6 @@ class Questions extends Component {
       ret.push(
         <Week key={question.value + (3 * i + 2)} trailing={true} />
       );
-
-      ret.push(
-        <BinaryQuestion text={question.value}/>
-      )
     });
 
     return ret;
@@ -64,4 +59,4 @@ class Questions extends Component {
   }
 }
 
-export default withFirebase(Questions);
+export default withFirebase(Answers);

@@ -7,7 +7,6 @@ const TestPage = () =>
 (
   <div>
   <Questions/>
-  <BasicExample/>
   </div>
 );
 
