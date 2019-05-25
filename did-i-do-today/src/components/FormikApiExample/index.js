@@ -7,7 +7,8 @@ class BasicExample extends Component {
     const date = new Date();
     date.setDate(date.getDate() - 17);
     console.log(date);
-    this.props.firebase.doGetAnswers('gtang.gt', date);
+
+    this.props.firebase.doGetAnswers('gtang.gt', date, console.log);
 
     return (
   <div>

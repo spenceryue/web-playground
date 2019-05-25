@@ -1,21 +1,28 @@
 import React from 'react';
+import { RadioGroup, RadioButton } from '../RadioComponent';
+import { Field }  from 'formik';
 
 const BinaryQuestion = (props) =>
 (
-  <div>{props.text}
-    <br/>
-    <input
-      type='radio'
-      id='positive'
+  <RadioGroup
+    id={props.text}
+    label={props.text}
+  >
+    <Field
+      component={RadioButton}
+      name={props.text}
+      id={props.text + 'yes'}
+      label='Yes'
     />
-    <label htmlFor={'positive'}>Yes</label>
 
-    <input
-      type='radio'
-      id='negative'
+    <Field
+      component={RadioButton}
+      name={props.text}
+      id={props.text + 'no'}
+      label='No'
     />
-    <label htmlFor={'negative'}>No</label>
-  </div>
+  </RadioGroup>
+
 );
 
 export default BinaryQuestion;

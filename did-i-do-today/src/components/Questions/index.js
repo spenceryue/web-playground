@@ -3,6 +3,8 @@ import Week from  '../Calendar/Week'
 import BinaryQuestion from  '../BinaryQuestion'
 import IntegerQuestion from  '../IntegerQuestion'
 
+import { Formik, withFormik, Form, Field, ErrorMessage }  from 'formik';
+
 import { withFirebase } from  '../Firebase'
 
 class Questions extends Component {
@@ -11,9 +13,9 @@ class Questions extends Component {
     this.state = {
       questions: { questions: [] }
     };
+
     this.setQuestions = this.setQuestions.bind(this);
     this.props.firebase.doGetQuestions('gtang.gt', this.setQuestions);
-
   }
 
   setQuestions(questions) {
@@ -58,11 +60,26 @@ class Questions extends Component {
     console.log(this.state.questions);
     return (
       <div>
-        {this.renderTitle()}
-        <br/>
-        {this.renderQuestions()}
-        <button>Submit</button>
-      </div>
+        <Formik onSubmit={(values, actions) => {
+          console.log(values);
+          console.log(actions);
+        }
+        }
+      >
+        <Form>
+
+          {this.renderTitle()}
+          <br/>
+          {this.renderQuestions()}
+
+          <button
+            type='submit'>
+            Submit
+          </button>
+
+        </Form>
+      </Formik>
+    </div>
     );
   }
 }
