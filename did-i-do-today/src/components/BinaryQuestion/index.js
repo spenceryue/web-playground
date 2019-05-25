@@ -4,8 +4,17 @@ const BinaryQuestion = (props) =>
 (
   <div>{props.text}
     <br/>
-    <button>Yes</button>
-    <button>No</button>
+    <input
+      type='radio'
+      id='positive'
+    />
+    <label htmlFor={'positive'}>Yes</label>
+
+    <input
+      type='radio'
+      id='negative'
+    />
+    <label htmlFor={'negative'}>No</label>
   </div>
 );
 

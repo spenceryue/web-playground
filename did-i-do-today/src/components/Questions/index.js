@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Week from  '../Calendar/Week'
 import BinaryQuestion from  '../BinaryQuestion'
+import IntegerQuestion from  '../IntegerQuestion'
 
 import { withFirebase } from  '../Firebase'
 
@@ -33,11 +34,21 @@ class Questions extends Component {
 
     this.state.questions.questions.forEach((question, i) => {
 
-      ret.push(
-        <BinaryQuestion
-          key={question.value + i}
-          text={question.value}/>
-      )
+      if (question.type === 'binary')
+      {
+        ret.push(
+          <BinaryQuestion
+            key={question.value + i}
+            text={question.value}/>
+        );
+      } else if (question.type === 'integer') {
+        ret.push(
+          <IntegerQuestion
+            text={question.value}
+          />
+        );
+      }
+      ret.push( <br/> );
     });
 
     return ret;
