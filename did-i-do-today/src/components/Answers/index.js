@@ -22,9 +22,9 @@ class Answers extends Component {
 
   renderTitle() {
     if (typeof(this.state.questions.userId) === 'undefined') {
-      return <h1>questions</h1>;
+      return <h1>answers</h1>;
     }
-    return <h1>{this.state.questions.userId + '\'s '}questions</h1>;
+    return <h1>{this.state.questions.userId + '\'s '}answers</h1>;
   }
 
   renderQuestions() {
