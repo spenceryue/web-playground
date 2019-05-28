@@ -16,35 +16,35 @@ class Week extends Component {
     this.state.offX = 25;
     this.state.offY = 20;
 
-    if (this.props.trailing === 'undefined') {
-      this.state.trailing = true;
-    } else {
-      this.state.trailing = this.props.trailing;
-    }
     this.state.date = this.props.date || new Date();
-    this.state.data = this.props.data || ['Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'];
+    this.state.data = this.props.data || ['Yes', 'No', 'Yes', 'Yes', undefined, 'Yes', 'Yes'];
+    this.state.data = this.props.data || Array.apply(null, Array(7));
+    this.state.dataPositive = this.props.dataPositive || 'Yes';
+    this.state.dataNegative = this.props.dataNegative || 'No';
 
     this.state.days = [];
 
-    if (this.state.trailing) {
-      this.state.date.setDate(this.state.date.getDate() - 6);
-
-      for (let i = 0; i < 7; i++)
-      {
+    this.state.date.setDate(this.state.date.getDate() - 6);
+    for (let i = 0; i < 7; i++)
+    {
+      if (this.state.data[i] === this.state.dataPositive) {
         this.state.days.push({
           day: this.state.date.getDay(),
-          value: (this.state.data[i] === 'Yes') ? 0.5 : 0
+          value: 0.5
         });
-        this.state.date.setDate(this.state.date.getDate() + 1);
-      }
-    } else {
-      for (let i = 0; i < 7; i++)
-      {
+      } else if (this.state.data[i] === this.state.dataNegative) {
         this.state.days.push({
-          day: i,
-          value: (this.state.data[i] === 'Yes') ? 0.5 : 0
+          day: this.state.date.getDay(),
+          value: -0.01
+        });
+      } else {
+        this.state.days.push({
+          day: this.state.date.getDay(),
+          value: 0
         });
       }
+
+      this.state.date.setDate(this.state.date.getDate() + 1);
     }
   }
 
@@ -75,7 +75,7 @@ class Week extends Component {
           className='Day'
           key={i}
           x={(this.state.length + this.state.padding) * i + this.state.offX}
-          y={this.state.offY}
+          y={this.state.offY + this.state.padding}
           width={this.state.length}
           height={this.state.length}
           fill={Gradient.green(this.state.days[i].value)}
