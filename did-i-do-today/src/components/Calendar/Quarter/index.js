@@ -5,7 +5,7 @@ class Quarter extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.state.date = props.date;
+    this.state.date = props.date || new Date();
 
     this.state.offset_x = props.offset_x || 100;
     this.state.offset_y = props.offset_y || 100;
@@ -80,7 +80,7 @@ class Quarter extends Component {
 
   render() {
     return <svg
-        width={2400}
+        width={500}
         height={300}
       >
         <text

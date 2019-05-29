@@ -16,18 +16,22 @@ class Year extends Component {
     this.state.dates = [];
     let date = new Date();
 
+    this.state.year = 2019;
+
     if (this.state.format === 'trailing') {
       date.setMonth(date.getMonth() - 11);
     } else if (this.state.format === 'standard')
     {
-      date.setYear(props.year);
+      date.setYear(this.state.year);
       date.setMonth(0);
+      date.setDate(0);
     }
 
     for (let i = 0; i < 12; i++) {
       this.state.dates.push(
         new Date(date)
       );
+
       date.setMonth(date.getMonth() + 1);
     }
 
@@ -100,7 +104,7 @@ class Year extends Component {
 
   render() {
     return <svg
-      width={2400}
+      width={2000}
       height={300}
     >
       <text

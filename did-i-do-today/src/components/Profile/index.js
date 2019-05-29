@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
 import Week from  '../Calendar/Week'
+import Quarter from  '../Calendar/Quarter'
+import Year from  '../Calendar/Year'
 import { withFirebase } from  '../Firebase'
 import StringHash from 'string-hash';
 
@@ -23,6 +25,8 @@ class Profile extends Component {
         </div>
         <p/>
         <Week dateIsStart={false} />
+        <Quarter dateIsStart={false} />
+        <Year dateIsStart={false} />
       </div>
     );
   }
