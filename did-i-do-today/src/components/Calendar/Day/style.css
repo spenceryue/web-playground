@@ -1,0 +1,21 @@
+.box:hover {
+  stroke-width: 5;
+}
+
+.box {
+  stroke-width: 1;
+  stroke: 'black';
+}
+
+.box:hover + .detail {
+  opacity: 1;
+}
+
+.detail:hover {
+  opacity: 1;
+}
+
+.detail {
+  opacity: 0;
+  pointer-events: none;
+}
