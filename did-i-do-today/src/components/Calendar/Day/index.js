@@ -8,16 +8,22 @@ class Day extends Component {
   {
     super(props);
 
-    let dateOptions = {
-      month: 'short',
-      day: 'numeric'
-    };
-
     this.state = {};
+    this.state.text = props.text;
     this.state.length = props.length || 100;
     this.state.padding = props.padding || 10;
     this.state.date = props.date || new Date();
-    this.state.text = props.text || this.state.date.toLocaleDateString('en-US', dateOptions);
+    this.state.data = props.data || undefined;
+    this.state.positive = props.positive || 'Yes';
+    this.state.negative = props.negative || 'No';
+
+    if (this.state.data === this.state.positive) {
+      this.state.dataNum = 0.5;
+    } else if (this.state.data === this.state.negative) {
+      this.state.dataNum = -0.1;
+    } else {
+      this.state.dataNum = 0;
+    }
   }
 
   render() {
@@ -25,6 +31,10 @@ class Day extends Component {
       weekday: 'short',
     };
 
+    let dateOptions = {
+      month: 'short',
+      day: 'numeric'
+    };
     return <svg
       width={2 * this.state.padding + this.state.length}
       height={2 * this.state.length}
@@ -35,7 +45,7 @@ class Day extends Component {
         y='25%'
         width={this.state.length}
         height={this.state.length}
-        fill={Gradient.green(0.5)}
+        fill={Gradient.green(this.state.dataNum)}
         stroke={'black'}
       />
       <text
@@ -51,7 +61,9 @@ class Day extends Component {
         textSize='10px'
         y='15%'
         x='50%'>
-        {this.state.date.toLocaleDateString('en-US', dayOptions)}
+        {this.state.date.toLocaleDateString('en-US', dateOptions) +
+            ' ' +
+            this.state.date.toLocaleDateString('en-US', dayOptions)}
       </text>    
     </svg>;
   }

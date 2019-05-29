@@ -13,12 +13,13 @@ class Answers extends Component {
     this.setAnswers = this.setAnswers.bind(this);
 
     let date = new Date();
-    date.setDate(date.getDate() - 31);
+    date.setDate(date.getDate() - 28);
 
     this.state.date = date;
 
     this.props.firebase.doGetQuestions('gtang.gt', this.setQuestions);
     this.props.firebase.doGetAnswers('gtang.gt', this.state.date, this.setAnswers);
+
   }
 
   setQuestions(questions) {
@@ -30,7 +31,7 @@ class Answers extends Component {
   setAnswers(answers) {
     console.log(answers);
     let answerIndex = 0;
-    let date = this.state.date;
+    let date = new Date(this.state.date);
     let data = [];
 
     for (let i = 0; i < 7; i++)
@@ -78,6 +79,7 @@ class Answers extends Component {
       );
       ret.push(
         <Week
+          date={this.state.date}
           key={question.value + (3 * i + 2)}
           data={this.state.data}/>
       );

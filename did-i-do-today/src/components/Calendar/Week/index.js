@@ -9,19 +9,32 @@ class Week extends Component {
   {
     super(props);
     this.state = {
-      date : new Date(),
+      date : props.date || new Date(),
+      dateIsStart : props.dateIsStart || true,
+      data : props.data || Array.apply(null, Array(7)),
+      positive : props.positive || 'Yes',
+      negative : props.negative || 'No'
     };
   }
 
   createDays = () => {
     let ret = [];
-    let date = this.state.date;
-    date.setDate(date.getDate() - 6);
+    let date = new Date(this.state.date);
+    if (!this.state.dateIsStart)
+    {
+      date.setDate(date.getDate() - 6);
+    }
 
     for (let i = 0; i < 7; i++)
     {
       ret.push(
-        <Day date={new Date(date)}/>
+        <Day
+          date={new Date(date)}
+          data={this.state.data[i]}
+          text={this.state.data[i]}
+          positive={this.state.positive}
+          negative={this.state.negative}
+        />
       );
 
       date.setDate(date.getDate() + 1);
