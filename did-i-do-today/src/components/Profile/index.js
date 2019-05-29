@@ -21,7 +21,7 @@ class Profile extends Component {
           Did I Make Progress On Did I Do Today?
         </div>
         <p/>
-        <Week trailing={false} />
+        <Week dateIsStart={false} />
       </div>
     );
   }

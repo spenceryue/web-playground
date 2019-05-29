@@ -10,7 +10,7 @@ class Week extends Component {
     super(props);
     this.state = {
       date : props.date || new Date(),
-      dateIsStart : props.dateIsStart || true,
+      dateIsStart : (props.dateIsStart === undefined) ? true : props.dateIsStart,
       data : props.data || Array.apply(null, Array(7)),
       positive : props.positive || 'Yes',
       negative : props.negative || 'No'
