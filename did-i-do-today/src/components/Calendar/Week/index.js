@@ -12,8 +12,8 @@ class Week extends Component {
       date : props.date || new Date(),
       dateIsStart : (props.dateIsStart === undefined) ? true : props.dateIsStart,
       data : props.data || Array.apply(null, Array(7)),
-      positive : props.positive || 'Yes',
-      negative : props.negative || 'No'
+      positive : props.positive || true,
+      negative : props.negative || false 
     };
   }
 
@@ -29,6 +29,7 @@ class Week extends Component {
     {
       ret.push(
         <Day
+          key={i + Math.random()}
           date={new Date(date)}
           data={this.state.data[i]}
           text={this.state.data[i]}

@@ -13,10 +13,12 @@ class Day extends Component {
     this.state.length = props.length || 100;
     this.state.padding = props.padding || 10;
     this.state.date = props.date || new Date();
-    this.state.data = props.data || undefined;
-    this.state.positive = props.positive || 'Yes';
-    this.state.negative = props.negative || 'No';
+    this.state.data = (props.data === undefined) ? undefined : props.data;
+    this.state.positive = (props.positive === undefined) ? true : props.positive;
+    this.state.negative = (props.negative === undefined) ? false : props.negative;
 
+    console.log(this.state.data);
+    console.log(this.state.negative);
     if (this.state.data === this.state.positive) {
       this.state.dataNum = 0.5;
     } else if (this.state.data === this.state.negative) {
@@ -58,7 +60,7 @@ class Day extends Component {
       </text>    
       <text
         textAnchor='middle'
-        textSize='10px'
+        textsize='10px'
         y='15%'
         x='50%'>
         {this.state.date.toLocaleDateString('en-US', dateOptions) +

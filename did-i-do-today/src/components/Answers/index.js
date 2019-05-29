@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
-import Week from  '../Calendar/Week'
+import Week from  '../Calendar/Week';
 
-import { withFirebase } from  '../Firebase'
+import { withFirebase } from  '../Firebase';
+import StringHash from 'string-hash';
 
+const questionHashes =
+  [
+    '3167593219',
+    '1680920143',
+    '3800379784'
+  ]
 class Answers extends Component {
   constructor (props) {
     super(props);
@@ -32,7 +39,12 @@ class Answers extends Component {
     console.log(answers);
     let answerIndex = 0;
     let date = new Date(this.state.date);
-    let data = [];
+    console.log(this.state.questions);
+    let data = {};
+    questionHashes.forEach((hash) =>
+      {
+        data[hash] = []
+      });
 
     for (let i = 0; i < 7; i++)
     {
@@ -43,10 +55,19 @@ class Answers extends Component {
         && tmpDate.getMonth() === date.getMonth()
         && tmpDate.getYear() === date.getYear())
       {
+        //data.push(answers[answerIndex].answers['6f1a1da7-dadd-4492-9ada-17198271588e']);
+        for (let key in answers[answerIndex].answers) {
+          if (data[key] === undefined) {
+            data[key] = [];
+          }
+          data[key].push(answers[answerIndex].answers[key]);
+        }
         answerIndex++;
-        data.push('Yes');
       } else {
-        data.push(undefined);
+        questionHashes.forEach((hash) =>
+          {
+            data[hash].push(undefined);
+          });
       }
 
       date.setDate(date.getDate() + 1);
@@ -81,7 +102,7 @@ class Answers extends Component {
         <Week
           date={this.state.date}
           key={question.value + (3 * i + 2)}
-          data={this.state.data}/>
+          data={this.state.data[StringHash(question.value)]}/>
       );
     });
 
