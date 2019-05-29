@@ -17,8 +17,6 @@ class Day extends Component {
     this.state.positive = (props.positive === undefined) ? true : props.positive;
     this.state.negative = (props.negative === undefined) ? false : props.negative;
 
-    console.log(this.state.data);
-    console.log(this.state.negative);
     if (this.state.data === this.state.positive) {
       this.state.dataNum = 0.5;
     } else if (this.state.data === this.state.negative) {

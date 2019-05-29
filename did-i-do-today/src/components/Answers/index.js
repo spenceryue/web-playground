@@ -36,10 +36,8 @@ class Answers extends Component {
   }
 
   setAnswers(answers) {
-    console.log(answers);
     let answerIndex = 0;
     let date = new Date(this.state.date);
-    console.log(this.state.questions);
     let data = {};
     questionHashes.forEach((hash) =>
       {
@@ -49,7 +47,6 @@ class Answers extends Component {
     for (let i = 0; i < 7; i++)
     {
       let tmpDate = answers[answerIndex].timeCreated.toDate();
-      console.log(tmpDate);
 
       if (tmpDate.getDate() === date.getDate()
         && tmpDate.getMonth() === date.getMonth()

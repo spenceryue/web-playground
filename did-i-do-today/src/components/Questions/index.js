@@ -59,12 +59,9 @@ class Questions extends Component {
   }
 
   render() {
-    console.log(this.state.questions);
     return (
       <div>
         <Formik onSubmit={(values, actions) => {
-            console.log(values);
-            console.log(actions);
             this.props.history.push(ROUTES.ANSWERS);
           }
         }
