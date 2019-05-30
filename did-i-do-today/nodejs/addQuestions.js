@@ -26,8 +26,9 @@ const query = questionsRef.where('userId', '==', 'gtang.gt')
             {
               qRefs[qRefs.length - 1].get()
                 .then((qSnap) => {
-                  func(qSnap.data());
-                });
+                })
+                .catch(e => {console.log(e)});
+              ;
             }
           });
       })
