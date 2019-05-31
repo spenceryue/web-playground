@@ -12,30 +12,60 @@ admin.initializeApp({
 
 const db = admin.firestore();
 
-const questionsRef = db.collection('questionsMeta');
+const questionsMetaRef = db.collection('questionsMeta');
+const questionsRef     = db.collection('questions');
 
-let userId = 'gtang.gt';
-
-if (process.argv[2] != undefined)
+if (process.argv[2] == undefined)
 {
-  userId = process.argv[2];
+  console.log('node addUser.js <user> <question1> <type>');
+  console.log('type: binary, integer');
+  return -1;
 }
 
-const query = questionsRef.where('userId', '==', userId)
-      .get()
-      .then((snap) => {
-        snap.forEach((doc) =>
-          {
-            let qRefs = doc.data().qRefs;
-            if (qRefs.length > 0)
-            {
-              qRefs[qRefs.length - 1].get()
-                .then((qSnap) => {
-                  console.log(qSnap.data().questions);
-                })
-                .catch(e => {console.log(e)});
-              ;
-            }
-          });
-      })
-      .catch(e => {console.log(e)});
+if (process.argv.length % 2 === 0 || process.argv.length < 5)
+{
+  console.log('node addUser.js <user> <question1> <type>');
+  console.log('type: binary, integer');
+  return -1;
+}
+
+let userId = process.argv[2];
+
+let questions = [];
+for (let i = 3; i < process.argv.length; i+=2)
+{
+  questions.push({
+    value: process.argv[i],
+    type: process.argv[i + 1]
+  });
+}
+
+  questionsMetaRef.where('userId', '==', userId)
+    .get()
+    .then((snap) => {
+      snap.forEach((doc, i) => {
+
+        doc.update({
+          qRefs: admin.firestore.FieldValue.arrayUnion('czsARV99bx3Vu0s9w97b')
+        });
+
+      });
+    });
+
+/*
+questionsRef.add({
+  userId,
+  questions,
+  timeCreated: admin.firestore.Timestamp.now(),
+}).then(ref => {
+  console.log('Added document with ID: ', ref.id);
+
+  questionsMetaRef.where('userId', '==', userId)
+    .get()
+    .then((snap) => {
+      snap.docs[0].update({
+        qRefs: admin.firestore.FieldValue.arrayUnion(ref)
+      });
+    });
+});
+*/

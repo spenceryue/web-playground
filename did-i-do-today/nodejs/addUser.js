@@ -26,10 +26,10 @@ let userId = process.argv[2];
 
 questionsRef.add({
   userId,
-  questions: {
+  questions: [{
     type: 'integer',
     value: 'on a scale of 1 - 10, how are you today?'
-  },
+  }],
   timeCreated: admin.firestore.Timestamp.now(),
 }).then(ref => {
   console.log('Added document with ID: ', ref.id);
