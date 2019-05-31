@@ -40,19 +40,7 @@ for (let i = 3; i < process.argv.length; i+=2)
   });
 }
 
-  questionsMetaRef.where('userId', '==', userId)
-    .get()
-    .then((snap) => {
-      snap.forEach((doc, i) => {
 
-        doc.update({
-          qRefs: admin.firestore.FieldValue.arrayUnion('czsARV99bx3Vu0s9w97b')
-        });
-
-      });
-    });
-
-/*
 questionsRef.add({
   userId,
   questions,
@@ -63,9 +51,12 @@ questionsRef.add({
   questionsMetaRef.where('userId', '==', userId)
     .get()
     .then((snap) => {
-      snap.docs[0].update({
-        qRefs: admin.firestore.FieldValue.arrayUnion(ref)
-      });
+      snap.forEach((doc, i) =>
+        {
+          doc._ref.update({
+            qRefs: admin.firestore.FieldValue.arrayUnion(ref)
+          });
+        });
     });
 });
-*/
+
