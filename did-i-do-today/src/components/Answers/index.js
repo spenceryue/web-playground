@@ -36,6 +36,7 @@ class Answers extends Component {
   }
 
   setAnswers(answers) {
+    console.log(answers);
     let answerIndex = 0;
     let date = new Date(this.state.date);
     let data = {};
@@ -46,6 +47,15 @@ class Answers extends Component {
 
     for (let i = 0; i < 7; i++)
     {
+      if (answers === undefined || answers[answerIndex] === undefined)
+      {
+        questionHashes.forEach((hash) =>
+          {
+            data[hash].push(undefined);
+          });
+        continue;
+      }
+
       let tmpDate = answers[answerIndex].timeCreated.toDate();
 
       if (tmpDate.getDate() === date.getDate()
