@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Gradient from '../Gradients';
-import Day from '../Day';
+import { WeekDay } from '../Day';
 import './style.css'
 
 class Week extends Component {
@@ -28,7 +28,7 @@ class Week extends Component {
     for (let i = 0; i < 7; i++)
     {
       ret.push(
-        <Day
+        <WeekDay
           key={i + Math.random()}
           date={new Date(date)}
           data={this.state.data[i]}

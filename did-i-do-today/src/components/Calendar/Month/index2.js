@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import Gradient from '../Gradients';
-import { MonthDay } from '../Day';
 
 const days_in_week = 7
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 const days_of_week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-const random = [undefined, false, true]
 
 class Month extends Component {
   constructor(props) {
@@ -32,12 +30,12 @@ class Month extends Component {
       this.state.random.push(Math.random());
     }
 
-    this.state.dataArray = this.getDataArray();
+    this.state.dataArray = this.getDataArray(this.state.metric);
 
     this.state.createWeekdays = props.createWeekdays;
   }
 
-  getDataArray = () => {
+  getDataArray = (metric) => {
     let date = new Date();
     date.setDate(1);
     date.setYear(this.state.year);
@@ -49,18 +47,37 @@ class Month extends Component {
     {
       if (date.getMonth() !== this.props.month)
       {
-        data_array.push(undefined);
+        data_array.push({number: -1, title: ''});
         continue;
       }
 
       if (i % 7 === date.getDay())
       {
-        data_array.push(new Date(date));
+        if (typeof(this.state.data[ptr]) !== 'undefined' &&
+            this.state.data[ptr].date &&
+            date.getDate() === this.state.data[ptr].date.getDate())
+        {
+          //data_array.push({number: this.state.data[ptr][metric] / this.state.max[metric], title: date.toDateString() + '\n' + this.state.data[ptr][metric]});
+          data_array.push({
+            number: this.state.random[ptr], 
+            title: date.toDateString() + '\n' + this.state.random[ptr]
+          });
+
+          ptr++;
+        }
+        else
+        {
+          let num = Math.random();
+          data_array.push({
+            number: num,
+            title: date.toDateString() + ' ' + num});
+        }
+
         date.setDate(date.getDate() + 1);
       }
       else
       {
-        data_array.push(undefined);
+        data_array.push({number: -1, title: ''});
       }
     }
 
@@ -72,18 +89,18 @@ class Month extends Component {
     let month = [];
 
     for (let i = 0; i < 7 * 6; i++) {
-      month.push(
-        <MonthDay
-          data={random[Math.floor(Math.random() * 3)]}
-          date={this.state.dataArray[i]}
-          length={this.state.square_length}
-          padding={this.state.square_padding}
+      month.push(<rect
+          key={this.state.month_name + ' ' + i}
           x={this.state.offset_x + (this.state.square_padding + this.state.square_length) * Math.floor(i / days_in_week)}
           y={this.state.offset_y + (this.state.square_padding + this.state.square_length) * (i % days_in_week)}
-        />
-      );
-    }
+          width={this.state.square_length}
+          height={this.state.square_length}
+          fill={Gradient.green(this.state.dataArray[i].number)}
+          >
+            <title>{this.state.dataArray[i].title}</title>
+          </rect>)
 
+    }
     return month;
   }
 
@@ -106,8 +123,21 @@ class Month extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.metric !== this.props.metric)
+    {
+      this.setState({
+        metric: this.props.metric
+      });
+
+      this.setState({
+        dataArray: this.getDataArray(this.props.metric)
+      });
+    }
+  }
+
   render() {
-    return <svg>
+    return <g>
       <text
         x={this.state.offset_x}
         y={this.state.offset_y - 10}
@@ -115,7 +145,7 @@ class Month extends Component {
       </text>
        {this.createWeekdays()}
        {this.createMonth()}
-      </svg>
+      </g>
   }
 }
 

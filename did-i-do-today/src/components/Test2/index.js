@@ -1,11 +1,11 @@
 import React from 'react';
 
-import Day from '../Calendar/Day';
+import { WeekDay } from '../Calendar/Day';
 
 const Test2Page = () =>
 (
   <div>
-    <Day text='asdf' data={false} positive={true} negative={false}/>
+    <WeekDay text='asdf' data={false} positive={true} negative={false}/>
   </div>
 );
 
