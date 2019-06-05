@@ -28,7 +28,23 @@ if (process.argv.length % 2 === 1 || process.argv.length < 4)
 
 let userId = process.argv[2];
 let date = new Date(process.argv[3]);
+let answers = {};
 
-console.log(date.toString());
+for (let i = 4; i < process.argv.length; i += 2)
+{
+  answers[process.argv[i]] = process.argv[i + 1];
+}
 
+let answerObj = {
+  timeCreated: admin.firestore.Timestamp.fromDate(date),
+  userId,
+  answers
+}
+
+console.log('Adding answers');
+answersRef.add(answerObj)
+  .then(ref => {
+    console.log('Added document with ID: ', ref.id);
+  })
+  .catch(e => console.err);
 

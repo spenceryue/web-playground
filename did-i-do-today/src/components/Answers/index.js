@@ -8,7 +8,8 @@ const questionHashes =
   [
     '3167593219',
     '1680920143',
-    '3800379784'
+    '3800379784',
+    '2087592373'
   ]
 class Answers extends Component {
   constructor (props) {
@@ -20,7 +21,7 @@ class Answers extends Component {
     this.setAnswers = this.setAnswers.bind(this);
 
     let date = new Date();
-    date.setDate(date.getDate() - 28);
+    date.setDate(date.getDate() - 6);
 
     this.state.date = date;
 
