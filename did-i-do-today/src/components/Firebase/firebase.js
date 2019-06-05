@@ -24,6 +24,9 @@ class Firebase {
   doSignInWithEmailAndPassword = (email, password) =>
     this.auth.signInWithEmailAndPassword(email, password);
 
+  doSignOut = () =>
+    this.auth.signOut();
+
   doGetAnswers = (userId, date, func) => {
     const answersRef = this.store.collection('answers');
 

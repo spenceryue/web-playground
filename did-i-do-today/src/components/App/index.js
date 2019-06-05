@@ -7,6 +7,7 @@ import Test2Page from '../Test2';
 import AnswersPage from '../Answers';
 import NotFoundPage from '../NotFound';
 
+import { withAuthentication } from '../Session';
 import
 {
   BrowserRouter as Router,
@@ -30,4 +31,4 @@ const App = () => (
   </Router>
 );
 
-export default App;
+export default withAuthentication(App);
