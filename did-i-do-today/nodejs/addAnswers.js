@@ -32,7 +32,16 @@ let answers = {};
 
 for (let i = 4; i < process.argv.length; i += 2)
 {
-  answers[process.argv[i]] = process.argv[i + 1];
+  let answer;
+  if (process.argv[i + 1] === 'true') {
+    answer = true;
+  } else if (process.argv[i + 1] === 'false') {
+    answer = false;
+  } else {
+    answer = process.argv[i + 1];
+  }
+
+  answers[process.argv[i]] = answer;
 }
 
 let answerObj = {

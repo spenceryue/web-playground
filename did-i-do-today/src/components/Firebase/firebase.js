@@ -63,6 +63,9 @@ class Firebase {
           });
       });
   }
+
+  doSetAnswers = (userId) => {
+  }
 }
 
 export default Firebase;

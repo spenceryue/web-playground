@@ -18,7 +18,7 @@ class Questions extends Component {
     };
 
     this.setQuestions = this.setQuestions.bind(this);
-    this.props.firebase.doGetQuestions(props.authUser.email, this.setQuestions);
+    props.firebase.doGetQuestions(props.authUser.email, this.setQuestions);
   }
 
   setQuestions(questions) {
@@ -64,6 +64,9 @@ class Questions extends Component {
       <div>
         <Formik onSubmit={(values, actions) => {
             this.props.history.push(ROUTES.ANSWERS);
+            console.log(values);
+
+            this.props.firebase.doSetAnswers(this.props.authUser.email);
           }
         }
       >
