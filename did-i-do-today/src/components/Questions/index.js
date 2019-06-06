@@ -18,7 +18,7 @@ class Questions extends Component {
     };
 
     this.setQuestions = this.setQuestions.bind(this);
-    this.props.firebase.doGetQuestions('gtang.gt', this.setQuestions);
+    this.props.firebase.doGetQuestions(props.authUser.email, this.setQuestions);
   }
 
   setQuestions(questions) {
@@ -87,12 +87,6 @@ class Questions extends Component {
 
 const condition = authUser => !!authUser;
 
-const QuestionForm = compose(
-  withAuthorization(condition),
-  withRouter,
-  withFirebase
-)(Questions);
-
 const QuestionsPage = compose(
   withFirebase,
   withRouter
@@ -100,4 +94,4 @@ const QuestionsPage = compose(
 
 export { QuestionsPage };
 
-export default QuestionForm;
+export default withAuthorization(condition)(Questions);

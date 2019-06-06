@@ -29,8 +29,8 @@ class Answers extends Component {
 
     this.state.date = date;
 
-    this.props.firebase.doGetQuestions('gtang.gt', this.setQuestions);
-    this.props.firebase.doGetAnswers('gtang.gt', this.state.date, this.setAnswers);
+    this.props.firebase.doGetQuestions(props.authUser.email, this.setQuestions);
+    this.props.firebase.doGetAnswers(props.authUser.email, this.state.date, this.setAnswers);
 
   }
 
