@@ -24,7 +24,7 @@ class Year extends Component {
     {
       date.setYear(this.state.year);
       date.setMonth(0);
-      date.setDate(0);
+      date.setDate(1);
     }
 
     for (let i = 0; i < 12; i++) {
