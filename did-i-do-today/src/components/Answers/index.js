@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import Week from  '../Calendar/Week';
 
 import { withFirebase } from  '../Firebase';
+import { withAuthorization } from  '../Session';
 import StringHash from 'string-hash';
+
+import { compose } from 'recompose';
 
 const questionHashes =
   [
@@ -11,6 +14,7 @@ const questionHashes =
     '3800379784',
     '2087592373'
   ]
+
 class Answers extends Component {
   constructor (props) {
     super(props);
@@ -128,4 +132,11 @@ class Answers extends Component {
   }
 }
 
-export default withFirebase(Answers);
+const condition = authUser => !!authUser;
+
+const AnswersForm = compose(
+  withAuthorization(condition),
+  withFirebase
+)(Answers);
+
+export default AnswersForm;

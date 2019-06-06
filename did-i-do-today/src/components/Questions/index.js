@@ -5,6 +5,7 @@ import IntegerQuestion from  '../IntegerQuestion'
 
 import { compose } from 'recompose';
 import { Formik, Form, Field, ErrorMessage }  from 'formik';
+import { withAuthorization } from  '../Session';
 import { withRouter } from 'react-router-dom';
 import { withFirebase } from  '../Firebase'
 import * as ROUTES from '../../constants/routes';
@@ -84,9 +85,19 @@ class Questions extends Component {
   }
 }
 
+const condition = authUser => !!authUser;
+
 const QuestionForm = compose(
+  withAuthorization(condition),
   withRouter,
   withFirebase
 )(Questions);
+
+const QuestionsPage = compose(
+  withFirebase,
+  withRouter
+)(Questions);
+
+export { QuestionsPage };
 
 export default QuestionForm;

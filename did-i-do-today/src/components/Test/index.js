@@ -1,17 +1,13 @@
 import React from 'react';
 
-import Questions from '../Questions';
+import { QuestionsPage } from '../Questions';
 import BasicExample from '../FormikApiExample';
-
-import { withAuthorization } from '../Session';
 
 const TestPage = () =>
 (
   <div>
-  <Questions/>
+  <QuestionsPage/>
   </div>
 );
 
-const condition = authUser => !!authUser;
-
-export default withAuthorization(condition)(TestPage);
+export default TestPage;

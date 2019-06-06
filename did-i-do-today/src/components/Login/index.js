@@ -43,7 +43,7 @@ class LoginFormBase extends Component {
             this.props.firebase
               .doSignInWithEmailAndPassword(values.email, values.password)
               .then(() => {
-                this.props.history.push(ROUTES.TEST);
+                this.props.history.push(ROUTES.QUESTIONS);
               })
               .catch(error => {
                 this.setState({ error });
