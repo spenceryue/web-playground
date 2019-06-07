@@ -12,7 +12,8 @@ const questionHashes =
     '3167593219',
     '1680920143',
     '3800379784',
-    '2087592373'
+    '2087592373',
+    '1350393365'
   ]
 
 class Answers extends Component {
@@ -42,7 +43,6 @@ class Answers extends Component {
 
   setAnswers(answers) {
     console.log(answers);
-    let answerIndex = 0;
     let date = new Date(this.state.date);
     let data = {};
     questionHashes.forEach((hash) =>
@@ -50,6 +50,7 @@ class Answers extends Component {
         data[hash] = []
       });
 
+    let answerIndex = 0;
     for (let i = 0; i < 7; i++)
     {
       if (answers === undefined || answers[answerIndex] === undefined)
@@ -68,12 +69,11 @@ class Answers extends Component {
         && tmpDate.getYear() === date.getYear())
       {
         //data.push(answers[answerIndex].answers['6f1a1da7-dadd-4492-9ada-17198271588e']);
-        for (let key in answers[answerIndex].answers) {
-          if (data[key] === undefined) {
-            data[key] = [];
-          }
-          data[key].push(answers[answerIndex].answers[key]);
-        }
+        questionHashes.forEach((hash) =>
+          {
+            data[hash].push(answers[answerIndex].answers[hash])
+          });
+
         answerIndex++;
       } else {
         questionHashes.forEach((hash) =>

@@ -53,7 +53,7 @@ class Questions extends Component {
           />
         );
       }
-      ret.push( <br/> );
+      ret.push( <br key={'br' + question.value}/> );
     });
 
     return ret;
@@ -63,11 +63,23 @@ class Questions extends Component {
     return (
       <div>
         <Formik onSubmit={(values, actions) => {
-            this.props.history.push(ROUTES.ANSWERS);
-            console.log(values);
-
-            this.props.firebase.doSetAnswers(this.props.authUser.email);
+          this.props.history.push(ROUTES.ANSWERS);
+          let obj = values;
+          for (let keys in obj)
+          { 
+            if (obj[keys] === 'yes')
+            {
+              obj[keys] = true;
+            }
+            else if (obj[keys] === 'no')
+            {
+              obj[keys] = false;
+            }
           }
+          console.log(obj);
+
+          this.props.firebase.doSetAnswers(this.props.authUser.email, obj);
+        }
         }
       >
         <Form>

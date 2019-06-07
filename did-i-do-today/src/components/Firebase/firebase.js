@@ -64,7 +64,20 @@ class Firebase {
       });
   }
 
-  doSetAnswers = (userId) => {
+  doSetAnswers = (userId, answers) => {
+    const answersRef = this.store.collection('answers');
+
+    let answerObj = {
+      timeCreated: app.firestore.Timestamp.now(),
+      userId,
+      answers
+    }
+
+    answersRef.add(answerObj)
+      .then(ref => {
+        console.log('Added document with ID: ', ref.id);
+      })
+      .catch(e => console.err);
   }
 }
 

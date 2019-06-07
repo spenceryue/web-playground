@@ -1,6 +1,7 @@
 import React from 'react';
 import { RadioGroup, RadioButton } from '../RadioComponent';
 import { Field }  from 'formik';
+import StringHash from 'string-hash';
 
 const BinaryQuestion = (props) =>
 (
@@ -10,15 +11,15 @@ const BinaryQuestion = (props) =>
   >
     <Field
       component={RadioButton}
-      name={props.text}
-      id={props.text + 'yes'}
+      name={StringHash(props.text)}
+      id={'yes'}
       label='Yes'
     />
 
     <Field
       component={RadioButton}
-      name={props.text}
-      id={props.text + 'no'}
+      name={StringHash(props.text)}
+      id={'no'}
       label='No'
     />
   </RadioGroup>
