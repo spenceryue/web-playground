@@ -4,6 +4,7 @@ import LandingPage from '../Landing';
 import LoginPage from '../Login';
 import TestPage from '../Test';
 import Test2Page from '../Test2';
+import Test3Page from '../Test3';
 import AnswersPage from '../Answers';
 import QuestionsPage from '../Questions';
 import NotFoundPage from '../NotFound';
@@ -29,6 +30,7 @@ const App = () => (
 
       <Route exact path={ROUTES.TEST} component={TestPage} />
       <Route exact path={ROUTES.TEST2} component={Test2Page} />
+      <Route exact path={ROUTES.TEST3} component={Test3Page} />
       <Route path='*' component={NotFoundPage} />
     </Switch>
   </Router>

@@ -4,11 +4,12 @@ import Week from  '../Calendar/Week'
 import Quarter from  '../Calendar/Quarter'
 import Year from  '../Calendar/Year'
 
-class Test2Page extends Component {
+class Test3Page extends Component {
   constructor (props) {
     super(props);
     const date = new Date();
 
+    console.log(localStorage.setItem('myData', Math.random()));
     console.log(localStorage.getItem('myData'));
   }
 
@@ -27,5 +28,5 @@ class Test2Page extends Component {
   }
 }
 
-export default Test2Page;
+export default Test3Page;
 
