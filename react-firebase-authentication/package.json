@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "firebase": "^5.11.1",
+    "querystringify": "^2.1.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",

@@ -8,6 +8,7 @@
     "firebase": "^6.0.2",
     "firebase-admin": "^8.0.0",
     "formik": "^1.5.4",
+    "querystringify": "^2.1.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router": "^5.0.0",
