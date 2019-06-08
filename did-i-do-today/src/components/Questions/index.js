@@ -25,6 +25,8 @@ class Questions extends Component {
     this.setState({
       questions
     });
+
+    localStorage.setItem('questions', JSON.stringify(questions));
   }
 
   renderTitle() {
