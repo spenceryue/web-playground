@@ -21,15 +21,16 @@ class Questions extends Component {
                     lastDate.getDate() === todayDate.getDate() &&
                     lastDate.getMonth() === todayDate.getMonth();
 
-    if (lastToday)
-    {
-      this.props.history.push(ROUTES.ANSWERS);
-    }
-
     this.state = {
       questions: { questions: [] },
       lastToday
     };
+
+    if (lastToday)
+    {
+      this.props.history.push(ROUTES.ANSWERS);
+      return;
+    }
 
     this.setQuestions = this.setQuestions.bind(this);
     props.firebase.doGetQuestions(props.authUser.email, this.setQuestions);
@@ -75,47 +76,47 @@ class Questions extends Component {
     return ret;
   }
 
+  formikSubmit(values, actions) {
+    this.props.history.push(ROUTES.ANSWERS);
+    let obj = values;
+    for (let keys in obj)
+    { 
+      if (obj[keys] === 'yes')
+      {
+        obj[keys] = true;
+      }
+      else if (obj[keys] === 'no')
+      {
+        obj[keys] = false;
+      }
+    }
+    console.log(obj);
+
+    this.props.firebase.doSetAnswers(this.props.authUser.email, obj);
+    localStorage.setItem('lastDateSubmitted', JSON.stringify(new Date()));
+  }
+
+  renderForm() {
+    if (this.state.lastToday) {
+      return (
+            <Formik onSubmit={this.formikSubmit}>
+              <Form>
+                {this.renderTitle()}
+                <br/>
+                {this.renderQuestions()}
+                <button
+                  type='submit'>
+                  Submit
+                </button>
+              </Form>
+            </Formik> 
+      );
+    }
+  }
+
   render() {
     return (
-      <div>
-        {
-          lastToday => condition(lastToday) ?
-        <Formik onSubmit={(values, actions) => {
-          this.props.history.push(ROUTES.ANSWERS);
-          let obj = values;
-          for (let keys in obj)
-          { 
-            if (obj[keys] === 'yes')
-            {
-              obj[keys] = true;
-            }
-            else if (obj[keys] === 'no')
-            {
-              obj[keys] = false;
-            }
-          }
-          console.log(obj);
-
-          this.props.firebase.doSetAnswers(this.props.authUser.email, obj);
-          localStorage.setItem('lastDateSubmitted', JSON.stringify(new Date()));
-        }
-        }
-      >
-        <Form>
-
-          {this.renderTitle()}
-          <br/>
-          {this.renderQuestions()}
-
-          <button
-            type='submit'>
-            Submit
-          </button>
-
-        </Form>
-      </Formik> : null
-        }
-    </div>
+      <div>{this.renderForm()}</div>
     );
   }
 }
