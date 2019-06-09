@@ -6,6 +6,7 @@ import { withAuthorization } from  '../Session';
 import StringHash from 'string-hash';
 
 import { compose } from 'recompose';
+import SignOutButton from '../Logout';
 
 const questionHashes =
   [
@@ -127,6 +128,7 @@ class Answers extends Component {
         {this.renderTitle()}
         <br/>
         {this.renderQuestions()}
+        <SignOutButton/>
       </div>
     );
   }
