@@ -6,8 +6,12 @@ import SignOutButton from '../Logout';
 const LandingPage = () =>
 (
   <div>
-  <Profile/>
-  <SignOutButton/>
+
+      <input type='date'/>
+      <input type='submit'/>
+
+    <Profile/>
+    <SignOutButton/>
 
   </div>
 );
