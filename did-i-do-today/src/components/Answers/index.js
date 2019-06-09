@@ -103,20 +103,23 @@ class Answers extends Component {
     let ret = [];
 
     this.state.questions.questions.forEach((question, i) => {
-      ret.push(
-        <div key={question.value + (3 * i + 0)}>
-          {question.value}
-        </div>
-      );
-      ret.push(
-        <br key={question.value + (3 * i + 1)} />
-      );
-      ret.push(
-        <Week
-          date={this.state.date}
-          key={question.value + (3 * i + 2)}
-          data={this.state.data[StringHash(question.value)]}/>
-      );
+      if (question.type === 'binary')
+      {
+        ret.push(
+          <div key={question.value + (3 * i + 0)}>
+            {'Did I ' + question.value + ' today?'}
+          </div>
+        );
+        ret.push(
+          <br key={question.value + (3 * i + 1)} />
+        );
+        ret.push(
+          <Week
+            date={this.state.date}
+            key={question.value + (3 * i + 2)}
+            data={this.state.data[StringHash(question.value)]}/>
+        );
+      }
     });
 
     return ret;

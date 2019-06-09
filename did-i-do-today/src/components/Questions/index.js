@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Week from  '../Calendar/Week'
 import BinaryQuestion from  '../BinaryQuestion'
 import IntegerQuestion from  '../IntegerQuestion'
+import DidiQuestion from  '../DidiQuestion'
 
 import { compose } from 'recompose';
 import { Formik, Form, Field, ErrorMessage }  from 'formik';
@@ -33,6 +34,7 @@ class Questions extends Component {
     }
 
     this.setQuestions = this.setQuestions.bind(this);
+    this.formikSubmit = this.formikSubmit.bind(this);
     props.firebase.doGetQuestions(props.authUser.email, this.setQuestions);
   }
 
@@ -59,15 +61,20 @@ class Questions extends Component {
       if (question.type === 'binary')
       {
         ret.push(
-          <BinaryQuestion
+          <DidiQuestion
             key={question.value + i}
-            text={question.value}/>
+            text={question.value} />
         );
       } else if (question.type === 'integer') {
         ret.push(
           <IntegerQuestion
-            text={question.value}
-          />
+            text={question.value} />
+        );
+      } else if (question.type === 'didi') {
+        ret.push(
+          <DidiQuestion
+            key={question.value + i}
+            text={question.value} />
         );
       }
       ret.push( <br key={'br' + question.value}/> );
@@ -97,7 +104,7 @@ class Questions extends Component {
   }
 
   renderForm() {
-    if (this.state.lastToday) {
+    if (!this.state.lastToday) {
       return (
             <Formik onSubmit={this.formikSubmit}>
               <Form>

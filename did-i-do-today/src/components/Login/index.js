@@ -29,7 +29,56 @@ const LoginValidation = yup.object().shape({
 });
 
 class LoginFormBase extends Component {
+  constructor (props)
+  {
+    super(props);
+    this.loginSubmit = this.loginSubmit.bind(this);
+    this.state = {};
+  }
+
+  loginSubmit(values, actions) {
+    this.props.firebase
+      .doSignInWithEmailAndPassword(values.email, values.password)
+      .then(() => {
+
+        let lastDate = new Date(JSON.parse(localStorage.getItem('lastDateSubmitted')));
+        let todayDate = new Date();
+
+        if (lastDate.getYear() === todayDate.getYear() &&
+          lastDate.getDate() === todayDate.getDate() &&
+          lastDate.getMonth() === todayDate.getMonth)
+        {
+          this.props.history.push(ROUTES.ANSWERS);
+        }
+        else
+        {
+          let prevWeek = new Date(todayDate);
+          prevWeek.setDate(prevWeek.getDate() - 6);
+
+          this.props.firebase.doGetAnswers(values.email, prevWeek, (answer) => {
+            localStorage.setItem('answers', JSON.stringify(answer));
+            let date = answer[answer.length - 1].timeCreated.toDate();
+            if (date.getYear() === todayDate.getYear() &&
+              date.getDate() === todayDate.getDate() &&
+              date.getMonth() === todayDate.getMonth())
+            {
+              this.props.history.push(ROUTES.ANSWERS);
+            }
+            else
+            {
+              this.props.history.push(ROUTES.QUESTIONS);
+            }
+          });
+        }
+      })
+      .catch(error => {
+        this.setState({ error });
+      });
+  }
+
   render() {
+    const { error } = this.state;
+
     return ( 
       <Formik
         initialValues={
@@ -39,46 +88,8 @@ class LoginFormBase extends Component {
           }
         }
 
-        onSubmit={(values, actions) => {
-            this.props.firebase
-              .doSignInWithEmailAndPassword(values.email, values.password)
-              .then(() => {
-
-                let lastDate = new Date(JSON.parse(localStorage.getItem('lastDateSubmitted')));
-                let todayDate = new Date();
-
-                if (lastDate.getYear() === todayDate.getYear() &&
-                    lastDate.getDate() === todayDate.getDate() &&
-                    lastDate.getMonth() === todayDate.getMonth)
-                {
-                  this.props.history.push(ROUTES.ANSWERS);
-                }
-                else
-                {
-                  let prevWeek = new Date(todayDate);
-                  prevWeek.setDate(prevWeek.getDate() - 6);
-
-                  this.props.firebase.doGetAnswers(values.email, prevWeek, (answer) => {
-                    localStorage.setItem('answers', JSON.stringify(answer));
-                    let date = answer[answer.length - 1].timeCreated.toDate();
-                    if (date.getYear() === todayDate.getYear() &&
-                        date.getDate() === todayDate.getDate() &&
-                        date.getMonth() === todayDate.getMonth())
-                    {
-                      this.props.history.push(ROUTES.ANSWERS);
-                    }
-                    else
-                    {
-                      this.props.history.push(ROUTES.QUESTIONS);
-                    }
-                  }); 
-                }
-              })
-              .catch(error => {
-                this.setState({ error });
-              });
-          }
-        }
+        validationSchema={LoginValidation}
+        onSubmit={this.loginSubmit}
       >
         <Form>
           <Field
@@ -103,6 +114,8 @@ class LoginFormBase extends Component {
             type='submit'>
             Log In
           </button>
+
+          {error && <p>{error.message}</p>}
         </Form>
       </Formik>
     )
@@ -112,21 +125,6 @@ class LoginFormBase extends Component {
 const LoginForm = compose(
   withRouter,
   withFirebase,
-  /*
-      withFormik({
-        handleSubmit: ( values, { setSubmitting }) =>
-        {
-          this.props.firebase.doSignInWithEmailAndPassword(
-            values.email,
-            values.password
-          ).then(() => {
-            this.props.history.push(ROUTES.LANDING);
-          });
-        },
-          validationSchema: LoginValidation
-      })
-      */
-
 )(LoginFormBase);
 
 export default LoginPage;
