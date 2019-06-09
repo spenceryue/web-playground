@@ -13,8 +13,22 @@ import * as ROUTES from '../../constants/routes';
 class Questions extends Component {
   constructor (props) {
     super(props);
+
+    let lastDate = new Date(JSON.parse(localStorage.getItem('lastDateSubmitted')));
+    let todayDate = new Date();
+
+    let lastToday = lastDate.getYear() === todayDate.getYear() &&
+                    lastDate.getDate() === todayDate.getDate() &&
+                    lastDate.getMonth() === todayDate.getMonth();
+
+    if (lastToday)
+    {
+      this.props.history.push(ROUTES.ANSWERS);
+    }
+
     this.state = {
-      questions: { questions: [] }
+      questions: { questions: [] },
+      lastToday
     };
 
     this.setQuestions = this.setQuestions.bind(this);
@@ -64,6 +78,8 @@ class Questions extends Component {
   render() {
     return (
       <div>
+        {
+          lastToday => condition(lastToday) ?
         <Formik onSubmit={(values, actions) => {
           this.props.history.push(ROUTES.ANSWERS);
           let obj = values;
@@ -81,6 +97,7 @@ class Questions extends Component {
           console.log(obj);
 
           this.props.firebase.doSetAnswers(this.props.authUser.email, obj);
+          localStorage.setItem('lastDateSubmitted', JSON.stringify(new Date()));
         }
         }
       >
@@ -96,13 +113,16 @@ class Questions extends Component {
           </button>
 
         </Form>
-      </Formik>
+      </Formik> : null
+        }
     </div>
     );
   }
 }
 
-const condition = authUser => !!authUser;
+const condition = authUser => { 
+  return !!authUser;
+}
 
 const QuestionsPage = compose(
   withFirebase,
