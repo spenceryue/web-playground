@@ -1,6 +1,7 @@
 import React from 'react';
 
 import LandingPage from '../Landing';
+import GeorgeLandingPage from '../GeorgeLanding';
 import LoginPage from '../Login';
 import TestPage from '../Test';
 import Test2Page from '../Test2';
@@ -23,7 +24,7 @@ import * as ROUTES from '../../constants/routes';
 const App = () => (
   <Router>
     <Switch>
-      <Route exact path={ROUTES.LANDING} component={LandingPage} />
+      <Route exact path={ROUTES.LANDING} component={GeorgeLandingPage} />
       <Route exact path={ROUTES.QUESTIONS} component={QuestionsPage} />
       <Route exact path={ROUTES.LOGIN} component={LoginPage} />
       <Route exact path={ROUTES.ANSWERS} component={AnswersPage} />

@@ -11,6 +11,8 @@ import { withRouter } from 'react-router-dom';
 import { withFirebase } from  '../Firebase'
 import * as ROUTES from '../../constants/routes';
 
+import * as yup from 'yup';
+
 class Questions extends Component {
   constructor (props) {
     super(props);
@@ -84,6 +86,7 @@ class Questions extends Component {
   }
 
   formikSubmit(values, actions) {
+    console.log(values);
     this.props.history.push(ROUTES.ANSWERS);
     let obj = values;
     for (let keys in obj)
@@ -104,19 +107,32 @@ class Questions extends Component {
   }
 
   renderForm() {
+    let test = {};
+
+    this.state.questions.questions.forEach((question, i) => {
+      test[question.value] = yup.string().min(1).required();
+    });
+      
+    console.log(test);
+
+    const validation = yup.object().shape(test);
+
     if (!this.state.lastToday) {
       return (
-            <Formik onSubmit={this.formikSubmit}>
-              <Form>
-                {this.renderTitle()}
-                <br/>
-                {this.renderQuestions()}
-                <button
-                  type='submit'>
-                  Submit
-                </button>
-              </Form>
-            </Formik> 
+        <Formik 
+          onSubmit={this.formikSubmit}
+          validationSchema={validation}
+        >
+          <Form>
+            {this.renderTitle()}
+            <br/>
+            {this.renderQuestions()}
+            <button
+              type='submit'>
+              Submit
+            </button>
+          </Form>
+        </Formik> 
       );
     }
   }
