@@ -43,7 +43,6 @@ class Answers extends Component {
   }
 
   setAnswers(answers) {
-    console.log(answers);
     let date = new Date(this.state.date);
     let data = {};
     questionHashes.forEach((hash) =>

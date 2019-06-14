@@ -1,5 +1,6 @@
 import app from 'firebase/app';
 import 'firebase/firestore';
+import 'firebase/database';
 import 'firebase/auth';
 
 const config =
@@ -19,6 +20,7 @@ class Firebase {
     app.initializeApp(config);
     this.store = app.firestore();
     this.auth  = app.auth();
+    this.database = app.database();
   }
 
   doSignInWithEmailAndPassword = (email, password) =>
@@ -27,7 +29,24 @@ class Firebase {
   doSignOut = () =>
     this.auth.signOut();
 
+  doGetUsername = (func) => {
+    this.database.ref('users/' + this.auth.currentUser.uid).once('value').then((snapshot) =>
+      {
+        func(snapshot.val().username);
+      }
+    );
+  }
+
+  doGetGeorgeUsername = (func) => {
+    this.database.ref('users/' + 'tTwRJTLmILXW3DZST1BbkoutXpt2').once('value').then((snapshot) =>
+      {
+        func(snapshot.val().username);
+      }
+    );
+  }
+
   doGetAnswers = (userId, date, func) => {
+
     const answersRef = this.store.collection('answers');
 
     const query = answersRef.where('userId', '==', userId)

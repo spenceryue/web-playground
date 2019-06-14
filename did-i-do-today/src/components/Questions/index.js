@@ -10,6 +10,7 @@ import { withAuthorization } from  '../Session';
 import { withRouter } from 'react-router-dom';
 import { withFirebase } from  '../Firebase'
 import * as ROUTES from '../../constants/routes';
+import StringHash from 'string-hash';
 
 import * as yup from 'yup';
 
@@ -20,20 +21,21 @@ class Questions extends Component {
     let lastDate = new Date(JSON.parse(localStorage.getItem('lastDateSubmitted')));
     let todayDate = new Date();
 
-    let lastToday = lastDate.getYear() === todayDate.getYear() &&
-                    lastDate.getDate() === todayDate.getDate() &&
-                    lastDate.getMonth() === todayDate.getMonth();
+    //let lastToday = lastDate.getYear() === todayDate.getYear() &&
+    //lastDate.getDate() === todayDate.getDate() &&
+    //lastDate.getMonth() === todayDate.getMonth();
 
     this.state = {
       questions: { questions: [] },
-      lastToday
+      //lastToday
     };
 
+    /*
     if (lastToday)
     {
       this.props.history.push(ROUTES.ANSWERS);
       return;
-    }
+    }*/
 
     this.setQuestions = this.setQuestions.bind(this);
     this.formikSubmit = this.formikSubmit.bind(this);
@@ -63,9 +65,10 @@ class Questions extends Component {
       if (question.type === 'binary')
       {
         ret.push(
-          <DidiQuestion
-            key={question.value + i}
-            text={question.value} />
+            <DidiQuestion
+              name={question.value}
+              key={question.value + i}
+              text={question.value} />
         );
       } else if (question.type === 'integer') {
         ret.push(
@@ -74,9 +77,9 @@ class Questions extends Component {
         );
       } else if (question.type === 'didi') {
         ret.push(
-          <DidiQuestion
-            key={question.value + i}
-            text={question.value} />
+            <DidiQuestion
+              key={question.value + i}
+              text={question.value} />
         );
       }
       ret.push( <br key={'br' + question.value}/> );
@@ -110,14 +113,14 @@ class Questions extends Component {
     let test = {};
 
     this.state.questions.questions.forEach((question, i) => {
-      test[question.value] = yup.string().min(1).required();
+      test[StringHash(question.value)] = yup.string().oneOf(['Yes', 'No']).required();
     });
       
     console.log(test);
 
     const validation = yup.object().shape(test);
 
-    if (!this.state.lastToday) {
+    //if (!this.state.lastToday) {
       return (
         <Formik 
           onSubmit={this.formikSubmit}
@@ -134,7 +137,7 @@ class Questions extends Component {
           </Form>
         </Formik> 
       );
-    }
+    //}
   }
 
   render() {

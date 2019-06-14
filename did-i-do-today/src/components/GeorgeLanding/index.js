@@ -9,10 +9,12 @@ class GeorgeLandingPage extends Component {
     super(props);
     this.state = {
       questions: { questions: [] },
-      questionHashes: []
+      questionHashes: [],
+      username: ''
     };
 
     this.setQuestions = this.setQuestions.bind(this);
+    this.setUsername = this.setUsername.bind(this);
     this.setAnswers = this.setAnswers.bind(this);
 
     let date = new Date();
@@ -20,6 +22,13 @@ class GeorgeLandingPage extends Component {
     this.state.date = date;
 
     this.props.firebase.doGetQuestions('gtang.gt@gmail.com', this.setQuestions);
+    this.props.firebase.doGetGeorgeUsername(this.setUsername);
+  }
+
+  setUsername(username) {
+    this.setState({
+      username
+    });
   }
 
   setQuestions(questions) {
@@ -87,10 +96,11 @@ class GeorgeLandingPage extends Component {
   }
 
   renderTitle() {
-    if (typeof(this.state.questions.userId) === 'undefined') {
+    if (typeof(this.state.username) === 'undefined' ||
+        this.state.username === '') {
       return <h1>answers</h1>;
     }
-    return <h1>{this.state.questions.userId + '\'s '}answers</h1>;
+    return <h1>{this.state.username + '\'s '}answers</h1>;
   }
 
   renderQuestions() {
