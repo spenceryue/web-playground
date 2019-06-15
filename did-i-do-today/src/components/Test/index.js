@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { QuestionsPage } from '../Questions';
+import Forms from '../Forms';
 
 const TestPage = () =>
 (
   <div>
-  <QuestionsPage/>
+  <Forms/>
   </div>
 );
 
