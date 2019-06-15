@@ -66,7 +66,6 @@ class Questions extends Component {
       {
         ret.push(
             <DidiQuestion
-              name={question.value}
               key={question.value + i}
               text={question.value} />
         );
@@ -88,8 +87,10 @@ class Questions extends Component {
     return ret;
   }
 
-  formikSubmit(values, actions) {
+  formikSubmit (values, actions) {
+
     console.log(values);
+
     this.props.history.push(ROUTES.ANSWERS);
     let obj = values;
     for (let keys in obj)
@@ -113,7 +114,7 @@ class Questions extends Component {
     let test = {};
 
     this.state.questions.questions.forEach((question, i) => {
-      test[StringHash(question.value)] = yup.string().oneOf(['Yes', 'No']).required();
+      test[StringHash(question.value)] = yup.string().required();
     });
       
     console.log(test);

@@ -3,3 +3,4 @@ console.log(stringHash("How many github contributions did I make?"));
 console.log(stringHash("Did I check stocks?"));
 console.log(stringHash("Did I make progress on Did I Do today?"));
 console.log(stringHash("asdf"));
+console.log(stringHash("ggasdf"));
