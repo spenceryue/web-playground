@@ -111,14 +111,14 @@ class Questions extends Component {
   }
 
   renderForm() {
+    const { error } = this.state;
+
     let test = {};
 
     this.state.questions.questions.forEach((question, i) => {
-      test[StringHash(question.value)] = yup.string().required();
+      test[StringHash(question.value)] = yup.string().required('An answer is required');
     });
       
-    console.log(test);
-
     const validation = yup.object().shape(test);
 
     //if (!this.state.lastToday) {
@@ -126,22 +126,29 @@ class Questions extends Component {
         <Formik 
           onSubmit={this.formikSubmit}
           validationSchema={validation}
+          render={(handleSubmit, values, errors) => 
+            (
+              <Form>
+                {this.renderTitle()}
+                <br/>
+                {this.renderQuestions()}
+                <button
+                  type='submit'>
+                  Submit
+                </button>
+
+              </Form>
+            )
+          }
         >
-          <Form>
-            {this.renderTitle()}
-            <br/>
-            {this.renderQuestions()}
-            <button
-              type='submit'>
-              Submit
-            </button>
-          </Form>
         </Formik> 
       );
     //}
   }
 
   render() {
+    console.log(this.props.error);
+
     return (
       <div>{this.renderForm()}</div>
     );

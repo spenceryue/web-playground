@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { QuestionsPage } from '../Questions';
-import BasicExample from '../FormikApiExample';
 
 const TestPage = () =>
 (
