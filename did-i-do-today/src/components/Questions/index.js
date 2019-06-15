@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Week from  '../Calendar/Week'
-import BinaryQuestion from  '../BinaryQuestion'
-import IntegerQuestion from  '../IntegerQuestion'
-import DidiQuestion from  '../DidiQuestion'
+import BinaryQuestion from  './BinaryQuestion'
+import IntegerQuestion from  './IntegerQuestion'
+import DidiQuestion from  './DidiQuestion'
 
 import { compose } from 'recompose';
 import { Formik, Form, Field, ErrorMessage }  from 'formik';
