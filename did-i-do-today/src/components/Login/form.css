@@ -16,3 +16,8 @@ button {
   margin-bottom: 0.5em;
 }
 
+#loginerror {
+  font-family: 'Arial', sans-serif;
+  font-size: 17px;
+}
+

@@ -87,8 +87,8 @@ class LoginFormBase extends Component {
             password: ''
           }
         }
-
         validationSchema={LoginValidation}
+
         onSubmit={this.loginSubmit}
       >
         <Form>
@@ -115,7 +115,7 @@ class LoginFormBase extends Component {
             Log In
           </button>
 
-          {error && <p>{error.message}</p>}
+          {error && <p id='loginerror'>{error.message}</p>}
         </Form>
       </Formik>
     )
