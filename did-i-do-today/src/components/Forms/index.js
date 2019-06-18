@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as yup from 'yup';
 
 const questions = [
+  'poop',
   'Did I do 2 leetcode today?',
   'Did I talk to 10 people today?',
   'Did I play basketball today?',
@@ -9,24 +12,69 @@ const questions = [
 
 class Forms extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {};
+
+    this.validMap = {};
+    this.emptyMap = {};
+    questions.forEach((question) =>
+      {
+        this.validMap[question] = yup.string().required('required field');
+        this.emptyMap[question] = '';
+      });
+
+    this.validation = yup.object().shape(this.validMap);
+  }
+
   createQuestions () {
     let ret = [];
 
     for (let i = 0; i < questions.length; i++)
     {
-      ret.push(<div>
-        {questions[i]}
-      </div>
-      )
+      ret.push(
+        <Field type='text' name={questions[i]} />
+      );
+      ret.push(
+        <ErrorMessage name={questions[i]} component='div'/>
+      );
+      ret.push(
+        <div/>
+      );
     }
 
     return ret;
   }
 
   render() {
+    const { error } = this.state;
     return (
       <div>
-        {this.createQuestions()}
+        <Formik
+          initialValues={this.emptyMap}
+          validationSchema={this.validation}
+          onSubmit={(values, { setSubmitting }) => {
+              alert(JSON.stringify(values, null, 2));
+              setSubmitting(false);
+              }
+            }
+          >
+              {({ isSubmitting }) => (
+              <Form>
+                {
+                  this.createQuestions()
+                }
+
+                <div/>
+                <button type='submit' disabled={isSubmitting}>
+                  Submit
+                </button>
+
+                {error && <p id='loginerror'>{error.message}</p>}
+              </Form>
+            )}
+
+          </Formik>
       </div>
     )
   }
