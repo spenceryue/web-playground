@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import DidIQuestion from './DidIQuestion';
+import IntegerQuestion from './IntegerQuestion';
 import * as yup from 'yup';
 
 const questions = [
@@ -33,13 +35,9 @@ class Forms extends Component {
     for (let i = 0; i < questions.length; i++)
     {
       ret.push(
-        <Field type='text' name={questions[i]} />
-      );
-      ret.push(
-        <ErrorMessage name={questions[i]} component='div'/>
-      );
-      ret.push(
-        <div/>
+        <IntegerQuestion
+          text={questions[i]}
+        />
       );
     }
 

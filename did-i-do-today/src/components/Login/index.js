@@ -22,6 +22,7 @@ const LoginValidation = yup.object().shape({
   .string()
   .email()
   .required(),
+
   password: yup
   .string()
   .min(8)
