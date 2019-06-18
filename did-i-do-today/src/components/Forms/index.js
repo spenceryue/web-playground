@@ -57,21 +57,16 @@ class Forms extends Component {
               }
             }
           >
-              {({ isSubmitting }) => (
               <Form>
                 {
                   this.createQuestions()
                 }
 
                 <div/>
-                <button type='submit' disabled={isSubmitting}>
+                <button type='submit'>
                   Submit
                 </button>
-
-                {error && <p id='loginerror'>{error.message}</p>}
               </Form>
-            )}
-
           </Formik>
       </div>
     )

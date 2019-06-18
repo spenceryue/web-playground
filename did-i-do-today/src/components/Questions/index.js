@@ -21,21 +21,21 @@ class Questions extends Component {
     let lastDate = new Date(JSON.parse(localStorage.getItem('lastDateSubmitted')));
     let todayDate = new Date();
 
-    //let lastToday = lastDate.getYear() === todayDate.getYear() &&
-    //lastDate.getDate() === todayDate.getDate() &&
-    //lastDate.getMonth() === todayDate.getMonth();
+    let lastToday = lastDate.getYear() === todayDate.getYear() &&
+    lastDate.getDate() === todayDate.getDate() &&
+    lastDate.getMonth() === todayDate.getMonth();
 
     this.state = {
       questions: { questions: [] },
-      //lastToday
+      lastToday
     };
 
-    /*
+    
     if (lastToday)
     {
       this.props.history.push(ROUTES.ANSWERS);
       return;
-    }*/
+    }
 
     this.setQuestions = this.setQuestions.bind(this);
     this.formikSubmit = this.formikSubmit.bind(this);
@@ -89,8 +89,6 @@ class Questions extends Component {
 
   formikSubmit (values, actions) {
 
-    console.log(values);
-
     this.props.history.push(ROUTES.ANSWERS);
     let obj = values;
     for (let keys in obj)
@@ -104,53 +102,42 @@ class Questions extends Component {
         obj[keys] = false;
       }
     }
-    console.log(obj);
 
     this.props.firebase.doSetAnswers(this.props.authUser.email, obj);
     localStorage.setItem('lastDateSubmitted', JSON.stringify(new Date()));
   }
 
-  renderForm() {
-    const { error } = this.state;
-
-    let test = {};
-
-    this.state.questions.questions.forEach((question, i) => {
-      test[StringHash(question.value)] = yup.string().required('An answer is required');
-    });
-      
-    const validation = yup.object().shape(test);
-
-    //if (!this.state.lastToday) {
-      return (
-        <Formik 
-          onSubmit={this.formikSubmit}
-          validationSchema={validation}
-          render={(handleSubmit, values, errors) => 
-            (
-              <Form>
-                {this.renderTitle()}
-                <br/>
-                {this.renderQuestions()}
-                <button
-                  type='submit'>
-                  Submit
-                </button>
-
-              </Form>
-            )
-          }
-        >
-        </Formik> 
-      );
-    //}
-  }
-
   render() {
-    console.log(this.props.error);
+    let valid = {};
+    let empty = {};
+
+    this.state.questions.questions.forEach((question) => {
+      valid[StringHash(question.value)] = yup.string().required('An answer is required');
+      empty[StringHash(question.value)] = '';
+    });
+
+    const validation = yup.object().shape(valid);
 
     return (
-      <div>{this.renderForm()}</div>
+      <div>
+        <Formik 
+          enableReinitialize
+          initialValues={empty}
+          validationSchema={validation}
+          onSubmit={this.formikSubmit}
+        >
+          <Form>
+            {this.renderTitle()}
+            <br/>
+            {this.renderQuestions()}
+            <button
+              type='submit'>
+              Submit
+            </button>
+
+          </Form>
+        </Formik> 
+      </div>
     );
   }
 }
