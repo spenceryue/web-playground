@@ -88,9 +88,6 @@ class Questions extends Component {
   }
 
   formikSubmit (values, actions) {
-    Object.keys(values).forEach((key) => {
-      values[key] = values[key].split('|')[1];
-    })
     console.log(values);
     return;
 
@@ -123,12 +120,12 @@ class Questions extends Component {
 
     const validation = yup.object().shape(valid);
 
+    //initialValues={empty}
+    //     validationSchema={validation}
     return (
       <div>
         <Formik 
           enableReinitialize
-          initialValues={empty}
-          validationSchema={validation}
           onSubmit={this.formikSubmit}
         >
           <Form>

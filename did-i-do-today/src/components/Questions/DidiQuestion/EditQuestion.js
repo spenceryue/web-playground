@@ -11,6 +11,7 @@ const EditQuestion = ({...props}) =>
         {'Did I '} 
       </div>
       <Field
+        id={props.text}
         name={props.text}
         value={props.text}
       />

@@ -9,18 +9,13 @@ const Question = ({...props}) =>
   <div>
     <div>{'Did I ' + props.text + ' today?'}</div>
     <Field
-      component={RadioButton}
+      component='select'
       name={StringHash(props.text)}
-      id={StringHash(props.text) + '|yes'}
-      label='Yes'
-    />
+    >
+      <option value='yes'>Yes</option>
+      <option value='no'>No</option>
+    </Field>
 
-    <Field
-      component={RadioButton}
-      name={StringHash(props.text)}
-      id={StringHash(props.text) + '|no'}
-      label='No'
-    />
 
     <ErrorMessage name={StringHash(props.text)} component='div'/>
   </div>

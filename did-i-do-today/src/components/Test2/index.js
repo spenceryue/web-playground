@@ -1,31 +1,21 @@
-import React, { Component } from 'react';
+import React, { useState }  from 'react';
 
-import Week from  '../Calendar/Week'
-import Quarter from  '../Calendar/Quarter'
-import Year from  '../Calendar/Year'
+const Example = () =>
+{
+  const [count, setCount] = useState(JSON.parse(localStorage.getItem('count')));
 
-class Test2Page extends Component {
-  constructor (props) {
-    super(props);
-    const date = new Date();
-
-    console.log(localStorage.getItem('myData'));
-  }
-
-  render() {
-    return (
-      <div>
-        <div>
-          Did I Make Progress On Did I Do Today?
-        </div>
-        <p/>
-        <Week dateIsStart={false} />
-        <Quarter dateIsStart={false} />
-        <Year dateIsStart={false} />
-      </div>
-    );
-  }
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => { 
+          setCount(count + 1);
+          localStorage.setItem('count', count + 1);
+        } 
+      }>
+        Click Me
+      </button>
+    </div>
+  );
 }
 
-export default Test2Page;
-
+export default Example;
