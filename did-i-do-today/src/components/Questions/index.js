@@ -21,21 +21,21 @@ class Questions extends Component {
     let lastDate = new Date(JSON.parse(localStorage.getItem('lastDateSubmitted')));
     let todayDate = new Date();
 
-    let lastToday = lastDate.getYear() === todayDate.getYear() &&
-    lastDate.getDate() === todayDate.getDate() &&
-    lastDate.getMonth() === todayDate.getMonth();
+    //let lastToday = lastDate.getYear() === todayDate.getYear() &&
+    //lastDate.getDate() === todayDate.getDate() &&
+    //lastDate.getMonth() === todayDate.getMonth();
 
     this.state = {
       questions: { questions: [] },
-      lastToday
+      // lastToday
     };
 
     
-    if (lastToday)
-    {
-      this.props.history.push(ROUTES.ANSWERS);
-      return;
-    }
+    //if (lastToday)
+    //{
+    // this.props.history.push(ROUTES.ANSWERS);
+    //  return;
+    //}
 
     this.setQuestions = this.setQuestions.bind(this);
     this.formikSubmit = this.formikSubmit.bind(this);
@@ -88,6 +88,11 @@ class Questions extends Component {
   }
 
   formikSubmit (values, actions) {
+    Object.keys(values).forEach((key) => {
+      values[key] = values[key].split('|')[1];
+    })
+    console.log(values);
+    return;
 
     this.props.history.push(ROUTES.ANSWERS);
     let obj = values;
@@ -134,9 +139,15 @@ class Questions extends Component {
               type='submit'>
               Submit
             </button>
+            <div/>
+
 
           </Form>
         </Formik> 
+
+        <button>
+          Edit Survey
+        </button>
       </div>
     );
   }

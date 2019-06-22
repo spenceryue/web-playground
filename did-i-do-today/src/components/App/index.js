@@ -24,7 +24,7 @@ import * as ROUTES from '../../constants/routes';
 const App = () => (
   <Router>
     <Switch>
-      <Route exact path={ROUTES.LANDING} component={TestPage} />
+      <Route exact path={ROUTES.LANDING} component={GeorgeLandingPage} />
       <Route exact path={ROUTES.QUESTIONS} component={QuestionsPage} />
       <Route exact path={ROUTES.LOGIN} component={LoginPage} />
       <Route exact path={ROUTES.ANSWERS} component={AnswersPage} />

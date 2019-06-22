@@ -1,30 +1,21 @@
 import React from 'react';
-import { RadioButton } from '../../RadioComponent';
-import { Field, ErrorMessage }  from 'formik';
-import StringHash from 'string-hash';
+import Question from './Question';
+import EditQuestion from './EditQuestion';
 
 const DidIQuestion = ({...props}) =>
 {
-  return (
-  <div>
-    <div>{'Did I ' + props.text + ' today?'}</div>
-    <Field
-      component={RadioButton}
-      name={StringHash(props.text)}
-      id={'yes'}
-      label='Yes'
-    />
-
-    <Field
-      component={RadioButton}
-      name={StringHash(props.text)}
-      id={'no'}
-      label='No'
-    />
-
-    <ErrorMessage name={StringHash(props.text)} component='div'/>
-  </div>
-  )
+  if (!props.editing)
+  {
+    return (
+      <Question {...props} />
+    )
+  }
+  else
+  {
+    return (
+      <EditQuestion {...props} />
+    )
+  }
 };
 
 export default DidIQuestion;
