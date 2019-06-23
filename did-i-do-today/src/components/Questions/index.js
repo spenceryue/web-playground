@@ -4,6 +4,8 @@ import BinaryQuestion from  './BinaryQuestion'
 import IntegerQuestion from  './IntegerQuestion'
 import DidiQuestion from  './DidiQuestion'
 
+import Debug from '../Debug';
+
 import { compose } from 'recompose';
 import { Formik, Form, Field, ErrorMessage }  from 'formik';
 import { withAuthorization } from  '../Session';
@@ -57,7 +59,7 @@ class Questions extends Component {
     return <h1>{this.state.questions.userId + '\'s '}questions</h1>;
   }
 
-  renderQuestions() {
+  renderQuestions(handleSubmit, handleChange) {
     let ret = [];
 
     this.state.questions.questions.forEach((question, i) => {
@@ -67,7 +69,9 @@ class Questions extends Component {
         ret.push(
             <DidiQuestion
               key={question.value + i}
-              text={question.value} />
+              text={question.value}
+              handleSubmit={handleSubmit}
+              handleChange={handleChange} />
         );
       } else if (question.type === 'integer') {
         ret.push(
@@ -120,26 +124,33 @@ class Questions extends Component {
 
     const validation = yup.object().shape(valid);
 
-    //initialValues={empty}
-    //     validationSchema={validation}
+    console.log(empty);
     return (
       <div>
+        {this.renderTitle()}
         <Formik 
           enableReinitialize
           onSubmit={this.formikSubmit}
+          initialValues={empty}
+          validationSchema={validation}
         >
-          <Form>
-            {this.renderTitle()}
-            <br/>
-            {this.renderQuestions()}
-            <button
-              type='submit'>
-              Submit
-            </button>
-            <div/>
+          {({ handleSubmit, handleChange }) =>
+            (
+              <form onSubmit={handleSubmit}>
+              <br/>
 
+              {this.renderQuestions(handleSubmit, handleChange)}
 
-          </Form>
+                <button
+                  type='submit'>
+                  Submit
+                </button>
+                <div/>
+
+                <Debug/>
+              </form>
+            )
+          }
         </Formik> 
 
         <button>

@@ -4,8 +4,7 @@ import EditQuestion from './EditQuestion';
 
 const DidIQuestion = ({...props}) =>
 {
-  //if (!props.editing)
-  if (false)
+  if (!props.editing)
   {
     return (
       <Question {...props} />
