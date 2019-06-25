@@ -22,13 +22,15 @@ const Question = ({
       <Field
         component={RadioButton}
         name={name}
-        id='yes'
+        id={name + 'y'}
+        presetValue={'yes'}
         label='Yes'
       />
       <Field
         component={RadioButton}
         name={name}
-        id='no'
+        id={name + 'n'}
+        presetValue={'no'}
         label='No'
       />
     </RadioGroup>

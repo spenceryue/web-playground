@@ -5,17 +5,20 @@ const RadioButton = ({
   field: { name, value, onChange, onBlur },
   id,
   label,
-  className,
+  presetValue,
   ...props
 }) => {
+  console.log({value, name, id});
   return (
     <div>
       <input
         name={name}
         id={id}
         type='radio'
-        value={id}
-        checked={id === value}
+        value={presetValue}
+        checked={
+          value === presetValue
+        }
         onChange={onChange}
         onBlur={onBlur}
         className={classNames('radio-button')}

@@ -30,6 +30,7 @@ class Questions extends Component {
 
     this.state = {
       questions: { questions: [] },
+      editing: false
       // lastToday
     };
 
@@ -69,6 +70,7 @@ class Questions extends Component {
       {
         ret.push(
           <DidiQuestion
+            editing={this.state.editing}
             key={question.value}
             name={StringHash(question.value)}
             label={'Did I ' + question.value + ' Today?'}
@@ -144,13 +146,17 @@ class Questions extends Component {
                   type='submit'>
                   Submit
                 </button>
+                <Debug/>
                 <div/>
               </form>
             )
           }
         </Formik> 
 
-        <button>
+        <button onClick={(event) => {
+          this.setState({ editing: true });
+        }
+        }>
           Edit Survey
         </button>
       </div>

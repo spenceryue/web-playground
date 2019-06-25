@@ -4,26 +4,35 @@ import { Field }  from 'formik';
 import StringHash from 'string-hash';
 
 const BinaryQuestion = (props) =>
-(
-  <RadioGroup
-    id={props.text}
-    label={props.text}
-  >
-    <Field
-      component={RadioButton}
-      name={StringHash(props.text)}
-      id={'yes'}
-      label='Yes'
-    />
+{
+  if (props.editing) {
+    return (
+      <div/>
+    )
+  }
+  else
+  {
+    return (
+      <RadioGroup
+        id={props.text}
+        label={props.text}
+      >
+        <Field
+          component={RadioButton}
+          name={StringHash(props.text)}
+          id={'yes'}
+          label='Yes'
+        />
 
-    <Field
-      component={RadioButton}
-      name={StringHash(props.text)}
-      id={'no'}
-      label='No'
-    />
-  </RadioGroup>
-
-);
+      <Field
+        component={RadioButton}
+        name={StringHash(props.text)}
+        id={'no'}
+        label='No'
+      />
+    </RadioGroup>
+    );
+  }
+};
 
 export default BinaryQuestion;
