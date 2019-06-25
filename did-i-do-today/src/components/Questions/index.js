@@ -96,9 +96,6 @@ class Questions extends Component {
   }
 
   formikSubmit (values, actions) {
-    console.log(values);
-    return;
-
     this.props.history.push(ROUTES.ANSWERS);
     let obj = values;
     for (let keys in obj)
@@ -143,15 +140,11 @@ class Questions extends Component {
               <form onSubmit={handleSubmit}>
               <br/>
                 {this.renderQuestions(values, errors, touched)}
-
-
                 <button
                   type='submit'>
                   Submit
                 </button>
                 <div/>
-
-                <Debug/>
               </form>
             )
           }
