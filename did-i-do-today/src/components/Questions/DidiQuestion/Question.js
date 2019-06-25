@@ -1,24 +1,37 @@
 import React from 'react';
-import { RadioButton } from '../../RadioComponent';
-import { Field, ErrorMessage }  from 'formik';
+import { Field }  from 'formik';
+import { RadioGroup, RadioButton } from '../../RadioComponent';
 import StringHash from 'string-hash';
 
-const Question = ({...props}) =>
+const Question = ({
+  name,
+  label,
+  value,
+  error,
+  touched,
+  ...props}) =>
 {
   return (
-  <div>
-    <div>{'Did I ' + props.text + ' today?'}</div>
-    <Field
-      component='select'
-      name={StringHash(props.text)}
+    <RadioGroup
+      id={name}
+      label={label}
+      value={value}
+      error={error}
+      touched={touched}
     >
-      <option value='yes'>Yes</option>
-      <option value='no'>No</option>
-    </Field>
-
-
-    <ErrorMessage name={StringHash(props.text)} component='div'/>
-  </div>
+      <Field
+        component={RadioButton}
+        name={name}
+        id='yes'
+        label='Yes'
+      />
+      <Field
+        component={RadioButton}
+        name={name}
+        id='no'
+        label='No'
+      />
+    </RadioGroup>
   )
 };
 

@@ -3,6 +3,7 @@ import Week from  '../Calendar/Week'
 import BinaryQuestion from  './BinaryQuestion'
 import IntegerQuestion from  './IntegerQuestion'
 import DidiQuestion from  './DidiQuestion'
+import { RadioGroup, RadioButton } from '../RadioComponent';
 
 import Debug from '../Debug';
 
@@ -59,7 +60,7 @@ class Questions extends Component {
     return <h1>{this.state.questions.userId + '\'s '}questions</h1>;
   }
 
-  renderQuestions(handleSubmit, handleChange) {
+  renderQuestions(values, errors, touched) {
     let ret = [];
 
     this.state.questions.questions.forEach((question, i) => {
@@ -67,12 +68,15 @@ class Questions extends Component {
       if (question.type === 'binary')
       {
         ret.push(
-            <DidiQuestion
-              key={question.value + i}
-              text={question.value}
-              handleSubmit={handleSubmit}
-              handleChange={handleChange} />
-        );
+          <DidiQuestion
+            key={question.value}
+            name={StringHash(question.value)}
+            label={'Did I ' + question.value + ' Today?'}
+            value={values[StringHash(question.value)]}
+            error={errors[StringHash(question.value)]}
+            touched={touched[StringHash(question.value)]}
+          />
+				);
       } else if (question.type === 'integer') {
         ret.push(
           <IntegerQuestion
@@ -134,12 +138,12 @@ class Questions extends Component {
           initialValues={empty}
           validationSchema={validation}
         >
-          {({ handleSubmit, handleChange }) =>
+          {({ values, handleSubmit, errors, touched, isSubmitting }) =>
             (
               <form onSubmit={handleSubmit}>
               <br/>
+                {this.renderQuestions(values, errors, touched)}
 
-              {this.renderQuestions(handleSubmit, handleChange)}
 
                 <button
                   type='submit'>
