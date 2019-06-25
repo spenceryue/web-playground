@@ -2,18 +2,24 @@ import React from 'react';
 import Question from './Question';
 import EditQuestion from './EditQuestion';
 
-const DidIQuestion = ({...props}) =>
+const DidIQuestion = ({
+  label,
+  ...props}) =>
 {
   if (!props.editing)
   {
     return (
-      <Question {...props} />
+      <Question 
+        label={'Did I ' + label + ' Today?'}
+      {...props} />
     )
   }
   else
   {
     return (
-      <EditQuestion {...props} />
+      <EditQuestion
+        label={label}
+      {...props} />
     )
   }
 };

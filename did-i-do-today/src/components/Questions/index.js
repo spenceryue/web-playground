@@ -73,7 +73,7 @@ class Questions extends Component {
             editing={this.state.editing}
             key={question.value}
             name={StringHash(question.value)}
-            label={'Did I ' + question.value + ' Today?'}
+            label={question.value}
             value={values[StringHash(question.value)]}
             error={errors[StringHash(question.value)]}
             touched={touched[StringHash(question.value)]}
@@ -98,6 +98,11 @@ class Questions extends Component {
   }
 
   formikSubmit (values, actions) {
+    if (this.state.editing)
+    {
+      console.log(values);
+      return;
+    }
     this.props.history.push(ROUTES.ANSWERS);
     let obj = values;
     for (let keys in obj)
@@ -120,10 +125,13 @@ class Questions extends Component {
     let valid = {};
     let empty = {};
 
-    this.state.questions.questions.forEach((question) => {
-      valid[StringHash(question.value)] = yup.string().required('An answer is required');
-      empty[StringHash(question.value)] = '';
-    });
+    if (!this.state.editing)
+    {
+      this.state.questions.questions.forEach((question) => {
+        valid[StringHash(question.value)] = yup.string().required('An answer is required');
+        empty[StringHash(question.value)] = '';
+      });
+    }
 
     const validation = yup.object().shape(valid);
 

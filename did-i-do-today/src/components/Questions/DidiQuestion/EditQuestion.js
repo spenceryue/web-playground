@@ -3,19 +3,40 @@ import { RadioButton } from '../../RadioComponent';
 import { Field, ErrorMessage }  from 'formik';
 import StringHash from 'string-hash';
 
-const EditQuestion = ({ handleChange, ...props }) =>
+const EditQuestion = ({
+  name,
+  label,
+  error,
+  touched,
+  ...props}) =>
 {
 
-  const [ value, setValue ] = useState(props.text);
+  const [ value, setValue ] = useState(label);
+  return (
+    <div>
+      <p>
+        {'Did I '}
+        <Field
+          name={name}
+          value={value}
+          onChange={(e) => {
+            setValue(e.target.value);
+          }}
+        />
+        {' Today?'}
+      </p>
+    </div>
+  );
+
+  /*
   return (
     <div>
       <p>
         {'Did I '} 
         <Field
-          name={StringHash(props.text)}
+          name={name}
           value={value}
           onChange={(e) => {
-            handleChange(e);
             setValue(e.target.value);
           }}
         />
@@ -25,7 +46,7 @@ const EditQuestion = ({ handleChange, ...props }) =>
 
       <ErrorMessage name={props.text} component='div'/>
     </div>
-  );
+  );*/
 };
 
 export default EditQuestion;
