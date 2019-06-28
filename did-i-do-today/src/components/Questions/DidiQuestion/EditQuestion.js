@@ -19,30 +19,19 @@ const EditQuestion = ({
           type='text'
           name={name}
         />
-        {' Today?'}
+        {' Today?   '}
+
+        <button
+          type='button'
+          onClick={()=>
+            {
+              console.log('delete ' + name);
+            }
+          }
+        >Delete</button>
       </p>
     </div>
   );
-
-  /*
-  return (
-    <div>
-      <p>
-        {'Did I '} 
-        <Field
-          name={name}
-          value={value}
-          onChange={(e) => {
-            setValue(e.target.value);
-          }}
-        />
-        {' Today?'}
-      </p>
-
-
-      <ErrorMessage name={props.text} component='div'/>
-    </div>
-  );*/
 };
 
 export default EditQuestion;
