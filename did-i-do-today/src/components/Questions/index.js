@@ -42,6 +42,7 @@ class Questions extends Component {
     //}
 
     this.setQuestions = this.setQuestions.bind(this);
+    this.deleteQuestion = this.deleteQuestion.bind(this);
     this.formikSubmit = this.formikSubmit.bind(this);
     props.firebase.doGetQuestions(props.authUser.email, this.setQuestions);
   }
@@ -78,6 +79,10 @@ class Questions extends Component {
     }
   }
 
+  addQuestion()
+  {
+  }
+
   renderTitle() {
     if (typeof(this.state.userId) === 'undefined') {
       return <h1>questions</h1>;
@@ -94,6 +99,7 @@ class Questions extends Component {
       {
         ret.push(
           <DidiQuestion
+            delete={this.deleteQuestion}
             editing={this.state.editing}
             key={question.value}
             name={StringHash(question.value)}

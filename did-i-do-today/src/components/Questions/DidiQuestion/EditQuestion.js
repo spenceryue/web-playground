@@ -25,7 +25,7 @@ const EditQuestion = ({
           type='button'
           onClick={()=>
             {
-              console.log('delete ' + name);
+              props.delete(name);
             }
           }
         >Delete</button>
