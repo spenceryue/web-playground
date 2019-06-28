@@ -29,7 +29,7 @@ class Questions extends Component {
     //lastDate.getMonth() === todayDate.getMonth();
 
     this.state = {
-      questions: { questions: [] },
+      questions: [],
       editing: false
       // lastToday
     };
@@ -47,24 +47,48 @@ class Questions extends Component {
   }
 
   setQuestions(questions) {
+    console.log(questions.questions);
     this.setState({
-      questions
+      questions: questions.questions,
+      userId: questions.userId
     });
 
     localStorage.setItem('questions', JSON.stringify(questions));
   }
 
+  deleteQuestion(questionId) {
+    let array = [...this.state.questions];
+    let index = -1;
+
+    for (let i = 0; i < array.length; i++)
+    {
+      if (StringHash(array[i].value) == questionId)
+      {
+        index = i;
+        break;
+      }
+    }
+
+    if (index !== -1)
+    {
+      array.splice(index, 1);
+      this.setState({
+        questions: array
+      });
+    }
+  }
+
   renderTitle() {
-    if (typeof(this.state.questions.userId) === 'undefined') {
+    if (typeof(this.state.userId) === 'undefined') {
       return <h1>questions</h1>;
     }
-    return <h1>{this.state.questions.userId + '\'s '}questions</h1>;
+    return <h1>{this.state.userId + '\'s '}questions</h1>;
   }
 
   renderQuestions(values, errors, touched) {
     let ret = [];
 
-    this.state.questions.questions.forEach((question, i) => {
+    this.state.questions.forEach((question, i) => {
 
       if (question.type === 'binary')
       {
@@ -105,14 +129,14 @@ class Questions extends Component {
 
     if (!this.state.editing)
     {
-      this.state.questions.questions.forEach((question) => {
+      this.state.questions.forEach((question) => {
         valid[StringHash(question.value)] = yup.string().required('An answer is required');
         empty[StringHash(question.value)] = '';
       });
     }
     else
     {
-      this.state.questions.questions.forEach((question) => {
+      this.state.questions.forEach((question) => {
         valid[StringHash(question.value)] = yup.string().required('An answer is required');
         empty[StringHash(question.value)] = question.value;
       });
@@ -207,6 +231,15 @@ class Questions extends Component {
         }>
           Edit Survey
         </button>
+
+        <button onClick={
+          ()=> {
+            this.deleteQuestion(2087592373);
+          }
+        }>
+          Delete Question
+        </button>
+
       </div>
     );
   }
