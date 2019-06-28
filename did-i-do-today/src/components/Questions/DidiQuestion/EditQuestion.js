@@ -11,17 +11,13 @@ const EditQuestion = ({
   ...props}) =>
 {
 
-  const [ value, setValue ] = useState(label);
   return (
     <div>
       <p>
         {'Did I '}
         <Field
+          type='text'
           name={name}
-          value={value}
-          onChange={(e) => {
-            setValue(e.target.value);
-          }}
         />
         {' Today?'}
       </p>

@@ -97,6 +97,80 @@ class Questions extends Component {
     return ret;
   }
 
+  renderFormik()
+  {
+
+    let valid = {};
+    let empty = {};
+
+    if (!this.state.editing)
+    {
+      this.state.questions.questions.forEach((question) => {
+        valid[StringHash(question.value)] = yup.string().required('An answer is required');
+        empty[StringHash(question.value)] = '';
+      });
+    }
+    else
+    {
+      this.state.questions.questions.forEach((question) => {
+        valid[StringHash(question.value)] = yup.string().required('An answer is required');
+        empty[StringHash(question.value)] = question.value;
+      });
+    }
+
+    const validation = yup.object().shape(valid);
+
+    if (this.state.editing)
+    {
+      return (<Formik
+          enableReinitialize
+          onSubmit={this.formikSubmit}
+          initialValues={empty}
+          validationSchema={validation}
+        >
+          {({ values, handleSubmit, errors, touched, isSubmitting }) =>
+              (
+                <form onSubmit={handleSubmit}>
+                  <br/>
+                  {this.renderQuestions(values, errors, touched)}
+                  <button
+                    type='submit'>
+                    Submit
+                  </button>
+                  <Debug/>
+                  <div/>
+                </form>
+              )
+          }
+        </Formik>);
+    }
+    else
+    {
+      return (<Formik
+          enableReinitialize
+          onSubmit={this.formikSubmit}
+          initialValues={empty}
+          validationSchema={validation}
+        >
+          {({ values, handleSubmit, errors, touched, isSubmitting }) =>
+              (
+                <form onSubmit={handleSubmit}>
+                  <br/>
+                  {this.renderQuestions(values, errors, touched)}
+                  <button
+                    type='submit'>
+                    Submit
+                  </button>
+                  <Debug/>
+                  <div/>
+                </form>
+              )
+          }
+        </Formik>);
+    }
+
+  }
+
   formikSubmit (values, actions) {
     if (this.state.editing)
     {
@@ -122,44 +196,10 @@ class Questions extends Component {
   }
 
   render() {
-    let valid = {};
-    let empty = {};
-
-    if (!this.state.editing)
-    {
-      this.state.questions.questions.forEach((question) => {
-        valid[StringHash(question.value)] = yup.string().required('An answer is required');
-        empty[StringHash(question.value)] = '';
-      });
-    }
-
-    const validation = yup.object().shape(valid);
-
-    console.log(empty);
     return (
       <div>
         {this.renderTitle()}
-        <Formik 
-          enableReinitialize
-          onSubmit={this.formikSubmit}
-          initialValues={empty}
-          validationSchema={validation}
-        >
-          {({ values, handleSubmit, errors, touched, isSubmitting }) =>
-            (
-              <form onSubmit={handleSubmit}>
-              <br/>
-                {this.renderQuestions(values, errors, touched)}
-                <button
-                  type='submit'>
-                  Submit
-                </button>
-                <Debug/>
-                <div/>
-              </form>
-            )
-          }
-        </Formik> 
+        {this.renderFormik()}
 
         <button onClick={(event) => {
           this.setState({ editing: true });
