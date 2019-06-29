@@ -81,6 +81,15 @@ class Questions extends Component {
 
   addQuestion()
   {
+    let array = [...this.state.questions];
+    array.push({
+      type: 'binary',
+      value: ''
+    });
+
+    this.setState({
+      questions: array
+    });
   }
 
   renderTitle() {
@@ -102,7 +111,7 @@ class Questions extends Component {
             delete={this.deleteQuestion}
             editing={this.state.editing}
             key={question.value}
-            name={StringHash(question.value)}
+            name={ (question.value == '') ? Math.random().toString() : StringHash(question.value)}
             label={question.value}
             value={values[StringHash(question.value)]}
             error={errors[StringHash(question.value)]}
@@ -166,6 +175,13 @@ class Questions extends Component {
                   <button
                     type='submit'>
                     Submit
+                  </button>
+                  <button onClick={
+                    ()=> {
+                      this.addQuestion();
+                    }
+                  }>
+                    Add Question
                   </button>
                   <Debug/>
                   <div/>
@@ -232,20 +248,11 @@ class Questions extends Component {
         {this.renderFormik()}
 
         <button onClick={(event) => {
-          this.setState({ editing: true });
+          this.setState({ editing: !this.state.editing });
         }
         }>
-          Edit Survey
+        { (this.state.editing) ? 'Cancel' : 'Edit Survey' }
         </button>
-
-        <button onClick={
-          ()=> {
-            this.deleteQuestion(2087592373);
-          }
-        }>
-          Delete Question
-        </button>
-
       </div>
     );
   }

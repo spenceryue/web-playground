@@ -47,6 +47,7 @@ class GeorgeLandingPage extends Component {
   }
 
   setAnswers(answers) {
+    console.log(answers);
     let date = new Date(this.state.date);
     let data = {};
     this.state.questionHashes.forEach((hash) =>

@@ -8,15 +8,6 @@ import StringHash from 'string-hash';
 import { compose } from 'recompose';
 import SignOutButton from '../Logout';
 
-const questionHashes =
-  [
-    '3167593219',
-    '1680920143',
-    '3800379784',
-    '2087592373',
-    '1350393365'
-  ]
-
 class Answers extends Component {
   constructor (props) {
     super(props);
@@ -32,22 +23,29 @@ class Answers extends Component {
     this.state.date = date;
 
     this.props.firebase.doGetQuestions(props.authUser.email, this.setQuestions);
-    this.props.firebase.doGetAnswers(props.authUser.email, this.state.date, this.setAnswers);
 
   }
 
   setQuestions(questions) {
-    console.log(questions)
+    let questionHashes = [];
+
+    questions.questions.forEach((question) =>
+      {
+        questionHashes.push(StringHash(question.value));
+      });
     this.setState({
-      questions
+      questions,
+      questionHashes
     });
+
+    this.props.firebase.doGetAnswers('gtang.gt@gmail.com', this.state.date, this.setAnswers);
   }
 
   setAnswers(answers) {
     console.log(answers);
     let date = new Date(this.state.date);
     let data = {};
-    questionHashes.forEach((hash) =>
+    this.state.questionHashes.forEach((hash) =>
       {
         data[hash] = []
       });
@@ -57,7 +55,7 @@ class Answers extends Component {
     {
       if (answers === undefined || answers[answerIndex] === undefined)
       {
-        questionHashes.forEach((hash) =>
+        this.state.questionHashes.forEach((hash) =>
           {
             data[hash].push(undefined);
           });
@@ -71,14 +69,14 @@ class Answers extends Component {
         && tmpDate.getYear() === date.getYear())
       {
         //data.push(answers[answerIndex].answers['6f1a1da7-dadd-4492-9ada-17198271588e']);
-        questionHashes.forEach((hash) =>
+        this.state.questionHashes.forEach((hash) =>
           {
             data[hash].push(answers[answerIndex].answers[hash])
           });
 
         answerIndex++;
       } else {
-        questionHashes.forEach((hash) =>
+        this.state.questionHashes.forEach((hash) =>
           {
             data[hash].push(undefined);
           });
@@ -95,6 +93,7 @@ class Answers extends Component {
 
   renderTitle() {
     if (typeof(this.state.questions.userId) === 'undefined') {
+
       return <h1>answers</h1>;
     }
     return <h1>{this.state.questions.userId + '\'s '}answers</h1>;
@@ -114,12 +113,15 @@ class Answers extends Component {
         ret.push(
           <br key={question.value + (3 * i + 1)} />
         );
-        ret.push(
-          <Week
-            date={this.state.date}
-            key={question.value + (3 * i + 2)}
-            data={this.state.data[StringHash(question.value)]}/>
-        );
+        if (this.state.data !== undefined)
+        {
+          ret.push(
+            <Week
+              date={this.state.date}
+              key={question.value + (3 * i + 2)}
+              data={this.state.data[StringHash(question.value)]}/>
+          );
+        }
       }
     });
 
