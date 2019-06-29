@@ -3,3 +3,4 @@
 # https://didido.today/login
 # https://didido.today/
 
+Reading about field arrays
