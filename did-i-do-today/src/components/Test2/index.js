@@ -16,6 +16,7 @@ export const FriendList = () => (
       }
       render={({ values }) => (
         <Form>
+
           <FieldArray
             name="friends"
             render={arrayHelpers => (
@@ -30,12 +31,6 @@ export const FriendList = () => (
                       >
                         -
                       </button>
-                      <button
-                        type="button"
-                        onClick={() => arrayHelpers.insert(index, '')} // insert an empty string at a position
-                      >
-                        +
-                      </button>
                     </div>
                   ))
                 ) : (
@@ -46,7 +41,13 @@ export const FriendList = () => (
                 )}
                 <div>
                   <button type="submit">Submit</button>
-                </div>
+                  <button
+                    type="button"
+                    onClick={() => arrayHelpers.insert(values.friends.length, '')} // insert an empty string at a position
+              >
+                +
+              </button>
+            </div>
               </div>
             )}
           />
