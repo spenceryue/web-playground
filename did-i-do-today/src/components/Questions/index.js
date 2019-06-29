@@ -48,9 +48,14 @@ class Questions extends Component {
   }
 
   setQuestions(questions) {
-    console.log(questions.questions);
+    let _questions = [...questions.questions];
+    _questions.forEach((question) =>
+      {
+        question.name = StringHash(question.value);
+      })
+
     this.setState({
-      questions: questions.questions,
+      questions: _questions,
       userId: questions.userId
     });
 
@@ -63,7 +68,7 @@ class Questions extends Component {
 
     for (let i = 0; i < array.length; i++)
     {
-      if (StringHash(array[i].value) == questionId)
+      if (array[i].name == questionId)
       {
         index = i;
         break;
@@ -81,11 +86,14 @@ class Questions extends Component {
 
   addQuestion()
   {
-    let array = [...this.state.questions];
-    array.push({
-      type: 'binary',
-      value: ''
-    });
+    let array = [
+      ...this.state.questions,
+      {
+        type: 'binary',
+        value:'',
+        name: Math.round(Math.random() * 10000000000)
+      }
+    ];
 
     this.setState({
       questions: array
@@ -110,12 +118,12 @@ class Questions extends Component {
           <DidiQuestion
             delete={this.deleteQuestion}
             editing={this.state.editing}
-            key={question.value}
-            name={ (question.value == '') ? Math.random().toString() : StringHash(question.value)}
+            key={question.name}
+            name={question.name}
             label={question.value}
-            value={values[StringHash(question.value)]}
-            error={errors[StringHash(question.value)]}
-            touched={touched[StringHash(question.value)]}
+            value={values[question.name]}
+            error={errors[question.name]}
+            touched={touched[question.name]}
           />
 				);
       } else if (question.type === 'integer') {
@@ -126,11 +134,11 @@ class Questions extends Component {
       } else if (question.type === 'didi') {
         ret.push(
             <DidiQuestion
-              key={question.value + i}
+              key={question.name + i}
               text={question.value} />
         );
       }
-      ret.push( <br key={'br' + question.value}/> );
+      ret.push( <br key={'br' + question.name}/> );
     });
 
     return ret;
@@ -141,19 +149,20 @@ class Questions extends Component {
 
     let valid = {};
     let empty = {};
+    console.log(this.state.questions);
 
     if (!this.state.editing)
     {
       this.state.questions.forEach((question) => {
-        valid[StringHash(question.value)] = yup.string().required('An answer is required');
-        empty[StringHash(question.value)] = '';
+        valid[question.name] = yup.string().required('An answer is required');
+        empty[question.name] = '';
       });
     }
     else
     {
       this.state.questions.forEach((question) => {
-        valid[StringHash(question.value)] = yup.string().required('An answer is required');
-        empty[StringHash(question.value)] = question.value;
+        valid[question.name] = yup.string().required('An answer is required');
+        empty[question.name] = question.value;
       });
     }
 
@@ -180,7 +189,9 @@ class Questions extends Component {
                     ()=> {
                       this.addQuestion();
                     }
-                  }>
+                  }
+                  type='button'
+                  >
                     Add Question
                   </button>
                   <Debug/>

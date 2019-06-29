@@ -5,9 +5,7 @@ import StringHash from 'string-hash';
 
 const EditQuestion = ({
   name,
-  label,
   error,
-  touched,
   ...props}) =>
 {
 
