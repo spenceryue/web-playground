@@ -1,40 +1,34 @@
 import React from 'react';
-import { Field }  from 'formik';
-import { RadioGroup, RadioButton } from '../../RadioComponent';
-import StringHash from 'string-hash';
 
-const Question = ({
-  name,
-  label,
-  value,
-  error,
-  touched,
-  ...props}) =>
+import { Field }  from 'formik';
+import { RadioGroup, RadioButton } from '../../../RadioComponent';
+
+const DidIQuestion = ({ question, value, error, touched }) =>
 {
   return (
     <RadioGroup
-      id={name}
-      label={label}
+      id={question.name}
+      label={'Did I ' + question.value + ' today?'}
       value={value}
       error={error}
       touched={touched}
     >
       <Field
         component={RadioButton}
-        name={name}
-        id={name + 'y'}
+        name={question.name}
+        id={question.name + 'y'}
         presetValue={'yes'}
         label='Yes'
       />
       <Field
         component={RadioButton}
-        name={name}
-        id={name + 'n'}
+        name={question.name}
+        id={question.name + 'n'}
         presetValue={'no'}
         label='No'
       />
     </RadioGroup>
-  )
+  );
 };
 
-export default Question;
+export default DidIQuestion;

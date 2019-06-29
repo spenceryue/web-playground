@@ -7,4 +7,7 @@ export const TAGS = [
   'attention divided is attention conquered',
   'sometimes success is binary',
   'you only live once',
+  'introspect',
+  'life is a one way trip',
+  'commit to yourself'
 ];

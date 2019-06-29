@@ -8,7 +8,6 @@ const RadioButton = ({
   presetValue,
   ...props
 }) => {
-  console.log({value, name, id});
   return (
     <div>
       <input
