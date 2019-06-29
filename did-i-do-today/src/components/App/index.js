@@ -10,6 +10,7 @@ import AnswersPage from '../Answers';
 import QuestionsPage from '../Questions';
 import NotFoundPage from '../NotFound';
 import SurveyPage from '../Survey';
+import EditSurveyPage from '../EditSurvey';
 
 import { withAuthentication } from '../Session';
 import
@@ -30,6 +31,7 @@ const App = () => (
       <Route exact path={ROUTES.LOGIN} component={LoginPage} />
       <Route exact path={ROUTES.ANSWERS} component={AnswersPage} />
       <Route exact path={ROUTES.SURVEY} component={SurveyPage} />
+      <Route exact path={ROUTES.EDITSURVEY} component={EditSurveyPage} />
 
       <Route exact path={ROUTES.TEST} component={TestPage} />
       <Route exact path={ROUTES.TEST2} component={Test2Page} />
