@@ -54,6 +54,8 @@ class Questions extends Component {
         question.name = StringHash(question.value);
       })
 
+    console.log(_questions);
+
     this.setState({
       questions: _questions,
       userId: questions.userId
@@ -107,7 +109,7 @@ class Questions extends Component {
     return <h1>{this.state.userId + '\'s '}questions</h1>;
   }
 
-  renderQuestions(values, errors, touched) {
+  renderQuestions(values, errors, touched, handleChange) {
     let ret = [];
 
     this.state.questions.forEach((question, i) => {
@@ -176,11 +178,11 @@ class Questions extends Component {
           initialValues={empty}
           validationSchema={validation}
         >
-          {({ values, handleSubmit, errors, touched, isSubmitting }) =>
+          {({ values, handleSubmit, errors, touched, isSubmitting, handleChange }) =>
               (
                 <form onSubmit={handleSubmit}>
                   <br/>
-                  {this.renderQuestions(values, errors, touched)}
+                  {this.renderQuestions(values, errors, touched, handleChange)}
                   <button
                     type='submit'>
                     Submit
@@ -209,11 +211,11 @@ class Questions extends Component {
           initialValues={empty}
           validationSchema={validation}
         >
-          {({ values, handleSubmit, errors, touched, isSubmitting }) =>
+          {({ values, handleSubmit, errors, touched, isSubmitting, handleChange }) =>
               (
                 <form onSubmit={handleSubmit}>
                   <br/>
-                  {this.renderQuestions(values, errors, touched)}
+                  {this.renderQuestions(values, errors, touched, handleChange)}
                   <button
                     type='submit'>
                     Submit
@@ -229,11 +231,8 @@ class Questions extends Component {
   }
 
   formikSubmit (values, actions) {
-    if (this.state.editing)
-    {
       console.log(values);
       return;
-    }
     this.props.history.push(ROUTES.ANSWERS);
     let obj = values;
     for (let keys in obj)

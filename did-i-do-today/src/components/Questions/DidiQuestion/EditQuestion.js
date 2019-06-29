@@ -16,6 +16,7 @@ const EditQuestion = ({
         <Field
           type='text'
           name={name}
+          onChange={props.onChange}
         />
         {' Today?   '}
 
