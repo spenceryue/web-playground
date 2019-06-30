@@ -1,7 +1,7 @@
 import React from 'react';
 import DidIQuestion from './DidIQuestion';
 
-const Question = ({ question, ...props }) =>
+const EditQuestion = ({ question, ...props }) =>
 {
   if (question.type == 'didi')
   {
@@ -12,4 +12,4 @@ const Question = ({ question, ...props }) =>
   }
 }
 
-export default Question;
+export default EditQuestion;

@@ -3,7 +3,7 @@ import Debug from '../Debug';
 import { Formik, Form, Field, FieldArray, ErrorMessage }  from 'formik';
 import * as yup from 'yup';
 import StringHash from 'string-hash';
-import Question from './Question';
+import EditQuestion from './EditQuestion';
 
 const dummy = [
   {
@@ -54,7 +54,7 @@ const EditSurveyForm = ({ move, swap, push, insert, unshift, pop, form }) =>
   form.values.questions.forEach(
     (question) => {
 
-      array.push((<Question
+      array.push((<EditQuestion
         key={question.name}
         question={question}
       />))
