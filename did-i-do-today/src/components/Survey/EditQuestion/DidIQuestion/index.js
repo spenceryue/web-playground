@@ -3,7 +3,7 @@ import React from 'react';
 import { Field }  from 'formik';
 import { RadioGroup, RadioButton } from '../../../RadioComponent';
 
-const DidIQuestion = ({ question, value, error, touched }) =>
+const DidIQuestion = ({ question, value, error, touched, remove }) =>
 {
   return (
     <div>

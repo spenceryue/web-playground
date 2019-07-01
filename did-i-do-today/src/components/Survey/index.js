@@ -63,17 +63,28 @@ const Survey = () => {
   )
 }
 
-const SurveyForm = ({ name, move, swap, push, insert, unshift, pop, form }) =>
+const SurveyForm = ({ name, move, swap, push, insert, unshift, pop, form, ...props}) =>
 {
   let array = [];
   form.values.questions.forEach(
-    (question) => {
-
+    (question, index) => {
       if (name === 'edit') {
         array.push((<EditQuestion
           key={question.name}
           question={question}
         />))
+        array.push((<button
+          key={'delete' + question.name}
+          type='button'
+          onClick={(e) =>
+            {
+              console.log(props.remove);
+            }
+          }
+        >
+          Delete
+        </button>
+        ))
       } else if (name === 'questions') {
         array.push((<Question
           key={question.name}
