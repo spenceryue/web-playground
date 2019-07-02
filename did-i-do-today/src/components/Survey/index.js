@@ -46,7 +46,19 @@ const Survey = () => {
             (
               <FieldArray 
                 name='questions'
-                component={ edit ? EditSurveyForm : SurveyForm }
+                render={ (props) => {
+                  console.log(formikProps);
+
+                  return edit ?
+                    <EditSurveyForm 
+                      {...formikProps}
+                      {...props}
+                    /> :
+                    <SurveyForm 
+                      {...formikProps}
+                      {...props}
+                    />
+                }}
               />
             )
         }
@@ -85,7 +97,13 @@ const SurveyForm = ({ name, move, swap, push, insert, unshift, pop, form, ...pro
       {
         array
       }
+      <button type='button' onClick={() => {
+        console.log('formik');
+        console.log(props);
+        props.handleChange('asdf')}}>Formik</button>
+
       <button type='submit'>Submit</button>
+      <Debug/>
     </Form>
   )
 }
