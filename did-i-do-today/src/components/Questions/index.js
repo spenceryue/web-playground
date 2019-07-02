@@ -231,8 +231,6 @@ class Questions extends Component {
   }
 
   formikSubmit (values, actions) {
-      console.log(values);
-      return;
     this.props.history.push(ROUTES.ANSWERS);
     let obj = values;
     for (let keys in obj)

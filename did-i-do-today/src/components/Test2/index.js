@@ -19,7 +19,7 @@ export const FriendList = () => (
 
           <FieldArray
             name="friends"
-            render={arrayHelpers => (
+            render={({...arrayHelpers}) => (
               <div>
                 {values.friends && values.friends.length > 0 ? (
                   values.friends.map((friend, index) => (

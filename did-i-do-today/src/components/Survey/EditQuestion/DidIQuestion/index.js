@@ -3,19 +3,26 @@ import React from 'react';
 import { Field }  from 'formik';
 import { RadioGroup, RadioButton } from '../../../RadioComponent';
 
-const DidIQuestion = ({ question, value, error, touched, remove }) =>
+const DidIQuestion = ({ question, value, error, touched, remove, index }) =>
 {
   return (
     <div>
       <p>{'Did I '}
         <Field
+          key={index}
           type='text'
-          name={question.name}
+          name={`questions.${index}`}
           value={question.value}
         />
         {' Today? '}
         <button
           type='button'
+          onClick={
+            (e) =>
+            {
+              remove(index);
+            }
+          }
         >Delete</button>
       </p>
     </div>

@@ -98,24 +98,12 @@ const EditSurveyForm = ({ name, move, swap, push, insert, unshift, pop, form, ..
       array.push((<EditQuestion
         key={question.name}
         question={question}
+        remove={props.remove}
+        index={index}
       />))
-      array.push((<button
-        key={'delete' + question.name}
-        type='button'
-        onClick={(e) =>
-          {
-            props.remove(index);
-          }
-        }
-      >
-        Delete
-      </button>
-      ))
-
       array.push(<br
         key={question.name + 'br'}
       />);
-
     }
   );
 
@@ -124,6 +112,13 @@ const EditSurveyForm = ({ name, move, swap, push, insert, unshift, pop, form, ..
       {
         array
       }
+      <button type='button'
+        onClick={(e) =>
+          {
+            push({value: '', type: 'didi', name: Math.random() * 10000});
+          }
+        }
+      >Add Question</button>
       <button type='submit'>Submit</button>
       <Debug/>
     </Form>
