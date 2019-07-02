@@ -9,5 +9,10 @@ export const TAGS = [
   'you only live once',
   'introspect',
   'life is a one way trip',
-  'commit to yourself'
+  'commit to yourself',
+  'the difference between you and me is what I did today',
+  'greatness takes time',
+  'find your growth curve',
+  'happiness is a habit',
+  'we all have 24 hours today'
 ];
