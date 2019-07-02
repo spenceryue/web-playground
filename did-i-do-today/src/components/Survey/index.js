@@ -34,7 +34,7 @@ const Survey = () => {
     <div>
       <h1>{ edit ? 'Edit ' : ''}Survey</h1>
       <Formik
-        validationSchema={validation}
+        validationSchema={ edit ? null : validation }
         initialValues={{ questions: dummy }}
         onSubmit={values =>
             setTimeout(() => {
@@ -45,8 +45,8 @@ const Survey = () => {
         {( formikProps ) => 
             (
               <FieldArray 
-                name={ edit ? 'edit' : 'questions' }
-                component={ edit ? SurveyForm : SurveyForm }
+                name='questions'
+                component={ edit ? EditSurveyForm : SurveyForm }
               />
             )
         }
@@ -68,29 +68,10 @@ const SurveyForm = ({ name, move, swap, push, insert, unshift, pop, form, ...pro
   let array = [];
   form.values.questions.forEach(
     (question, index) => {
-      if (name === 'edit') {
-        array.push((<EditQuestion
-          key={question.name}
-          question={question}
-        />))
-        array.push((<button
-          key={'delete' + question.name}
-          type='button'
-          onClick={(e) =>
-            {
-              console.log(props.remove);
-            }
-          }
-        >
-          Delete
-        </button>
-        ))
-      } else if (name === 'questions') {
-        array.push((<Question
-          key={question.name}
-          question={question}
-        />))
-      }
+      array.push((<Question
+        key={question.name}
+        question={question}
+      />))
 
       array.push(<br
         key={question.name + 'br'}
@@ -104,9 +85,48 @@ const SurveyForm = ({ name, move, swap, push, insert, unshift, pop, form, ...pro
       {
         array
       }
-      <button>Submit</button>
+      <button type='submit'>Submit</button>
     </Form>
   )
 }
 
+const EditSurveyForm = ({ name, move, swap, push, insert, unshift, pop, form, ...props}) =>
+{
+  let array = [];
+  form.values.questions.forEach(
+    (question, index) => {
+      array.push((<EditQuestion
+        key={question.name}
+        question={question}
+      />))
+      array.push((<button
+        key={'delete' + question.name}
+        type='button'
+        onClick={(e) =>
+          {
+            props.remove(index);
+          }
+        }
+      >
+        Delete
+      </button>
+      ))
+
+      array.push(<br
+        key={question.name + 'br'}
+      />);
+
+    }
+  );
+
+  return (
+    <Form>
+      {
+        array
+      }
+      <button type='submit'>Submit</button>
+      <Debug/>
+    </Form>
+  )
+}
 export default Survey;
