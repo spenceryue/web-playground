@@ -101,9 +101,6 @@ const EditSurveyForm = ({ name, move, swap, push, insert, unshift, pop, form, ..
 
 // within a `FieldArray`'s render
 const QuestionsArrayError = ({ errors }) =>
-{
-  console.log(typeof errors.questions);
-   return typeof errors.questions === 'string' ? <div>{errors.questions}</div> : null;
-}
+   typeof errors.questions === 'string' ? <div>{errors.questions}</div> : null;
 
 export default EditSurvey;

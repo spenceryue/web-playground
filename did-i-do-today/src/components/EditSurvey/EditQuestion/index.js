@@ -6,10 +6,13 @@ const EditQuestion = ({ question, ...props }) =>
 {
   if (question.type == 'didi')
   {
-    return <DidIQuestion
-      question={question}
-      {...props}
-    />
+    return (<div>
+        <DidIQuestion
+          question={question}
+          {...props}
+        />
+      </div>
+    )
   }
 }
 

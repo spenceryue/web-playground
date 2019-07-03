@@ -1,14 +1,14 @@
 import React from 'react';
 
-import { Field, ErrorMessage }  from 'formik';
 import { RadioGroup, RadioButton } from '../../../RadioComponent';
 import StringHash from 'string-hash';
+import { Field, getIn }  from 'formik';
 
 const DidIQuestion = ({ question, remove, index, ...props}) =>
 {
   return (
     <div>
-      <p>{'Did I '}
+      <div>{'Did I '}
         <Field
           key={index}
           type='text'
@@ -34,9 +34,21 @@ const DidIQuestion = ({ question, remove, index, ...props}) =>
             }
           }
         >Delete</button>
-      </p>
+        <ErrorMessage name={`questions[${index}]`}/>
+      </div>
     </div>
   );
 };
+
+const ErrorMessage = ({ name }) => (
+    <Field
+      name={name}
+      render={({ form }) => {
+              const error = getIn(form.errors, name);
+              const touch = getIn(form.touched, name);
+              return touch && error ? <p>{error.value}</p> : null;
+            }}
+    />
+);
 
 export default DidIQuestion;
