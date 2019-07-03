@@ -13,6 +13,10 @@ const DidIQuestion = ({ question, remove, index, ...props}) =>
           type='text'
           name={`questions.${index}`}
           value={question.value}
+          onChange={(e) => {
+            props.setFieldValue(`questions.${index}`, e.target.value, false);
+          }
+          }
         />
         {' Today? '}
         <button

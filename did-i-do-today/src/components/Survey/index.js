@@ -99,8 +99,11 @@ const SurveyForm = ({ name, move, swap, push, insert, unshift, pop, form, ...pro
       }
       <button type='button' onClick={() => {
         console.log('formik');
-        console.log(props);
-        props.handleChange('asdf')}}>Formik</button>
+        console.log(props.setFieldValue);
+        //props.setFieldValue('questions', 'hello world', false);
+      }
+
+        }>Formik</button>
 
       <button type='submit'>Submit</button>
       <Debug/>
@@ -118,6 +121,7 @@ const EditSurveyForm = ({ name, move, swap, push, insert, unshift, pop, form, ..
         question={question}
         remove={props.remove}
         index={index}
+        setFieldValue={props.setFieldValue}
       />))
       array.push(<br
         key={question.name + 'br'}
