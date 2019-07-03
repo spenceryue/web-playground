@@ -1,5 +1,6 @@
 import React from 'react';
 import DidIQuestion from './DidIQuestion';
+import StringHash from 'string-hash';
 
 const EditQuestion = ({ question, ...props }) =>
 {
@@ -7,7 +8,7 @@ const EditQuestion = ({ question, ...props }) =>
   {
     return <DidIQuestion
       question={question}
-      props
+      {...props}
     />
   }
 }

@@ -96,6 +96,7 @@ const SurveyForm = ({ name, move, swap, push, insert, unshift, pop, form, ...pro
         array
       }
       <button type='submit'>Submit</button>
+      <Debug/>
     </Form>
   )
 }
@@ -126,7 +127,7 @@ const EditSurveyForm = ({ name, move, swap, push, insert, unshift, pop, form, ..
       <button type='button'
         onClick={(e) =>
           {
-            push({value: '', type: 'didi', name: Math.random() * 10000});
+            push({value: '', type: 'didi', name: Math.random() * 1000000});
           }
         }
       >Add Question</button>
