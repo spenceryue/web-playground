@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Field }  from 'formik';
+import { Field, ErrorMessage }  from 'formik';
 import { RadioGroup, RadioButton } from '../../../RadioComponent';
 import StringHash from 'string-hash';
 

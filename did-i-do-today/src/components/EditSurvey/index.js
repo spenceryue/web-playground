@@ -18,7 +18,16 @@ const dummy = [
   }
 ]
 
-let valid = { questions : yup.array().required('Must have questions').min(1, 'ask at least 1 question')};
+let valid = { questions : yup.array()
+  .of(
+    yup.object().shape({
+      name: yup.string(),
+      value: yup.string().required('required'),
+      type: yup.string()
+    })
+  )
+  .required('Must have questions')};
+
 const validation = yup.object().shape(valid);
 
 
@@ -37,6 +46,7 @@ const EditSurvey = () =>
     >
       {( formikProps ) => 
           (
+            <Form>
             <FieldArray 
               name='questions'
               render={ (props) => (
@@ -46,10 +56,11 @@ const EditSurvey = () =>
                 />
               )}
             />
+          </Form>
           )
-      }
-    </Formik>
-  </div>
+            }
+          </Formik>
+        </div>
 )
 
 const EditSurveyForm = ({ name, move, swap, push, insert, unshift, pop, form, ...props}) =>
@@ -71,10 +82,10 @@ const EditSurveyForm = ({ name, move, swap, push, insert, unshift, pop, form, ..
   );
 
   return (
-    <Form>
-      {
-        array
-      }
+    <div>
+      {array}
+      <br/>
+      <QuestionsArrayError errors={form.errors} />
       <button type='button'
         onClick={(e) =>
           {
@@ -84,7 +95,15 @@ const EditSurveyForm = ({ name, move, swap, push, insert, unshift, pop, form, ..
       >Add Question</button>
       <button type='submit'>Submit</button>
       <Debug/>
-    </Form>
+    </div>
   )
 }
+
+// within a `FieldArray`'s render
+const QuestionsArrayError = ({ errors }) =>
+{
+  console.log(typeof errors.questions);
+   return typeof errors.questions === 'string' ? <div>{errors.questions}</div> : null;
+}
+
 export default EditSurvey;
