@@ -98,6 +98,29 @@ class Firebase {
       })
       .catch(e => console.err);
   }
+
+  doSetQuestions = (userId, questions) => {
+    const questionsRef = this.store.collection('questions');
+    const questionsMetaRef = this.store.collection('questionsMeta');
+
+    questionsRef.add({
+      userId,
+      questions,
+      timeCreated: app.firestore.Timestamp.now(),
+    }).then(ref => {
+
+      questionsMetaRef.where('userId', '==', userId)
+        .get()
+        .then((snap) => {
+          snap.forEach((doc, i) =>
+            {
+              doc._ref.update({
+                qRefs: admin.firestore.FieldValue.arrayUnion(ref)
+              });
+            });
+        });
+    });
+  }
 }
 
 export default Firebase;
