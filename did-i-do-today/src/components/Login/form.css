@@ -1,15 +1,15 @@
-div {
+.loginDiv {
   text-align: center;
 }
 
-input {
+.loginInput {
   font-family: 'Courier New', monospace;
   margin-top: 0.6em;
   margin-bottom: 0.5em;
   font-size: 20px;
 }
 
-button {
+.loginButton {
   font-family: 'Courier New', monospace;
   font-size: 15px;
   margin-top: 1em;

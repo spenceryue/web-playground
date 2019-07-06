@@ -11,7 +11,7 @@ import * as yup from 'yup';
 import * as ROUTES from '../../constants/routes';
 
 const LoginPage = () => (
-  <div>
+  <div className='loginDiv'>
     <Logo/>
     <LoginForm/>
   </div>
@@ -94,6 +94,7 @@ class LoginFormBase extends Component {
       >
         <Form>
           <Field
+            className='loginInput'
             type='text'
             name='email'
             placeholder='email' />
@@ -103,6 +104,7 @@ class LoginFormBase extends Component {
           <br/>
 
           <Field
+            className='loginInput'
             type='password'
             name='password'
             placeholder='password' />
@@ -112,6 +114,7 @@ class LoginFormBase extends Component {
           <br/>
 
           <button
+            className='loginButton'
             type='submit'>
             Log In
           </button>

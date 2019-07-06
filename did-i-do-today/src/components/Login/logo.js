@@ -5,7 +5,7 @@ import * as TAGS from './tags';
 const num = Math.floor(Math.random() * TAGS.TAGS.length);
 
 const Logo = () => (
-  <div>
+  <div className='loginDiv'>
   <p id='logo'><b>D</b>id <b>I d</b>o.<b>t</b>oday</p>
   <p className='tag'>{TAGS.TAGS[num]}</p>
   </div>
