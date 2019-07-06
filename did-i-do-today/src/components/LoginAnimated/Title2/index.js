@@ -9,16 +9,17 @@ const container = () =>
 
         <div className="content">
           <div className="content__container">
-            <p className="content__container__text">
-              Hello
-            </p>
-
+            <div className="content__container__text">
+              {'Did I'}
             <ul className="content__container__list">
               <li className="content__container__list__item">{'world !'}</li>
               <li className="content__container__list__item">{'bob !'}</li>
               <li className="content__container__list__item">{'users !'}</li>
               <li className="content__container__list__item">{'world !'}</li>
             </ul>
+              {'today?'}
+            </div>
+
           </div>
         </div>
       </div>
