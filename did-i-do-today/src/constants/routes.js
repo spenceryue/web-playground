@@ -7,3 +7,4 @@ export const QUESTIONS = '/questions';
 export const ANSWERS = '/answers';
 export const SURVEY = '/survey';
 export const EDITSURVEY = '/editsurvey';
+export const LOGINANIM = '/loginanim';

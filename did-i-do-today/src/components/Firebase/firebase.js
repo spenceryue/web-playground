@@ -115,7 +115,7 @@ class Firebase {
           snap.forEach((doc, i) =>
             {
               doc._ref.update({
-                qRefs: admin.firestore.FieldValue.arrayUnion(ref)
+                qRefs: app.firestore.FieldValue.arrayUnion(ref)
               });
             });
         });

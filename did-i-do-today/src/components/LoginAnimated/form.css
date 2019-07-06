@@ -1,0 +1,23 @@
+div {
+  text-align: center;
+}
+
+input {
+  font-family: 'Courier New', monospace;
+  margin-top: 0.6em;
+  margin-bottom: 0.5em;
+  font-size: 20px;
+}
+
+button {
+  font-family: 'Courier New', monospace;
+  font-size: 15px;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+#loginerror {
+  font-family: 'Arial', sans-serif;
+  font-size: 17px;
+}
+
