@@ -17,7 +17,7 @@ const container = () =>
               <li className="content__container__list__item">{'world !'}</li>
               <li className="content__container__list__item">{'bob !'}</li>
               <li className="content__container__list__item">{'users !'}</li>
-              <li className="content__container__list__item">{'everybody !'}</li>
+              <li className="content__container__list__item">{'world !'}</li>
             </ul>
           </div>
         </div>
