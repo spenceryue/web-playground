@@ -1,5 +1,5 @@
 import React from 'react';
-import Logo from './Title';
+import Logo from './Title2';
 
 const LoginPage = () => (
   <div>
