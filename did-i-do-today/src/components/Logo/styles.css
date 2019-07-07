@@ -1,0 +1,48 @@
+.logo {
+  --overflow-pad: 1em;
+  --neg-overflow-pad: calc(-1 * var(--overflow-pad));
+  position: relative;
+  margin: calc(var(--neg-overflow-pad) + 2em) 0 calc(var(--neg-overflow-pad) + .5em) 0;
+  padding: var(--overflow-pad) 0 var(--overflow-pad) 0;
+  font-family: "Courier New", monospace;
+  text-align: center;
+  white-space: pre;
+  /* disable below to see behind the scenes */
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, #0000, black 45% 73%, #0000 73%);
+  mask-image: linear-gradient(to bottom, #0000, black 45% 73%, #0000 73%);
+  /* uncomment below to see mask */
+  /* background: linear-gradient(to bottom, #0000, red 45% 73%, #0000 73%); */
+}
+.letter {
+  display: inline-block;
+}
+.bold.letter {
+  font-weight: bold;
+}
+.gap.letter {
+  /* initial width before animation starts */
+  width: 2ch;
+}
+.options {
+  position: absolute;
+  left: 0;
+  top: var(--overflow-pad);
+  /*
+  The options gap happens to be at the center of logo.
+  There are 6 characters on either side.
+  The font is monospaced.
+  */
+  width: 100%;
+  height: calc(var(--line-height) * 3em);
+  pointer-events: none;
+}
+.option > :first-child {
+  font-weight: bold;
+}
+.tag {
+  margin-bottom: 2em;
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+  font-size: 25px;
+}
