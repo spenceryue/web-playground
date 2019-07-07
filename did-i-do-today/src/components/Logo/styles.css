@@ -5,6 +5,7 @@
   margin: calc(var(--neg-overflow-pad) + 2em) 0 calc(var(--neg-overflow-pad) + .5em) 0;
   padding: var(--overflow-pad) 0 var(--overflow-pad) 0;
   font-family: "Courier New", monospace;
+  line-height: var(--line-height);
   text-align: center;
   white-space: pre;
   /* disable below to see behind the scenes */
@@ -24,6 +25,14 @@
   /* initial width before animation starts */
   width: 2ch;
 }
+/* Uncomment these for debugging */
+/*
+.option:nth-child(2n){
+  background: #f001;
+}.option:nth-child(2n+1){
+  background: #0f01;
+}
+*/
 .options {
   position: absolute;
   left: 0;

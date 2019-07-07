@@ -5,7 +5,7 @@ import * as $ from './utils';
 
 /**
  * How to use <Logo> props:
- * 
+ *
  * @param options {string[]}      - the words that are cycled through in the animation
  *                                  (MUST give an even number of these unfortunately)
  * @param style {
@@ -35,7 +35,7 @@ export const Logo = props => {
         // used to calculate the logo height
         fontSize: `70px`,
         // must be in units of "multiples of font size"
-        lineHeight: 79 / 70,
+        lineHeight: 1.2,
         // feel free to add more CSS styles, but the above two are required.
       },
       // units are in milliseconds
